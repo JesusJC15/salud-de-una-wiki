@@ -45,7 +45,7 @@ Cubre logs estructurados, metricas tecnicas, 4 KPIs de negocio, alertas y vistas
 | AI Summary Time | Tiempo de generacion de resumen IA | < 15000 ms |
 | Error Rate | Porcentaje de respuestas 5xx/total | < 2.0% |
 | Concurrent Sessions | Sesiones activas simultaneas | Medicion continua |
-| Availability | Tiempo de disponibilidad mensual | >= 98.0% |
+| Availability | Tiempo de disponibilidad mensual | > 99.0% |
 
 ## KPIs de Negocio (4 obligatorios)
 
@@ -80,7 +80,11 @@ Cubre logs estructurados, metricas tecnicas, 4 KPIs de negocio, alertas y vistas
 - Alerta critica si `P95 API > 1500 ms` durante 10 minutos.
 - Alerta critica si `error_rate > 2%` durante 5 minutos.
 - Alerta warning si `AI Summary Time > 15000 ms` en 3 muestras consecutivas.
-- Alerta warning si `availability < 98%` en ventana mensual proyectada.
+- Alerta warning si `availability <= 99%` en ventana mensual proyectada.
+
+## Alineacion con lineamiento academico
+- Lineamiento: tiempo de respuesta menor a `2 segundos`.
+- Meta interna definida por el equipo: `< 1500 ms` (mas estricta que el lineamiento).
 
 ## Operacion y Revision
 - Revision diaria tecnica en daily scrum.

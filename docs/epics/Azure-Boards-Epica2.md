@@ -1322,33 +1322,33 @@ Actualizar la Wiki con:
 ├── 🔷 FEATURE: F2.1 – Flujo Triage Medicina General (8 SP)
 │   │
 │   └── 📖 USER STORY: HU-003 – Como paciente de MG quiero triage guiado por IA (8 SP)
-│       ├── ✅ T-003-01 – Diseño modelo TriageSession en MongoDB (2h)
-│       ├── ✅ T-003-02 – Endpoint POST /v1/triage/sessions (2h)
-│       ├── ✅ T-003-03 – Endpoint POST /v1/triage/sessions/{id}/answers (2h)
-│       ├── ✅ T-003-04 – Endpoint POST /v1/triage/sessions/{id}/analyze + IA (5h)
-│       ├── ✅ T-003-05 – RedFlagsEngine catálogo Medicina General (3h)
-│       ├── ✅ T-003-06 – Pantalla triage MG en React Native (5h)
-│       ├── ✅ T-003-07 – GuardrailService para respuestas IA (3h)
-│       ├── ✅ T-003-08 – Pruebas unitarias TriageService + RedFlagsEngine MG (3h)
-│       ├── ✅ T-003-09 – Pruebas de integración endpoints triage MG (3h)
-│       └── ✅ T-003-10 – Documentación técnica triage MG en Wiki (1h)
+│       ├── [ ] T-003-01 – Diseño modelo TriageSession en MongoDB (2h)
+│       ├── [ ] T-003-02 – Endpoint POST /v1/triage/sessions (2h)
+│       ├── [ ] T-003-03 – Endpoint POST /v1/triage/sessions/{id}/answers (2h)
+│       ├── [ ] T-003-04 – Endpoint POST /v1/triage/sessions/{id}/analyze + IA (5h)
+│       ├── [ ] T-003-05 – RedFlagsEngine catálogo Medicina General (3h)
+│       ├── [ ] T-003-06 – Pantalla triage MG en React Native (5h)
+│       ├── [ ] T-003-07 – GuardrailService para respuestas IA (3h)
+│       ├── [ ] T-003-08 – Pruebas unitarias TriageService + RedFlagsEngine MG (3h)
+│       ├── [ ] T-003-09 – Pruebas de integración endpoints triage MG (3h)
+│       └── [ ] T-003-10 – Documentación técnica triage MG en Wiki (1h)
 │
 ├── 🔷 FEATURE: F2.2 – Flujo Triage Odontología (5 SP)
 │   │
 │   └── 📖 USER STORY: HU-004 – Como paciente odontológico quiero clasificación por red flags (8 SP)*
-│       ├── ✅ T-004-01 – RedFlagsEngine catálogo Odontología (3h)
-│       ├── ✅ T-004-02 – Adaptar endpoint /analyze para DENTISTRY (2h)
-│       ├── ✅ T-004-03 – Pantalla triage odontológico en React Native (4h)
+│       ├── [ ] T-004-01 – RedFlagsEngine catálogo Odontología (3h)
+│       ├── [ ] T-004-02 – Adaptar endpoint /analyze para DENTISTRY (2h)
+│       ├── [ ] T-004-03 – Pantalla triage odontológico en React Native (4h)
 │       └── [comparte tareas con F2.3]
 │
 └── 🔷 FEATURE: F2.3 – Motor de Red Flags por Especialidad (3 SP)
     │
     └── 📖 USER STORY: HU-004 – (continuación) Red flags y cola médica priorizada
-        ├── ✅ T-004-04 – GET /v1/consultations/queue con prioridad y filtro (3h)
-        ├── ✅ T-004-05 – Pruebas unitarias RedFlagsEngine OD + cola (3h)
-        ├── ✅ T-004-06 – Pruebas de integración triage OD y cola médica (3h)
-        ├── ✅ T-004-07 – Prueba de concurrencia base del módulo triage (2h)
-        └── ✅ T-004-08 – Documentación técnica OD y cola en Wiki (1h)
+        ├── [ ] T-004-04 – GET /v1/consultations/queue con prioridad y filtro (3h)
+        ├── [ ] T-004-05 – Pruebas unitarias RedFlagsEngine OD + cola (3h)
+        ├── [ ] T-004-06 – Pruebas de integración triage OD y cola médica (3h)
+        ├── [ ] T-004-07 – Prueba de concurrencia base del módulo triage (2h)
+        └── [ ] T-004-08 – Documentación técnica OD y cola en Wiki (1h)
 
 * HU-004 tiene parent F2.2 en Azure Boards pero sus tareas cubren también F2.3.
   Crear el vínculo de "Related" entre HU-004 y F2.3 en Azure Boards.

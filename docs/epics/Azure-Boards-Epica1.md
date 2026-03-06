@@ -1067,27 +1067,27 @@ Actualizar la Wiki con:
 ├── 🔷 FEATURE: F1.1 – Registro y Login de Paciente (5 SP)
 │   │
 │   └── 📖 USER STORY: HU-001 – Como paciente nuevo quiero registrarme e iniciar sesión (5 SP)
-│       ├── ✅ T-001-01 – Diseño de modelo Patient en MongoDB (2h)
-│       ├── ✅ T-001-02 – Endpoint POST /v1/auth/patient/register (3h)
-│       ├── ✅ T-001-03 – Endpoint POST /v1/auth/login con JWT (3h)
-│       ├── ✅ T-001-04 – JwtAuthGuard y @Roles para RBAC (2h)
-│       ├── ✅ T-001-05 – Pantallas Registro y Login en React Native (4h)
-│       ├── ✅ T-001-06 – Pruebas unitarias AuthService paciente (3h)
-│       ├── ✅ T-001-07 – Pruebas de integración endpoints auth paciente (2h)
-│       └── ✅ T-001-08 – Documentación técnica en Wiki (1h)
+│       ├── [ ] T-001-01 – Diseño de modelo Patient en MongoDB (2h)
+│       ├── [ ] T-001-02 – Endpoint POST /v1/auth/patient/register (3h)
+│       ├── [ ] T-001-03 – Endpoint POST /v1/auth/login con JWT (3h)
+│       ├── [ ] T-001-04 – JwtAuthGuard y @Roles para RBAC (2h)
+│       ├── [ ] T-001-05 – Pantallas Registro y Login en React Native (4h)
+│       ├── [ ] T-001-06 – Pruebas unitarias AuthService paciente (3h)
+│       ├── [ ] T-001-07 – Pruebas de integración endpoints auth paciente (2h)
+│       └── [ ] T-001-08 – Documentación técnica en Wiki (1h)
 │
 └── 🔷 FEATURE: F1.2 – Registro de Médico y Verificación REThUS (8 SP)
     │
     └── 📖 USER STORY: HU-002 – Como admin quiero validar médico con soporte REThUS (8 SP)
-        ├── ✅ T-002-01 – Diseño de modelos Doctor y RethusVerification (2h)
-        ├── ✅ T-002-02 – Endpoint POST /v1/auth/doctor/register (3h)
-        ├── ✅ T-002-03 – Endpoint POST /v1/admin/doctors/{id}/rethus-verify (4h)
-        ├── ✅ T-002-04 – Panel admin: lista PENDING y acción verificar (Next.js) (4h)
-        ├── ✅ T-002-05 – Guard DoctorVerifiedGuard en endpoints clínicos (2h)
-        ├── ✅ T-002-06 – Notificación interna de resultado REThUS (2h)
-        ├── ✅ T-002-07 – Pruebas unitarias AdminService (3h)
-        ├── ✅ T-002-08 – Pruebas de integración verificación REThUS (2h)
-        └── ✅ T-002-09 – Documentación técnica en Wiki (1h)
+        ├── [ ] T-002-01 – Diseño de modelos Doctor y RethusVerification (2h)
+        ├── [ ] T-002-02 – Endpoint POST /v1/auth/doctor/register (3h)
+        ├── [ ] T-002-03 – Endpoint POST /v1/admin/doctors/{id}/rethus-verify (4h)
+        ├── [ ] T-002-04 – Panel admin: lista PENDING y acción verificar (Next.js) (4h)
+        ├── [ ] T-002-05 – Guard DoctorVerifiedGuard en endpoints clínicos (2h)
+        ├── [ ] T-002-06 – Notificación interna de resultado REThUS (2h)
+        ├── [ ] T-002-07 – Pruebas unitarias AdminService (3h)
+        ├── [ ] T-002-08 – Pruebas de integración verificación REThUS (2h)
+        └── [ ] T-002-09 – Documentación técnica en Wiki (1h)
 ```
 
 **Total horas estimadas Sprint 1 (Épica 1):** 42 horas de trabajo  
@@ -1115,7 +1115,7 @@ Actualizar la Wiki con:
 - `POST /v1/admin/doctors/{doctorId}/rethus-verify` → T-002-03
 
 ### KPIs impactados por esta épica
-- **SLO Disponibilidad >= 98%**: el módulo de auth es crítico; su indisponibilidad bloquea toda la plataforma.
+- **SLO Disponibilidad > 99%**: el módulo de auth es crítico; su indisponibilidad bloquea toda la plataforma.
 - **KPI Retención a 7 días**: un onboarding simple y seguro reduce abandono inicial.
 
 ### Riesgos asociados

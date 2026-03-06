@@ -4,6 +4,22 @@ Definir la ejecucion de 10 sprints del semestre con metas, entregables y criteri
 ## Alcance
 Incluye Sprint 0 (Inception) y Sprint 1 a 9 (construccion, hardening y cierre).
 
+## Equivalencia con Lineamiento 2026-1
+Para mantener continuidad historica del equipo se conserva `Sprint 0..9` y se mapea al esquema del lineamiento (`Inception + Sprint 1..10`):
+
+| Esquema interno | Lineamiento |
+|---|---|
+| Sprint 0 | Inception |
+| Sprint 1 | Sprint 1 |
+| Sprint 2 | Sprint 2 |
+| Sprint 3 | Sprint 3 |
+| Sprint 4 | Sprint 4 |
+| Sprint 5 | Sprint 5 |
+| Sprint 6 | Sprint 6 |
+| Sprint 7 | Sprint 7 |
+| Sprint 8 | Sprint 8 |
+| Sprint 9 | Sprint 10 |
+
 ## Cadencia Scrum
 - Sprint planning semanal.
 - Daily scrum diario.
