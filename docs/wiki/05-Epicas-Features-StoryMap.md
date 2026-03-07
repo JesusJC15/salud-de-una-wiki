@@ -5,15 +5,15 @@ Organizar el producto en epicas y features para garantizar trazabilidad de valor
 Incluye mapeo de epicas/features y un story map textual por flujo de usuario. No reemplaza el backlog detallado de historias.
 
 ## Mapa de Epicas
-| ID Epica | Nombre | Resultado de negocio |
-|---|---|---|
-| E1 | Onboarding y acceso seguro | Incorporar usuarios validos con control de rol |
-| E2 | Triage inteligente por especialidad | Priorizar casos y reducir incertidumbre del paciente |
-| E3 | Consulta clinica en tiempo real | Mejorar velocidad y continuidad de atencion |
-| E4 | Resumen clinico y traductor IA | Aumentar eficiencia medica y claridad de comunicacion |
-| E5 | Seguimiento y evolucion | Medir progresion y detectar cambios de riesgo |
-| E6 | Observabilidad y analitica | Medir salud tecnica y valor de negocio |
-| E7 | Monetizacion simulada y gobierno | Validar viabilidad de modelo y controles operativos |
+| ID Epica | Nombre | Resultado de negocio | Documento |
+|---|---|---|---|
+| E1 | Onboarding y acceso seguro | Incorporar usuarios validos con control de rol | [E1](../epics/Azure-Boards-Epica1.md) |
+| E2 | Triage inteligente por especialidad | Priorizar casos y reducir incertidumbre del paciente | [E2](../epics/Azure-Boards-Epica2.md) |
+| E3 | Consulta clinica en tiempo real | Mejorar velocidad y continuidad de atencion | [E3](../epics/Azure-Boards-Epica3.md) |
+| E4 | Resumen clinico y traductor IA | Aumentar eficiencia medica y claridad de comunicacion | [E4](../epics/Azure-Boards-Epica4.md) |
+| E5 | Seguimiento y evolucion | Medir progresion y detectar cambios de riesgo | [E5](../epics/Azure-Boards-Epica5.md) |
+| E6 | Observabilidad y analitica | Medir salud tecnica y valor de negocio | [E6](../epics/Azure-Boards-Epica6.md) |
+| E7 | Monetizacion simulada y gobierno | Validar viabilidad de modelo y controles operativos | [E7](../epics/Azure-Boards-Epica7.md) |
 
 ## Feature Mapping por Epica
 | Epica | Feature ID | Feature | Prioridad |

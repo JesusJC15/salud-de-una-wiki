@@ -1331,31 +1331,31 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 ├── 🔷 FEATURE: F5.1 – Seguimiento Post-Consulta Automatizado (8 SP)
 │   │
 │   └── 📖 USER STORY: HU-007 – Como paciente quiero reportar evolución post-consulta (8 SP)
-│       ├── ✅ T-007-01 – Diseño schema Mongoose Followup (2h)
-│       ├── ✅ T-007-02 – Creación automática de Followup al cerrar consulta (3h)
-│       ├── ✅ T-007-03 – Endpoint POST /v1/followups con motor de re-priorización (4h)
-│       ├── ✅ T-007-04 – Scheduler NestJS de recordatorios de Followup vencidos (3h)
-│       ├── ✅ T-007-06 – Pantalla formulario de evolución en React Native (5h)
-│       ├── ✅ T-007-09 – Pruebas unitarias FollowupService y re-priorización (4h)
-│       ├── ✅ T-007-10 – Pruebas de integración POST /v1/followups (3h)
-│       └── ✅ T-007-12 – Documentación técnica endpoints seguimiento en Wiki (1h)
+│       ├── [ ] T-007-01 – Diseño schema Mongoose Followup (2h)
+│       ├── [ ] T-007-02 – Creación automática de Followup al cerrar consulta (3h)
+│       ├── [ ] T-007-03 – Endpoint POST /v1/followups con motor de re-priorización (4h)
+│       ├── [ ] T-007-04 – Scheduler NestJS de recordatorios de Followup vencidos (3h)
+│       ├── [ ] T-007-06 – Pantalla formulario de evolución en React Native (5h)
+│       ├── [ ] T-007-09 – Pruebas unitarias FollowupService y re-priorización (4h)
+│       ├── [ ] T-007-10 – Pruebas de integración POST /v1/followups (3h)
+│       └── [ ] T-007-12 – Documentación técnica endpoints seguimiento en Wiki (1h)
 │
 ├── 🔷 FEATURE: F5.2 – Timeline Evolutivo del Paciente (8 SP)
 │   │
 │   └── 📖 USER STORY: HU-007 – (continúa, cubre también F5.2)
-│       ├── ✅ T-007-05 – Endpoint GET /v1/patients/{id}/timeline con paginación (5h)
-│       ├── ✅ T-007-07 – Vista de timeline en app React Native (4h)
-│       ├── ✅ T-007-08 – Vista de timeline en panel médico Next.js (4h)
-│       ├── ✅ T-007-10 – Pruebas de integración GET /v1/patients/{id}/timeline (incluido arriba)
-│       └── ✅ T-007-11 – Prueba de rendimiento SLO P95 < 1500 ms (2h)
+│       ├── [ ] T-007-05 – Endpoint GET /v1/patients/{id}/timeline con paginación (5h)
+│       ├── [ ] T-007-07 – Vista de timeline en app React Native (4h)
+│       ├── [ ] T-007-08 – Vista de timeline en panel médico Next.js (4h)
+│       ├── [ ] T-007-10 – Pruebas de integración GET /v1/patients/{id}/timeline (incluido arriba)
+│       └── [ ] T-007-11 – Prueba de rendimiento SLO P95 < 1500 ms (2h)
 │
 └── 🔷 FEATURE: F5.1 (extensión Could) – Perfil de Familiar Cuidador
     │
     └── 📖 USER STORY: HU-012 – Como familiar cuidador quiero gestionar perfil de dependiente (8 SP)
-        ├── ✅ T-012-01 – Diseño schema DependentProfile y relación CaregiverOf (2h)
-        ├── ✅ T-012-02 – Endpoints POST/GET /v1/patients/dependents (4h)
-        ├── ✅ T-012-03 – Pantalla de gestión de perfiles en React Native (4h)
-        └── ✅ T-012-04 – Pruebas unitarias e integración de gestión de cuidador (3h)
+        ├── [ ] T-012-01 – Diseño schema DependentProfile y relación CaregiverOf (2h)
+        ├── [ ] T-012-02 – Endpoints POST/GET /v1/patients/dependents (4h)
+        ├── [ ] T-012-03 – Pantalla de gestión de perfiles en React Native (4h)
+        └── [ ] T-012-04 – Pruebas unitarias e integración de gestión de cuidador (3h)
 ```
 
 **Total horas estimadas Sprint 6 (Épica 5):**
@@ -1410,7 +1410,7 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 - **KPI Tasa de red flags relevantes confirmadas**: si el motor de re-priorización detecta
   empeoramiento, aporta datos a este KPI cuando el médico confirma la relevancia.
 - **SLO P95 latencia < 1500 ms**: aplica al endpoint de timeline; verificado en T-007-11.
-- **SLO Disponibilidad >= 98%**: el módulo de seguimiento es parte del core del MVP; su
+- **SLO Disponibilidad > 99%**: el módulo de seguimiento es parte del core del MVP; su
   indisponibilidad afecta la retención y la detección de empeoramiento.
 
 ### Riesgos asociados

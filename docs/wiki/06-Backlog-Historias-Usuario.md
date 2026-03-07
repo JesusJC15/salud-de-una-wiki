@@ -42,3 +42,12 @@ Incluye historias Must, Should, Could y Won't de alcance semestral. Cada histori
 - Se permite iniciar historias Should solo si el sprint ya cumple historias Must comprometidas.
 - Historias Could no bloquean hitos de presentacion.
 - Historias Won't quedan fuera y no se estiman para compromiso.
+
+## Referencias por Epica (Azure Boards)
+- E1: [Azure-Boards-Epica1](../epics/Azure-Boards-Epica1.md)
+- E2: [Azure-Boards-Epica2](../epics/Azure-Boards-Epica2.md)
+- E3: [Azure-Boards-Epica3](../epics/Azure-Boards-Epica3.md)
+- E4: [Azure-Boards-Epica4](../epics/Azure-Boards-Epica4.md)
+- E5: [Azure-Boards-Epica5](../epics/Azure-Boards-Epica5.md)
+- E6: [Azure-Boards-Epica6](../epics/Azure-Boards-Epica6.md)
+- E7: [Azure-Boards-Epica7](../epics/Azure-Boards-Epica7.md)

@@ -1018,18 +1018,18 @@ Referencias a HU-006, HU-005 y HU-007, y al sprint de implementación.
 ├── 🔷 FEATURE: F3.1 – Chat Clínico en Tiempo Real (9 SP)
 │   │
 │   └── 📖 USER STORY: HU-006 – Como paciente y médico quiero intercambiar mensajes en tiempo real (13 SP)
-│       ├── ✅ T-006-01 – Diseño de modelos Consultation y ConsultationMessage en MongoDB (2h)
-│       ├── ✅ T-006-02 – Endpoint POST /v1/consultations (3h)
-│       ├── ✅ T-006-03 – Endpoint GET /v1/consultations/queue (3h)
-│       ├── ✅ T-006-04 – Endpoint POST /v1/consultations/{id}/messages (3h)
-│       ├── ✅ T-006-05 – ConsultationGateway WebSocket NestJS (5h)
-│       ├── ✅ T-006-06 – Endpoints de cambio de estado (attend y close) (2h)
-│       ├── ✅ T-006-07 – Pantalla de chat en React Native (paciente) (5h)
-│       ├── ✅ T-006-08 – Vista de cola y chat en Next.js (médico) (5h)
-│       ├── ✅ T-006-09 – Pruebas unitarias ConsultationService y Gateway (4h)
-│       ├── ✅ T-006-10 – Pruebas de integración endpoints REST consulta (3h)
-│       ├── ✅ T-006-11 – Prueba de carga 100 sesiones WS concurrentes (Sprint 5) (3h)
-│       └── ✅ T-006-12 – Documentación técnica en Wiki (2h)
+│       ├── [ ] T-006-01 – Diseño de modelos Consultation y ConsultationMessage en MongoDB (2h)
+│       ├── [ ] T-006-02 – Endpoint POST /v1/consultations (3h)
+│       ├── [ ] T-006-03 – Endpoint GET /v1/consultations/queue (3h)
+│       ├── [ ] T-006-04 – Endpoint POST /v1/consultations/{id}/messages (3h)
+│       ├── [ ] T-006-05 – ConsultationGateway WebSocket NestJS (5h)
+│       ├── [ ] T-006-06 – Endpoints de cambio de estado (attend y close) (2h)
+│       ├── [ ] T-006-07 – Pantalla de chat en React Native (paciente) (5h)
+│       ├── [ ] T-006-08 – Vista de cola y chat en Next.js (médico) (5h)
+│       ├── [ ] T-006-09 – Pruebas unitarias ConsultationService y Gateway (4h)
+│       ├── [ ] T-006-10 – Pruebas de integración endpoints REST consulta (3h)
+│       ├── [ ] T-006-11 – Prueba de carga 100 sesiones WS concurrentes (Sprint 5) (3h)
+│       └── [ ] T-006-12 – Documentación técnica en Wiki (2h)
 │
 └── 🔷 FEATURE: F3.2 – Cola de Casos Priorizada para Médico (4 SP)
     │
@@ -1072,7 +1072,7 @@ Referencias a HU-006, HU-005 y HU-007, y al sprint de implementación.
 - **KPI Tiempo a primera respuesta médica**: el chat en tiempo real y la cola priorizada
   son los mecanismos directos para reducir este indicador.
 - **SLO P95 Chat Delivery < 1500 ms**: medido en el smoke test de concurrencia (T-006-11).
-- **SLO Disponibilidad >= 98%**: el módulo de consulta es crítico para el flujo completo
+- **SLO Disponibilidad > 99%**: el módulo de consulta es crítico para el flujo completo
   del MVP.
 
 ### Riesgos asociados

@@ -65,7 +65,11 @@ Dueño: <rol o persona>
 ## Estructura de Documentacion (mapa rapido)
 1. Home: `00-Home.md`
 2. Definicion de producto: `01` a `03`
-3. Definicion tecnica: `04`
+3. Definicion tecnica y arquitectura: `04`
 4. Backlog y calidad: `05` a `08`
 5. Observabilidad y priorizacion: `09`, `10`
 6. Plan operativo y riesgos: `11`, `12`
+7. Anexos metodologicos: `13`
+8. Mockups funcionales: `14`
+9. Cumplimiento lineamientos 2026-1: `15`
+10. Epicas Azure Boards (detalle): `docs/epics/Azure-Boards-Epica1.md` a `Azure-Boards-Epica7.md`

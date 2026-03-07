@@ -6,7 +6,7 @@ Incluye los 9 bloques de Canvas y la relacion con priorizacion del MVP. No inclu
 
 ## Business Model Canvas
 
-![Business Model Canvas.png](../Business%20Model%20Canvas.png)
+![Business Model Canvas.png](../img/Business Model Canvas.png)
 
 ## Business Case Resumido
 - Problema economico: tiempo medico improductivo en recoleccion inicial.
