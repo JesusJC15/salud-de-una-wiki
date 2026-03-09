@@ -1,14 +1,12 @@
-# Azure Boards – Épica 3: Consulta Clínica en Tiempo Real
+## Azure Boards – Épica 3: Consulta Clínica en Tiempo Real
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 3 – Consulta Clínica en Tiempo Real** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
----
-
 ## 1. ÉPICA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Epic |
 | **ID**                 | E3 |
 | **Title**              | Consulta Clínica en Tiempo Real |
@@ -113,14 +111,12 @@ Feature: Consulta clínica en tiempo real en SaludDeUna
     And la consulta deja de aparecer en la cola activa del médico
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F3.1 – Chat Clínico en Tiempo Real
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F3.1 |
 | **Title**              | Chat Clínico en Tiempo Real |
@@ -202,12 +198,10 @@ Feature: Mensajería clínica en tiempo real
     And no recibe ningún evento de esa consulta
 ```
 
----
-
 ### Feature F3.2 – Cola de Casos Priorizada para Médico
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F3.2 |
 | **Title**              | Cola de Casos Priorizada para Médico |
@@ -288,14 +282,12 @@ Feature: Cola de casos priorizada para médico
     And la consulta aparece en la cola del médico correspondiente
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-006 – Chat Clínico en Tiempo Real
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-006 |
 | **Title**              | Como paciente y médico quiero intercambiar mensajes en tiempo real con estado de caso para mejorar la continuidad y oportunidad de respuesta |
@@ -426,18 +418,14 @@ Feature: Mensajería clínica en tiempo real
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ## 4. TAREAS
 
 ### Tareas de HU-006 – Chat Clínico en Tiempo Real
 
----
-
 #### T-006-01 – Diseño de modelos de datos Consultation y ConsultationMessage en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquemas Mongoose Consultation y ConsultationMessage |
 | **Parent (User Story)**| HU-006 |
@@ -491,12 +479,10 @@ Ubicar en: apps/api/src/consultations/schemas/
 - El campo serverTimestamp es el único timestamp de referencia para ordenamiento.
 - No se puede crear una segunda consulta activa para el mismo paciente (índice único validado).
 
----
-
 #### T-006-02 – Implementación del endpoint POST /v1/consultations
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/consultations para crear consulta desde triage |
 | **Parent (User Story)**| HU-006 |
@@ -533,12 +519,10 @@ Ubicar en: apps/api/src/consultations/
 - Retorna 409 si el paciente ya tiene una consulta activa.
 - El evento `consultation.queue.updated` se emite correctamente al médico correspondiente.
 
----
-
 #### T-006-03 – Implementación del endpoint GET /v1/consultations/queue
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint GET /v1/consultations/queue con ordenamiento por prioridad |
 | **Parent (User Story)**| HU-006 |
@@ -573,12 +557,10 @@ Ubicar en: apps/api/src/consultations/
 - Paginación funciona con parámetro lastId.
 - El log registra cada acceso al endpoint.
 
----
-
 #### T-006-04 – Implementación del endpoint POST /v1/consultations/{id}/messages
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint REST de envío de mensajes en consulta |
 | **Parent (User Story)**| HU-006 |
@@ -614,12 +596,10 @@ Ubicar en: apps/api/src/consultations/
 - El evento `consultation.message.created` se emite al room correcto.
 - El campo content es sanitizado para prevenir XSS antes de persistir.
 
----
-
 #### T-006-05 – Implementación del Gateway WebSocket (ConsultationGateway)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar ConsultationGateway WebSocket en NestJS |
 | **Parent (User Story)**| HU-006 |
@@ -667,12 +647,10 @@ Ubicar en: apps/api/src/consultations/consultation.gateway.ts
 - El ACK lógico es emitido tras cada mensaje procesado.
 - La desconexión abrupta del cliente es manejada sin causar errores en el servidor.
 
----
-
 #### T-006-06 – Implementación del cambio de estado de consulta (IN_PROGRESS / CLOSED)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoints de cambio de estado de consulta (atender y cerrar) |
 | **Parent (User Story)**| HU-006 |
@@ -710,12 +688,10 @@ Ubicar en: apps/api/src/consultations/
 - El evento `follow-up.triggered` se emite tras el cierre para HU-007.
 - Intentar cerrar una consulta ya CLOSED retorna 422 con mensaje de estado inválido.
 
----
-
 #### T-006-07 – Pantalla de chat clínico en React Native (app paciente)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantalla de chat clínico en la app React Native del paciente |
 | **Parent (User Story)**| HU-006 |
@@ -759,12 +735,10 @@ Ubicar en: apps/mobile/src/screens/consultation/ConsultationScreen.tsx
 - El input se deshabilita cuando la consulta está CLOSED.
 - La app no crashea en ningún flujo de error del backend o del WebSocket.
 
----
-
 #### T-006-08 – Vista de cola y pantalla de chat en Next.js (panel médico)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar vista de cola de casos y pantalla de chat en el panel médico (Next.js) |
 | **Parent (User Story)**| HU-006 |
@@ -809,12 +783,10 @@ Ubicar en: apps/web/src/app/doctor/
 - El panel lateral muestra el resumen clínico preconsulta cuando está disponible.
 - Acceso de un rol no-MEDICO o médico no-VERIFIED redirige a /403.
 
----
-
 #### T-006-09 – Pruebas unitarias del ConsultationService y ConsultationGateway
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para ConsultationService y ConsultationGateway |
 | **Parent (User Story)**| HU-006 |
@@ -857,12 +829,10 @@ Ubicar en: apps/api/src/consultations/
 - Cobertura >= 80% de los dos módulos.
 - No hay dependencias reales de base de datos ni de WebSocket en estas pruebas.
 
----
-
 #### T-006-10 – Pruebas de integración de endpoints REST de consulta
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para endpoints REST de consulta |
 | **Parent (User Story)**| HU-006 |
@@ -909,12 +879,10 @@ Ubicar en: apps/api/test/consultations.e2e-spec.ts
 - Se cubre el flujo completo desde la creación de consulta hasta el cierre.
 - Los tests de estado HTTP y estructura de respuesta son precisos.
 
----
-
 #### T-006-11 – Prueba de concurrencia inicial (smoke test WebSocket)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Ejecutar prueba de carga con 100 sesiones WebSocket simultáneas (Sprint 5) |
 | **Parent (User Story)**| HU-006 |
@@ -957,12 +925,10 @@ Ubicar en: apps/api/test/load/consultation-concurrency.yml (o .js según herrami
 - La tasa de pérdida de mensajes es < 0.1%.
 - El resultado del test queda registrado y referenciado en la Wiki.
 
----
-
 #### T-006-12 – Documentación técnica de la consulta clínica en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoints REST, Gateway WebSocket y flujo de consulta en la Wiki |
 | **Parent (User Story)**| HU-006 |
@@ -1008,8 +974,6 @@ Referencias a HU-006, HU-005 y HU-007, y al sprint de implementación.
 - Los resultados del smoke test están referenciados.
 - Un desarrollador nuevo puede consumir el chat sin leer el código fuente.
 
----
-
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
 ```
@@ -1040,12 +1004,10 @@ Referencias a HU-006, HU-005 y HU-007, y al sprint de implementación.
 **Total Story Points Épica 3:** 13 SP (HU-006: 13 SP)  
 **Sprint objetivo:** Sprint 5
 
----
-
 ## 6. REFERENCIAS CRUZADAS
 
 | Artefacto | Referencia |
-|-----------|-----------|
+|---|---|
 | Plan Maestro | `Plan Maestro SaludDeUna (IETI 2026-1).md` – Sprint 5 y MoSCoW |
 | Story Map | `docs/wiki/05-Epicas-Features-StoryMap.md` – Actividad 3: Consulta |
 | Backlog completo | `docs/wiki/06-Backlog-Historias-Usuario.md` – HU-006 |

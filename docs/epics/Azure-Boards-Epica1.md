@@ -1,14 +1,12 @@
-# Azure Boards – Épica 1: Onboarding y Acceso Seguro
+## Azure Boards – Épica 1: Onboarding y Acceso Seguro
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 1 – Onboarding y Acceso Seguro** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
----
-
 ## 1. ÉPICA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Epic |
 | **ID**                 | E1 |
 | **Title**              | Onboarding y Acceso Seguro |
@@ -85,14 +83,12 @@ Feature: Control de acceso por rol en SaludDeUna
     And el médico puede atender consultas a partir de ese momento
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F1.1 – Registro y Login de Paciente
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F1.1 |
 | **Title**              | Registro y Login de Paciente |
@@ -158,12 +154,10 @@ Feature: Registro y login de paciente
     And el sistema no revela si el correo existe o no
 ```
 
----
-
 ### Feature F1.2 – Registro de Médico y Verificación REThUS
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F1.2 |
 | **Title**              | Registro de Médico y Verificación REThUS |
@@ -231,14 +225,12 @@ Feature: Registro de médico y verificación REThUS
     And el mensaje indica que debe completar la verificación profesional
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-001 – Registro e Inicio de Sesión del Paciente
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-001 |
 | **Title**              | Como paciente nuevo quiero registrarme e iniciar sesión para gestionar mis consultas de forma segura |
@@ -334,12 +326,10 @@ Feature: Registro y login de paciente
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ### HU-002 – Validación REThUS de Médico por Administrador
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-002 |
 | **Title**              | Como admin de plataforma quiero validar a un médico con soporte REThUS para asegurar autenticidad profesional |
@@ -442,18 +432,14 @@ Feature: Validación profesional de médico por admin
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ## 4. TAREAS
 
 ### Tareas de HU-001 – Registro e Inicio de Sesión del Paciente
 
----
-
 #### T-001-01 – Diseño de modelo de datos Patient en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquema Mongoose Patient con campos requeridos y validaciones |
 | **Parent (User Story)**| HU-001 |
@@ -491,12 +477,10 @@ Ubicar en: apps/api/src/patients/schemas/patient.schema.ts
 - Índice único en email verificado en MongoDB local.
 - No expone passwordHash en ninguna consulta por defecto.
 
----
-
 #### T-001-02 – Implementación del endpoint POST /v1/auth/patient/register
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/auth/patient/register en NestJS |
 | **Parent (User Story)**| HU-001 |
@@ -529,12 +513,10 @@ Ubicar en: apps/api/src/auth/
 - Retorna 400 con errores de validación si el payload es inválido.
 - La contraseña nunca aparece en logs ni en la respuesta.
 
----
-
 #### T-001-03 – Implementación del endpoint POST /v1/auth/login
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/auth/login con emisión de JWT |
 | **Parent (User Story)**| HU-001 |
@@ -571,12 +553,10 @@ Ubicar en: apps/api/src/auth/
 - Login fallido retorna 401 con mensaje genérico.
 - La clave JWT nunca está hardcodeada; se lee de variable de entorno.
 
----
-
 #### T-001-04 – Guard JWT y decorador @Roles en NestJS
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar JwtAuthGuard y decorador @Roles para RBAC |
 | **Parent (User Story)**| HU-001 |
@@ -602,12 +582,10 @@ Implementar la infraestructura de autorización reutilizable:
 - Una ruta decorada con @Public() no requiere JWT.
 - El guard extrae correctamente el userId y role del payload del JWT.
 
----
-
 #### T-001-05 – Pantallas de Registro y Login en React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantallas de Registro y Login en la app React Native |
 | **Parent (User Story)**| HU-001 |
@@ -647,12 +625,10 @@ Ubicar en: apps/mobile/src/screens/auth/
 - Contraseña nunca visible en texto plano; usar `secureTextEntry`.
 - La app no crashea en ningún flujo de error del backend.
 
----
-
 #### T-001-06 – Pruebas unitarias del servicio de autenticación (paciente)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para AuthService (registro y login de paciente) |
 | **Parent (User Story)**| HU-001 |
@@ -680,12 +656,10 @@ Ubicar en: apps/api/src/auth/auth.service.spec.ts
 - Cobertura >= 80% del AuthService.
 - No hay dependencias reales de base de datos en estas pruebas (todo mockeado).
 
----
-
 #### T-001-07 – Pruebas de integración de endpoints de auth (paciente)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para POST /v1/auth/patient/register y POST /v1/auth/login |
 | **Parent (User Story)**| HU-001 |
@@ -711,12 +685,10 @@ Ubicar en: apps/api/test/auth.e2e-spec.ts
 - Todos los tests de integración pasan en CI.
 - Los tests se ejecutan de forma aislada sin depender de datos externos.
 
----
-
 #### T-001-08 – Documentación técnica de endpoints de auth en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoints de autenticación de paciente en la Wiki del proyecto |
 | **Parent (User Story)**| HU-001 |
@@ -740,16 +712,12 @@ Actualizar o crear sección en la Wiki de Azure DevOps con:
 - La Wiki refleja los contratos reales de los endpoints implementados.
 - Un nuevo desarrollador puede usar la documentación para consumir los endpoints sin leer el código fuente.
 
----
-
 ### Tareas de HU-002 – Validación REThUS de Médico
-
----
 
 #### T-002-01 – Diseño de modelo de datos Doctor y RethusVerification en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquemas Mongoose Doctor y RethusVerification |
 | **Parent (User Story)**| HU-002 |
@@ -791,12 +759,10 @@ Ubicar en: apps/api/src/doctors/schemas/
 - El campo rethusStatus por defecto es PENDING.
 - RethusVerification referencia el Doctor por ObjectId.
 
----
-
 #### T-002-02 – Implementación del endpoint POST /v1/auth/doctor/register
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/auth/doctor/register en NestJS |
 | **Parent (User Story)**| HU-002 |
@@ -824,12 +790,10 @@ Ubicar en: apps/api/src/auth/
 - Correo duplicado retorna 409.
 - Payload inválido retorna 400 con detalle de errores.
 
----
-
 #### T-002-03 – Implementación del endpoint POST /v1/admin/doctors/{doctorId}/rethus-verify
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint de verificación REThUS para admin |
 | **Parent (User Story)**| HU-002 |
@@ -867,12 +831,10 @@ Ubicar en: apps/api/src/admin/
 - El rethusStatus del Doctor se actualiza atómicamente.
 - Si la transacción falla a mitad de camino, ningún documento queda modificado (rollback verificado).
 
----
-
 #### T-002-04 – Panel admin web: lista de médicos PENDING y acción de verificar
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar vista de verificación REThUS en el panel admin (Next.js) |
 | **Parent (User Story)**| HU-002 |
@@ -901,12 +863,10 @@ Ubicar en: apps/web/src/app/admin/doctors/verification/
 - Tras la acción, el médico desaparece de la lista PENDING.
 - Acceso desde un rol no-ADMIN redirige a /403.
 
----
-
 #### T-002-05 – Implementación del guard de estado VERIFIED en endpoints clínicos
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar guard que bloquea médicos no verificados en endpoints clínicos |
 | **Parent (User Story)**| HU-002 |
@@ -932,12 +892,10 @@ Ubicar en: apps/api/src/common/guards/doctor-verified.guard.ts
 - Médico VERIFIED accede correctamente.
 - El guard no afecta a pacientes ni admins.
 
----
-
 #### T-002-06 – Notificación interna de resultado de verificación REThUS
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar notificación interna al médico tras cambio de estado REThUS |
 | **Parent (User Story)**| HU-002 |
@@ -964,12 +922,10 @@ Ubicar en: apps/api/src/notifications/
 - El documento tiene los campos correctos (type, status, message, read=false).
 - El log registra el evento de notificación.
 
----
-
 #### T-002-07 – Pruebas unitarias del servicio de verificación REThUS
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para AdminService (verificación REThUS) |
 | **Parent (User Story)**| HU-002 |
@@ -996,12 +952,10 @@ Ubicar en: apps/api/src/admin/admin.service.spec.ts
 - Mocks de repositorios usados; sin dependencias reales de BD.
 - Cobertura >= 80%.
 
----
-
 #### T-002-08 – Pruebas de integración del endpoint de verificación REThUS
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para POST /v1/admin/doctors/{doctorId}/rethus-verify |
 | **Parent (User Story)**| HU-002 |
@@ -1027,12 +981,10 @@ Ubicar en: apps/api/test/admin-rethus.e2e-spec.ts
 - Todos los tests pasan en CI de forma aislada.
 - Se cubre el flujo completo de verificación y bloqueo.
 
----
-
 #### T-002-09 – Documentación técnica de endpoints de médico y verificación REThUS en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoints de registro de médico y verificación REThUS en la Wiki |
 | **Parent (User Story)**| HU-002 |
@@ -1056,8 +1008,6 @@ Actualizar la Wiki con:
 **Criterios de aceptación de la tarea:**
 - La Wiki refleja los contratos reales de los endpoints.
 - El flujo REThUS es comprensible para un desarrollador nuevo sin leer el código.
-
----
 
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
@@ -1094,12 +1044,10 @@ Actualizar la Wiki con:
 **Total Story Points Épica 1:** 13 SP (HU-001: 5 SP + HU-002: 8 SP)  
 **Sprint objetivo:** Sprint 1
 
----
-
 ## 6. REFERENCIAS CRUZADAS
 
 | Artefacto | Referencia |
-|-----------|-----------|
+|---|---|
 | Plan Maestro | `Plan Maestro SaludDeUna (IETI 2026-1).md` – Sprints y MoSCoW |
 | Story Map | `docs/wiki/05-Epicas-Features-StoryMap.md` – Actividad 1: Onboarding |
 | Backlog completo | `docs/wiki/06-Backlog-Historias-Usuario.md` – HU-001, HU-002 |

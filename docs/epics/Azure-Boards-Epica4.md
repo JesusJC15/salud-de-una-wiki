@@ -1,14 +1,12 @@
-# Azure Boards – Épica 4: Resumen Clínico y Traductor IA
+## Azure Boards – Épica 4: Resumen Clínico y Traductor IA
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 4 – Resumen Clínico y Traductor IA** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
----
-
 ## 1. ÉPICA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Epic |
 | **ID**                 | E4 |
 | **Title**              | Resumen Clínico y Traductor IA |
@@ -129,14 +127,12 @@ Feature: Resumen clínico y traducción IA en SaludDeUna
     And no modifica el registro oficial de la consulta sin confirmación del médico
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F4.1 – Resumen Clínico Automático Preconsulta
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F4.1 |
 | **Title**              | Resumen Clínico Automático Preconsulta |
@@ -239,12 +235,10 @@ Feature: Generación de resumen clínico preconsulta
     And el log registra el intento de acceso no autorizado
 ```
 
----
-
 ### Feature F4.2 – Traducción Paciente-Clínico Bidireccional
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F4.2 |
 | **Title**              | Traducción Paciente-Clínico Bidireccional |
@@ -336,14 +330,12 @@ Feature: Traducción paciente-clínico bidireccional
     And no realiza ninguna llamada al servicio IA
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### Historia de Usuario HU-005 – Resumen Clínico Automático Preconsulta
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-005 |
 | **Title**              | Como médico quiero recibir el resumen clínico automático preconsulta |
@@ -422,12 +414,10 @@ Feature: Generación de resumen clínico
     And el KPI de utilidad de resumen clínico se incrementa correctamente
 ```
 
----
-
 ### Historia de Usuario HU-009 – Traducción a Lenguaje Simple para Paciente
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-009 |
 | **Title**              | Como paciente quiero recibir explicaciones médicas en lenguaje simple |
@@ -508,18 +498,14 @@ Feature: Traducción bidireccional de lenguaje clínico
     And no realiza ninguna llamada al servicio IA
 ```
 
----
-
 ## 4. TAREAS
 
 ### Tareas de HU-005 – Resumen Clínico Automático Preconsulta
 
----
-
 #### T-005-01 – Diseño del modelo ClinicalSummary en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar y documentar el modelo ClinicalSummary en MongoDB |
 | **Parent (User Story)**| HU-005 |
@@ -552,12 +538,10 @@ Ubicar en: apps/api/src/consultations/schemas/clinical-summary.schema.ts
 - Todos los campos del contrato ClinicalSummary están presentes con los tipos correctos.
 - La documentación del modelo está actualizada en la Wiki (referencia al sprint 4).
 
----
-
 #### T-005-02 – Implementación del IAOrchestrator: Gemini + RAG para generación de resumen
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar IAOrchestrator con Gemini + RAG para generación de ClinicalSummary |
 | **Parent (User Story)**| HU-005 |
@@ -598,12 +582,10 @@ Ubicar en: apps/api/src/ia/ia-orchestrator.service.ts
 - El log incluye todos los campos requeridos (promptVersion, confidenceScore, latency_ms).
 - El servicio no genera contenido de diagnóstico ni prescripción en ningún escenario de prueba.
 
----
-
 #### T-005-03 – Implementación del endpoint POST /v1/consultations/{id}/summary/generate
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint de generación de resumen clínico |
 | **Parent (User Story)**| HU-005 |
@@ -648,12 +630,10 @@ Ubicar en: apps/api/src/consultations/consultations.controller.ts y
 - IA no disponible → HTTP 503 y ClinicalSummary con estado AI_UNAVAILABLE persiste.
 - Evento WebSocket consultation.summary.ready emitido correctamente.
 
----
-
 #### T-005-04 – Implementación de los guardrails de IA para el resumen clínico
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar guardrails que bloquean diagnóstico/prescripción en el resumen IA |
 | **Parent (User Story)**| HU-005 |
@@ -695,12 +675,10 @@ Ubicar en: apps/api/src/ia/guardrail.service.ts
 - El log de bloqueo no incluye el texto original del prompt.
 - La versión del prompt queda registrada en cada ClinicalSummary generado.
 
----
-
 #### T-005-05 – Vista de resumen clínico en el panel médico (Next.js)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar vista de resumen clínico en el panel médico (Next.js) |
 | **Parent (User Story)**| HU-005 |
@@ -745,12 +723,10 @@ Ubicar en: apps/web/src/app/consultations/[id]/components/ClinicalSummary/
 - El banner AI_UNAVAILABLE aparece cuando el endpoint retorna 503.
 - La sección no es visible para el rol PACIENTE.
 
----
-
 #### T-005-06 – Pruebas unitarias del IAOrchestrator y del IAGuardrailService
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para IAOrchestrator y IAGuardrailService |
 | **Parent (User Story)**| HU-005 |
@@ -790,12 +766,10 @@ Ubicar en:
 - Cobertura >= 80% en IAOrchestrator y >= 90% en IAGuardrailService.
 - Los mocks de IAProviderAdapter simulan correctamente los escenarios de fallo y éxito.
 
----
-
 #### T-005-07 – Pruebas de integración del endpoint de resumen clínico
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para POST /v1/consultations/{id}/summary/generate |
 | **Parent (User Story)**| HU-005 |
@@ -825,12 +799,10 @@ Ubicar en: apps/api/test/clinical-summary.e2e-spec.ts
 - El mock de IAProviderAdapter cubre escenarios de éxito, retry y fallo total.
 - La idempotencia del endpoint está cubierta y verificada.
 
----
-
 #### T-005-08 – Documentación técnica del resumen clínico en la Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoint y flujo del resumen clínico en la Wiki |
 | **Parent (User Story)**| HU-005 |
@@ -862,16 +834,12 @@ Actualizar la Wiki con:
 - El flujo de generación es comprensible para un desarrollador nuevo sin leer el código.
 - Los guardrails y el plan de contingencia están documentados con sus comportamientos esperados.
 
----
-
 ### Tareas de HU-009 – Traducción Paciente-Clínico Bidireccional
-
----
 
 #### T-009-01 – Diseño del módulo TranslationService y su contrato de API
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar el módulo TranslationService y el contrato del endpoint de traducción |
 | **Parent (User Story)**| HU-009 |
@@ -908,12 +876,10 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 - Las interfaces TypeScript del body y la response están definidas sin errores.
 - Los nombres de las versiones de prompt están registrados en la colección PromptVersions.
 
----
-
 #### T-009-02 – Implementación de traducción clínico → paciente (lenguaje simple)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar traducción de lenguaje clínico a lenguaje simple para paciente |
 | **Parent (User Story)**| HU-009 |
@@ -947,12 +913,10 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 - El guardrail bloquea textos con patrones diagnósticos.
 - El log no incluye el texto original ni el traducido.
 
----
-
 #### T-009-03 – Implementación de traducción paciente → clínico (terminología médica)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar traducción de descripción del paciente a lenguaje clínico estructurado |
 | **Parent (User Story)**| HU-009 |
@@ -984,12 +948,10 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 - El resultado no incluye un código diagnóstico CIE-10 directo ni prescripción.
 - El guardrail bloquea descripciones que contienen solicitudes explícitas de diagnóstico.
 
----
-
 #### T-009-04 – Implementación del endpoint POST /v1/consultations/{id}/translation
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint de traducción bidireccional en ConsultationsController |
 | **Parent (User Story)**| HU-009 |
@@ -1027,12 +989,10 @@ Ubicar en: apps/api/src/consultations/consultations.controller.ts
 - Texto con contenido diagnóstico → HTTP 422.
 - No autenticado → HTTP 401.
 
----
-
 #### T-009-05 – Integración del botón de traducción en la app React Native (paciente)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar botón "Explicar en lenguaje simple" en el chat de la app (React Native) |
 | **Parent (User Story)**| HU-009 |
@@ -1067,12 +1027,10 @@ Ubicar en: apps/mobile/src/screens/Chat/components/TranslationModal/
 - Los errores de la API se muestran con mensajes amigables sin exponer detalles técnicos.
 - El hilo de chat original no se modifica.
 
----
-
 #### T-009-06 – Pruebas unitarias del TranslationService
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para TranslationService |
 | **Parent (User Story)**| HU-009 |
@@ -1101,12 +1059,10 @@ Ubicar en: apps/api/src/ia/translation.service.spec.ts
 - Cobertura >= 85%.
 - Los mocks cubren escenarios de éxito, guardrail activado y fallo del proveedor.
 
----
-
 #### T-009-07 – Documentación técnica del módulo de traducción en la Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoint y módulo de traducción bidireccional en la Wiki |
 | **Parent (User Story)**| HU-009 |
@@ -1133,8 +1089,6 @@ Actualizar la Wiki con:
 - La Wiki describe correctamente los dos casos de uso con ejemplos comprensibles.
 - La política de privacidad del log (sin almacenar textos) está explícitamente documentada.
 - El comportamiento del guardrail en traducción está diferenciado del comportamiento en el resumen.
-
----
 
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
@@ -1169,12 +1123,10 @@ Actualizar la Wiki con:
 **Total Story Points Épica 4:** 13 SP (HU-005: 8 SP + HU-009: 5 SP)  
 **Sprint objetivo:** Sprint 4
 
----
-
 ## 6. REFERENCIAS CRUZADAS
 
 | Artefacto | Referencia |
-|-----------|-----------|
+|---|---|
 | Plan Maestro | `Plan Maestro SaludDeUna (IETI 2026-1).md` – Sprint 4 y MoSCoW |
 | Story Map | `docs/wiki/05-Epicas-Features-StoryMap.md` – Actividad 3: Consulta (slice B) |
 | Backlog completo | `docs/wiki/06-Backlog-Historias-Usuario.md` – HU-005, HU-009 |

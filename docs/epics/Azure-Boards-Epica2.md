@@ -1,14 +1,12 @@
-# Azure Boards – Épica 2: Triage Inteligente por Especialidad
+## Azure Boards – Épica 2: Triage Inteligente por Especialidad
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 2 – Triage Inteligente por Especialidad** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
----
-
 ## 1. ÉPICA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Epic |
 | **ID**                 | E2 |
 | **Title**              | Triage Inteligente por Especialidad |
@@ -101,14 +99,12 @@ Feature: Triage inteligente por especialidad en SaludDeUna
     Then los casos HIGH aparecen primero, seguidos de MODERATE y luego LOW
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F2.1 – Flujo Triage Medicina General
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F2.1 |
 | **Title**              | Flujo Triage Medicina General |
@@ -179,8 +175,6 @@ Feature: Triage de Medicina General con IA
          meds, history y priority correctamente estructurados
 ```
 
----
-
 ### Feature F2.2 – Flujo Triage Odontología
 
 > **Nota Azure Boards:** HU-004 tiene como parent primario esta feature (F2.2). Crear además
@@ -188,7 +182,7 @@ Feature: Triage de Medicina General con IA
 > de reglas y la cola médica (T-004-01, T-004-04) forman parte del alcance de F2.3.
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F2.2 |
 | **Title**              | Flujo Triage Odontología |
@@ -257,8 +251,6 @@ Feature: Triage de Odontología con motor de reglas
     Then el caso aparece en la posición más alta de la cola de esa especialidad
 ```
 
----
-
 ### Feature F2.3 – Motor de Red Flags por Especialidad
 
 > **Nota Azure Boards:** Esta feature agrupa las tareas del motor de reglas (T-004-01),
@@ -267,7 +259,7 @@ Feature: Triage de Odontología con motor de reglas
 > mantener la trazabilidad completa en el tablero.
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F2.3 |
 | **Title**              | Motor de Red Flags por Especialidad |
@@ -342,14 +334,12 @@ Feature: Motor de detección de red flags clínicas
     And no contiene términos de diagnóstico ni recomendaciones de medicación
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-003 – Triage Guiado por IA para Medicina General
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-003 |
 | **Title**              | Como paciente de medicina general quiero responder un triage guiado por IA para describir mejor mis síntomas y riesgo |
@@ -465,12 +455,10 @@ Feature: Triage IA para medicina general
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ### HU-004 – Clasificación de Prioridad por Red Flags en Odontología
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-004 |
 | **Title**              | Como paciente odontológico quiero recibir clasificación de prioridad por red flags para identificar casos que requieren atención presencial |
@@ -584,18 +572,14 @@ Feature: Detección de red flags odontológicas
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ## 4. TAREAS
 
 ### Tareas de HU-003 – Triage Guiado por IA para Medicina General
 
----
-
 #### T-003-01 – Diseño del modelo TriageSession en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquema Mongoose TriageSession con campos de especialidad, respuestas y análisis |
 | **Parent (User Story)**| HU-003 |
@@ -638,12 +622,10 @@ Ubicar en: apps/api/src/triage/schemas/triage-session.schema.ts
 - Los sub-documentos de answers y redFlags se validan con los enums correctos.
 - Índice compuesto (patientId, status) verificado en MongoDB local.
 
----
-
 #### T-003-02 – Implementación del endpoint POST /v1/triage/sessions
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/triage/sessions para iniciar sesión de triage |
 | **Parent (User Story)**| HU-003 |
@@ -677,12 +659,10 @@ Ubicar en: apps/api/src/triage/
 - Retorna 400 si specialty no es un valor válido del enum.
 - Solo pacientes autenticados pueden crear sesiones (401 sin token, 403 con otro rol).
 
----
-
 #### T-003-03 – Implementación del endpoint POST /v1/triage/sessions/{sessionId}/answers
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint de guardado de respuestas del cuestionario de triage |
 | **Parent (User Story)**| HU-003 |
@@ -715,12 +695,10 @@ Ubicar en: apps/api/src/triage/
 - Retorna 400 si la sesión no está en estado IN_PROGRESS.
 - El campo isComplete refleja correctamente si todas las preguntas obligatorias fueron respondidas.
 
----
-
 #### T-003-04 – Implementación del endpoint POST /v1/triage/sessions/{sessionId}/analyze
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint de análisis IA de la sesión de triage (Gemini + RedFlagsEngine) |
 | **Parent (User Story)**| HU-003 |
@@ -767,12 +745,10 @@ Ubicar en: apps/api/src/triage/ y apps/api/src/triage/services/gemini-triage.ser
 - Se crea automáticamente un documento Consultation con la prioridad asignada.
 - El tiempo de respuesta se registra y se alerta si supera 15 s.
 
----
-
 #### T-003-05 – Implementación del RedFlagsEngine para Medicina General
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar RedFlagsEngine con catálogo de red flags para Medicina General |
 | **Parent (User Story)**| HU-003 |
@@ -806,12 +782,10 @@ Ubicar en: apps/api/src/triage/engines/red-flags.engine.ts
 - El catálogo es modificable sin cambiar el código del motor.
 - Cobertura de pruebas >= 90% en CI.
 
----
-
 #### T-003-06 – Implementación del cuestionario de Medicina General y pantalla de triage en React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantalla de triage MG en la app React Native con cuestionario paso a paso |
 | **Parent (User Story)**| HU-003 |
@@ -852,12 +826,10 @@ Ubicar en: apps/mobile/src/screens/triage/
 - La app no crashea con ninguna respuesta válida del backend.
 - Los errores del backend se muestran con mensajes comprensibles al usuario.
 
----
-
 #### T-003-07 – Implementación del GuardrailService para respuestas IA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar GuardrailService para filtrar respuestas IA con lenguaje de diagnóstico |
 | **Parent (User Story)**| HU-003 |
@@ -886,12 +858,10 @@ Ubicar en: apps/api/src/triage/services/guardrail.service.ts
 - El servicio clasifica como safe textos con lenguaje de priorización/urgencia sin diagnóstico.
 - Cada violación queda registrada en el log con el correlation ID.
 
----
-
 #### T-003-08 – Pruebas unitarias del TriageService y RedFlagsEngine MG
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para TriageService y RedFlagsEngine (Medicina General) |
 | **Parent (User Story)**| HU-003 |
@@ -931,12 +901,10 @@ Ubicar en: apps/api/src/triage/triage.service.spec.ts y red-flags.engine.spec.ts
 - Cobertura >= 80% TriageService, >= 90% RedFlagsEngine.
 - No hay dependencias reales de base de datos ni de API IA en estas pruebas.
 
----
-
 #### T-003-09 – Pruebas de integración de los endpoints de triage MG
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para los tres endpoints de triage de Medicina General |
 | **Parent (User Story)**| HU-003 |
@@ -965,12 +933,10 @@ Ubicar en: apps/api/test/triage-mg.e2e-spec.ts
 - El mock de Gemini permite probar el guardrail sin llamadas reales a la API.
 - El flujo completo (crear → responder → analizar) se cubre end-to-end.
 
----
-
 #### T-003-10 – Documentación técnica del módulo de triage MG en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoints de triage de Medicina General y política de guardrail en la Wiki |
 | **Parent (User Story)**| HU-003 |
@@ -997,16 +963,12 @@ Actualizar la Wiki con:
 - Un nuevo desarrollador puede implementar un cliente del triage sin leer el código fuente.
 - La política de guardrail es comprensible para el equipo de producto y clínico.
 
----
-
 ### Tareas de HU-004 – Clasificación de Prioridad por Red Flags en Odontología
-
----
 
 #### T-004-01 – Extensión del RedFlagsEngine con catálogo de Odontología
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Extender RedFlagsEngine con catálogo de red flags para Odontología |
 | **Parent (User Story)**| HU-004 |
@@ -1039,12 +1001,10 @@ Ubicar en: apps/api/src/triage/rules/red-flags-od.json y red-flags.engine.ts
 - La extensión no rompe los red flags de Medicina General existentes.
 - Cobertura de pruebas del catálogo odontológico >= 90%.
 
----
-
 #### T-004-02 – Adaptación del endpoint de análisis para especialidad Odontología
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Adaptar endpoint POST /v1/triage/sessions/{id}/analyze para specialty=DENTISTRY |
 | **Parent (User Story)**| HU-004 |
@@ -1077,12 +1037,10 @@ Adaptar la lógica del endpoint de análisis para el flujo de Odontología:
 - El override por red flags CRITICAL funciona igual que en MG.
 - El campo specialNotes se incluye en la respuesta cuando RF-OD-004 está presente.
 
----
-
 #### T-004-03 – Cuestionario de Odontología y pantalla de triage en React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantalla de triage odontológico en la app React Native |
 | **Parent (User Story)**| HU-004 |
@@ -1120,12 +1078,10 @@ Ubicar en: apps/mobile/src/screens/triage/ (extender los componentes existentes 
 - La nota de RF-OD-004 se muestra correctamente cuando está presente en la respuesta.
 - No hay regresiones en el flujo de Medicina General.
 
----
-
 #### T-004-04 – Implementación de la cola médica priorizada y filtrada por especialidad
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar GET /v1/consultations/queue con filtro de especialidad y orden por prioridad |
 | **Parent (User Story)**| HU-004 |
@@ -1163,12 +1119,10 @@ Ubicar en: apps/api/src/consultations/
 - Un médico PENDING recibe 403 (guard de verificación activo).
 - El campo waitingMinutes se calcula correctamente.
 
----
-
 #### T-004-05 – Pruebas unitarias del RedFlagsEngine Odontología y lógica de cola
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para catálogo de red flags odontológicos y cola priorizada |
 | **Parent (User Story)**| HU-004 |
@@ -1205,12 +1159,10 @@ Ubicar en: apps/api/src/triage/red-flags.engine.spec.ts (extender) y
 - Las coberturas mínimas se cumplen.
 - No hay regresiones en las pruebas de red flags de Medicina General.
 
----
-
 #### T-004-06 – Pruebas de integración del flujo de triage odontológico y cola médica
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para el flujo de triage de Odontología y la cola médica |
 | **Parent (User Story)**| HU-004 |
@@ -1243,12 +1195,10 @@ Ubicar en: apps/api/test/triage-od.e2e-spec.ts y consultations-queue.e2e-spec.ts
 - El flujo completo de Odontología (sin IA) se cubre end-to-end.
 - La cola médica muestra el comportamiento correcto de filtrado y ordenamiento.
 
----
-
 #### T-004-07 – Pruebas de concurrencia base del módulo de triage
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Ejecutar prueba de concurrencia base para el módulo de triage (10 sesiones simultáneas) |
 | **Parent (User Story)**| HU-004 |
@@ -1280,12 +1230,10 @@ Ubicar en: apps/api/test/performance/triage-concurrency.test.js
 - Ninguna sesión mezcla respuestas de otro paciente.
 - Los resultados quedan documentados como artefacto del sprint.
 
----
-
 #### T-004-08 – Documentación técnica del módulo de triage odontológico y cola médica en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar triage de Odontología, catálogo de red flags y cola médica priorizada en la Wiki |
 | **Parent (User Story)**| HU-004 |
@@ -1311,8 +1259,6 @@ Actualizar la Wiki con:
 - La Wiki explica claramente las diferencias entre el triage de MG y el de Odontología.
 - El catálogo de red flags de OD está documentado con todos los campos.
 - La lógica de la cola médica priorizada es comprensible sin leer el código.
-
----
 
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
@@ -1359,12 +1305,10 @@ Actualizar la Wiki con:
 **Total Story Points Épica 2:** 16 SP (HU-003: 8 SP + HU-004: 8 SP)  
 **Sprints objetivo:** Sprint 2 (HU-003) y Sprint 3 (HU-004)
 
----
-
 ## 6. REFERENCIAS CRUZADAS
 
 | Artefacto | Referencia |
-|-----------|-----------|
+|---|---|
 | Plan Maestro | `Plan Maestro SaludDeUna (IETI 2026-1).md` – Sprints 2 y 3, API /v1/triage/* |
 | Story Map | `docs/wiki/05-Epicas-Features-StoryMap.md` – Actividad 2: Captura y priorización |
 | Backlog completo | `docs/wiki/06-Backlog-Historias-Usuario.md` – HU-003, HU-004 |

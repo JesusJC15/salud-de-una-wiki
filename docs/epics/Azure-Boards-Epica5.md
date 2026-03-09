@@ -1,14 +1,12 @@
-# Azure Boards – Épica 5: Seguimiento y Evolución del Paciente
+## Azure Boards – Épica 5: Seguimiento y Evolución del Paciente
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 5 – Seguimiento y Evolución del Paciente** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
----
-
 ## 1. ÉPICA
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Epic |
 | **ID**                 | E5 |
 | **Title**              | Seguimiento y Evolución del Paciente |
@@ -131,14 +129,12 @@ Feature: Seguimiento y evolución post-consulta en SaludDeUna
     And el estado del Followup cambia a REMINDED
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F5.1 – Seguimiento Post-Consulta Automatizado
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F5.1 |
 | **Title**              | Seguimiento Post-Consulta Automatizado |
@@ -226,12 +222,10 @@ Feature: Seguimiento post-consulta automatizado
     And no persiste ningún cambio
 ```
 
----
-
 ### Feature F5.2 – Timeline Evolutivo del Paciente
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Feature |
 | **ID**                 | F5.2 |
 | **Title**              | Timeline Evolutivo del Paciente |
@@ -320,14 +314,12 @@ Feature: Timeline evolutivo del paciente
     And el cliente puede paginar usando el nextCursor para obtener el siguiente lote
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-007 – Seguimiento y Reporte de Evolución Post-Consulta
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-007 |
 | **Title**              | Como paciente en seguimiento quiero reportar mi evolución después de la consulta para que el sistema detecte empeoramiento o mejora de forma oportuna |
@@ -453,12 +445,10 @@ Feature: Seguimiento automatizado de evolución
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ### HU-012 – Gestión de Perfil de Familiar o Cuidador
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-012 |
 | **Title**              | Como familiar cuidador quiero gestionar el perfil de un menor o adulto mayor para acompañar su atención dentro de la plataforma |
@@ -581,18 +571,14 @@ Feature: Gestión de perfil de familiar cuidador
 - [ ] Demo funcional aprobada por el equipo
 - [ ] Historia pasada a estado Done con evidencia enlazada (PR + test results)
 
----
-
 ## 4. TAREAS
 
 ### Tareas de HU-007 – Seguimiento y Reporte de Evolución Post-Consulta
 
----
-
 #### T-007-01 – Diseño de modelo de datos Followup en MongoDB
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquema Mongoose Followup con todos los campos de seguimiento |
 | **Parent (User Story)**| HU-007 |
@@ -637,12 +623,10 @@ Ubicar en: apps/api/src/followups/schemas/followup.schema.ts
 - Restricción unique en consultationId verificada (un Followup por consulta).
 - El campo responses es nullable hasta que el paciente complete el formulario.
 
----
-
 #### T-007-02 – Creación automática de Followup al cerrar consulta
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar creación automática de Followup al cambiar estado de consulta a CLOSED |
 | **Parent (User Story)**| HU-007 |
@@ -677,12 +661,10 @@ Ubicar en: apps/api/src/followups/followup.service.ts
 - No se crea un segundo Followup si el método se llama dos veces para la misma consulta.
 - El log registra el evento de creación con consultationId y patientId.
 
----
-
 #### T-007-03 – Implementación del endpoint POST /v1/followups
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint POST /v1/followups para registro de evolución del paciente |
 | **Parent (User Story)**| HU-007 |
@@ -741,12 +723,10 @@ Ubicar en: apps/api/src/followups/
 - El disclaimer aparece en la respuesta si intensityScore >= 8.
 - Nunca dos Followups completados para la misma consulta.
 
----
-
 #### T-007-04 – Scheduler de recordatorios de seguimiento
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar scheduler NestJS para envío de recordatorios de Followup vencidos |
 | **Parent (User Story)**| HU-007 |
@@ -786,12 +766,10 @@ Ubicar en: apps/api/src/followups/followup-scheduler.service.ts
 - Followups ya COMPLETED son omitidos por el job.
 - Los errores de WebSocket no detienen el procesamiento del batch.
 
----
-
 #### T-007-05 – Implementación del endpoint GET /v1/patients/{patientId}/timeline
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoint GET /v1/patients/{patientId}/timeline con paginación por cursor |
 | **Parent (User Story)**| HU-007 |
@@ -843,12 +821,10 @@ Ubicar en: apps/api/src/patients/patients.controller.ts
 - El tiempo de respuesta con 100 eventos es < 1500 ms (verificado con prueba básica).
 - El indicador de tendencia aparece en Followups donde hay delta >= 2.
 
----
-
 #### T-007-06 – Pantalla de formulario de evolución en React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantalla de formulario de evolución post-consulta en la app móvil |
 | **Parent (User Story)**| HU-007 |
@@ -893,12 +869,10 @@ Ubicar en: apps/mobile/src/screens/followup/
 - La notificación push abre directamente el formulario correcto.
 - La app no pierde los datos del formulario si hay un error de red al enviar.
 
----
-
 #### T-007-07 – Vista de timeline en la app React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar vista de timeline evolutivo del paciente en la app móvil |
 | **Parent (User Story)**| HU-007 |
@@ -936,12 +910,10 @@ Ubicar en: apps/mobile/src/screens/patient/PatientTimelineScreen.tsx
 - El indicador de tendencia es visible en Followups con delta >= 2.
 - Tap en un evento navega al documento fuente correspondiente.
 
----
-
 #### T-007-08 – Vista de timeline en el panel médico (Next.js)
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar vista de timeline del paciente en el panel médico web (Next.js) |
 | **Parent (User Story)**| HU-007 |
@@ -978,12 +950,10 @@ Ubicar en: apps/web/src/app/doctor/patients/[patientId]/timeline/
 - Los filtros de tipo y fecha funcionan correctamente.
 - Acceso desde un médico sin consultas con el paciente redirige a /403.
 
----
-
 #### T-007-09 – Pruebas unitarias del FollowupService y motor de re-priorización
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias para FollowupService incluyendo motor de re-priorización |
 | **Parent (User Story)**| HU-007 |
@@ -1030,12 +1000,10 @@ Ubicar en: apps/api/src/followups/followup.service.spec.ts
 - Los escenarios de re-priorización cubren todos los casos de la lógica de negocio.
 - No hay dependencias reales de base de datos en estas pruebas.
 
----
-
 #### T-007-10 – Pruebas de integración de los endpoints de seguimiento y timeline
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas de integración para POST /v1/followups y GET /v1/patients/{id}/timeline |
 | **Parent (User Story)**| HU-007 |
@@ -1073,12 +1041,10 @@ Ubicar en: apps/api/test/followups.e2e-spec.ts
 - Se cubre el flujo completo de seguimiento y re-priorización.
 - La paginación del timeline es verificada con datos reales de prueba.
 
----
-
 #### T-007-11 – Prueba de rendimiento básica del endpoint de timeline
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Ejecutar prueba de rendimiento básica del GET /v1/patients/{id}/timeline para verificar SLO P95 < 1500 ms |
 | **Parent (User Story)**| HU-007 |
@@ -1109,12 +1075,10 @@ Ubicar resultado en: docs/tests/performance/timeline-slo-sprint6.md
 - Si SLO cumplido: evidencia en PR (output de k6/Artillery).
 - Si SLO no cumplido: tarea de deuda técnica abierta con causa identificada.
 
----
-
 #### T-007-12 – Documentación técnica de endpoints de seguimiento y timeline en Wiki
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Documentar endpoints de seguimiento y timeline del paciente en la Wiki del proyecto |
 | **Parent (User Story)**| HU-007 |
@@ -1144,18 +1108,14 @@ Actualizar la Wiki de Azure DevOps con:
 - El motor de re-priorización es comprensible para un desarrollador nuevo sin leer el código.
 - El KPI de retención queda documentado con su fórmula de cálculo.
 
----
-
 ### Tareas de HU-012 – Gestión de Perfil de Familiar o Cuidador
 
 > **Nota:** Las tareas de HU-012 solo se ejecutan si el sprint ha cumplido todas las historias Must y Should con holgura suficiente. De lo contrario, se mueven al backlog de sprints posteriores.
 
----
-
 #### T-012-01 – Diseño de modelo de datos DependentProfile y relación CaregiverOf
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Diseñar esquema Mongoose DependentProfile con relación CaregiverOf |
 | **Parent (User Story)**| HU-012 |
@@ -1193,12 +1153,10 @@ Ubicar en: apps/api/src/patients/schemas/dependent-profile.schema.ts
 - La relación con el cuidador por ObjectId está definida.
 - El límite de 3 perfiles se valida en el servicio antes de persistir.
 
----
-
 #### T-012-02 – Implementación de endpoints de gestión de perfiles dependientes
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar endpoints POST y GET /v1/patients/dependents |
 | **Parent (User Story)**| HU-012 |
@@ -1239,12 +1197,10 @@ Ubicar en: apps/api/src/patients/
 - GET retorna solo los perfiles del cuidador autenticado.
 - El Followup soporta reportedBy diferente al patientId.
 
----
-
 #### T-012-03 – Pantalla de gestión de perfiles dependientes en React Native
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Implementar pantalla de gestión de perfiles dependientes en la app móvil |
 | **Parent (User Story)**| HU-012 |
@@ -1282,12 +1238,10 @@ Ubicar en: apps/mobile/src/screens/profile/DependentProfilesScreen.tsx
 - El selector de perfil aparece en FollowupFormScreen cuando hay dependientes.
 - El cambio de perfil activo se refleja visualmente en el header de la app.
 
----
-
 #### T-012-04 – Pruebas unitarias y de integración de gestión de cuidador
 
 | Campo Azure Boards     | Valor |
-|------------------------|-------|
+|---|---|
 | **Work Item Type**     | Task |
 | **Title**              | Escribir pruebas unitarias e integración para gestión de perfiles dependientes |
 | **Parent (User Story)**| HU-012 |
@@ -1320,8 +1274,6 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 - Todos los tests pasan en CI.
 - El límite de 3 perfiles está cubierto por tests unitarios y de integración.
 - La lógica de seguimiento para dependientes está cubierta.
-
----
 
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
@@ -1361,7 +1313,7 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 **Total horas estimadas Sprint 6 (Épica 5):**
 
 | Historia | Tareas | Horas |
-|----------|--------|-------|
+|---|---|---|
 | HU-007   | T-007-01 a T-007-12 | 40 horas |
 | HU-012   | T-012-01 a T-012-04 | 13 horas |
 | **Total** | | **53 horas** |
@@ -1369,12 +1321,10 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 **Total Story Points Épica 5:** 16 SP (HU-007: 8 SP + HU-012: 8 SP Could)  
 **Sprint objetivo:** Sprint 6
 
----
-
 ## 6. REFERENCIAS CRUZADAS
 
 | Artefacto | Referencia |
-|-----------|-----------|
+|---|---|
 | Plan Maestro | `Plan Maestro SaludDeUna (IETI 2026-1).md` – Sprint 6: Seguimiento y timeline |
 | Story Map | `docs/wiki/05-Epicas-Features-StoryMap.md` – Actividad 4: Continuidad; Slice C: E5+E6 |
 | Backlog completo | `docs/wiki/06-Backlog-Historias-Usuario.md` – HU-007, HU-012 |
@@ -1389,7 +1339,7 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 ### API endpoints de esta épica (contratos del Plan Maestro)
 
 | Endpoint | Tarea asociada | Descripción |
-|----------|---------------|-------------|
+|---|---|---|
 | `POST /v1/followups` | T-007-03 | Registrar respuesta de formulario de evolución |
 | `GET /v1/patients/{id}/timeline` | T-007-05 | Obtener timeline evolutivo paginado |
 | `POST /v1/patients/dependents` | T-012-02 | Crear perfil dependiente (cuidador) |
@@ -1398,7 +1348,7 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 ### WebSocket events de esta épica
 
 | Evento | Namespace | Descripción |
-|--------|-----------|-------------|
+|---|---|---|
 | `consultation.followup.reminder.triggered` | consultation | Recordatorio de seguimiento al paciente |
 | `consultation.priority.updated` | consultation | Notificación al médico por re-priorización |
 

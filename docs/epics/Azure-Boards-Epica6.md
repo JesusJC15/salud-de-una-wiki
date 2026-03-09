@@ -1,9 +1,7 @@
-# Azure Boards - Epica 6: Observabilidad y Analitica
+## Azure Boards - Epica 6: Observabilidad y Analitica
 
 ## Proposito del documento
 Este documento contiene la informacion necesaria para implementar la **Epica 6 - Observabilidad y Analitica** en Azure Boards, incluyendo epica, features, historias, criterios Gherkin, tareas y trazabilidad.
-
----
 
 ## 1. EPICA
 
@@ -75,8 +73,6 @@ Feature: Observabilidad integral de SaludDeUna
     Then se genera una alerta critica
     And se registra evento de alerta con correlation_id
 ```
-
----
 
 ## 2. FEATURES
 
@@ -180,8 +176,6 @@ Feature: Dashboard dual tecnico/negocio
     And puede segmentar por especialidad y fechas
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-008 - Dashboard tecnico y de negocio
@@ -245,8 +239,6 @@ para priorizar mejoras del producto con evidencia.
 Como equipo de operacion quiero recibir alertas por degradacion
 para responder antes de afectar usuarios.
 ```
-
----
 
 ## 4. TAREAS
 
@@ -372,8 +364,6 @@ para responder antes de afectar usuarios.
 | **Iteration Path** | SaludDeUna\\Sprint 7 |
 | **Remaining Work (h)** | 2 |
 
----
-
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
 ```
@@ -405,8 +395,6 @@ EPIC: E6 - Observabilidad y Analitica (12 SP total)
 **Total horas estimadas Sprint 7 (Epica 6):** 41 horas  
 **Total Story Points Epica 6:** 12 SP  
 **Sprint objetivo:** Sprint 7
-
----
 
 ## 6. REFERENCIAS CRUZADAS
 

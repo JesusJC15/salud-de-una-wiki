@@ -1,9 +1,7 @@
-# Azure Boards - Epica 7: Monetizacion Simulada y Gobierno
+## Azure Boards - Epica 7: Monetizacion Simulada y Gobierno
 
 ## Proposito del documento
 Este documento contiene la informacion necesaria para implementar la **Epica 7 - Monetizacion Simulada y Gobierno** en Azure Boards, incluyendo epica, features, historias, criterios Gherkin, tareas y trazabilidad.
-
----
 
 ## 1. EPICA
 
@@ -77,8 +75,6 @@ Feature: Monetizacion simulada y gobierno de contenido
     And queda disponible en el endpoint publico de conocimiento
 ```
 
----
-
 ## 2. FEATURES
 
 ### Feature F7.1 - Flujo de pago simulado
@@ -147,8 +143,6 @@ Feature: Gobierno de conocimiento clinico
     And no aparecen articulos en estado PENDING o REJECTED
 ```
 
----
-
 ## 3. HISTORIAS DE USUARIO
 
 ### HU-010 - Flujo de monetizacion simulado
@@ -204,8 +198,6 @@ Feature: Base de conocimiento validada
     Then cambia a APPROVED
     And queda disponible para consulta
 ```
-
----
 
 ## 4. TAREAS
 
@@ -333,8 +325,6 @@ Feature: Base de conocimiento validada
 | **Iteration Path** | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 2 |
 
----
-
 ## 5. RESUMEN DE ESTRUCTURA EN AZURE BOARDS
 
 ```
@@ -362,8 +352,6 @@ EPIC: E7 - Monetizacion Simulada y Gobierno (10 SP total)
 **Total horas estimadas Sprint 8 (Epica 7):** 30 horas  
 **Total Story Points Epica 7:** 10 SP  
 **Sprint objetivo:** Sprint 8
-
----
 
 ## 6. REFERENCIAS CRUZADAS
 
