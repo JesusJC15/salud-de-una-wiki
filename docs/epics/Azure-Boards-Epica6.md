@@ -2,6 +2,8 @@
 
 ## Propósito del documento
 Este documento contiene toda la información necesaria para implementar la **Épica 6 – Observabilidad y Analítica** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
+## Propósito del documento
+Este documento contiene toda la información necesaria para implementar la **Épica 6 – Observabilidad y Analítica** en Azure Boards, incluyendo la épica, sus features, historias de usuario con criterios Gherkin, y todas las tareas de desarrollo, pruebas y documentación asociadas. Cada sección indica los campos exactos que se deben completar al crear el ítem en Azure Boards.
 
 ---
 
