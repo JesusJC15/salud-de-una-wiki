@@ -434,12 +434,13 @@ Feature: Generación de resumen clínico
 | **Parent (Feature)**   | F4.2 – Traducción Paciente-Clínico Bidireccional |
 | **State**              | Active |
 | **Area Path**          | SaludDeUna\\Backend / SaludDeUna\\IA / SaludDeUna\\Mobile |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
+| **Estado de planificación** | Candidata – Sprint 8 |
 | **Priority**           | 2 – High |
 | **MoSCoW**             | Should |
 | **Effort (SP)**        | 5 SP |
 | **Risk**               | Medium – Guardrails deben prevenir que la traducción sea interpretada como diagnóstico (R-003, R-006) |
-| **Tags**               | ia; traduccion; lenguaje-simple; paciente; should; sprint4 |
+| **Tags**               | ia; traduccion; lenguaje-simple; paciente; should; sprint8 |
 | **Depends On**         | HU-005 (resumen clínico activo como contexto de consulta) |
 
 #### Descripción (campo Description)
@@ -457,7 +458,9 @@ que el paciente no comprende (p. ej. "bradicardia", "cefalea tensional",
 "otalgia"). El módulo de traducción permite al paciente solicitar con un botón
 en la app una versión del mensaje del médico en lenguaje cotidiano. El servicio
 invoca a Gemini con guardrails activos para asegurar que la respuesta es
-orientativa y no constituye un diagnóstico.
+orientativa y no constituye un diagnóstico. Por priorización del roadmap, esta
+historia queda como candidata para Sprint 8 y no hace parte del compromiso base
+de Sprint 4.
 
 Adicionalmente, el médico puede utilizar la función inversa para normalizar la
 descripción libre del paciente ("me duele la cabeza desde ayer y tengo náuseas")
@@ -866,6 +869,8 @@ Actualizar la Wiki con:
 
 ### Tareas de HU-009 – Traducción Paciente-Clínico Bidireccional
 
+> **Nota:** Las tareas de HU-009 quedan como trabajo candidato de Sprint 8 y solo se activan si las historias comprometidas del sprint mantienen capacidad disponible.
+
 ---
 
 #### T-009-01 – Diseño del módulo TranslationService y su contrato de API
@@ -878,7 +883,7 @@ Actualizar la Wiki con:
 | **Assigned To**        | Desarrollador Backend / IA |
 | **State**              | To Do |
 | **Activity**           | Design |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 2 |
 
 **Descripción:**
@@ -920,7 +925,7 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 | **Assigned To**        | Desarrollador Backend / IA |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -959,7 +964,7 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 | **Assigned To**        | Desarrollador Backend / IA |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -996,7 +1001,7 @@ Ubicar en: apps/api/src/ia/translation.service.ts
 | **Assigned To**        | Desarrollador Backend |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -1039,7 +1044,7 @@ Ubicar en: apps/api/src/consultations/consultations.controller.ts
 | **Assigned To**        | Desarrollador Mobile |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -1079,7 +1084,7 @@ Ubicar en: apps/mobile/src/screens/Chat/components/TranslationModal/
 | **Assigned To**        | Desarrollador Backend / QA |
 | **State**              | To Do |
 | **Activity**           | Testing |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -1113,7 +1118,7 @@ Ubicar en: apps/api/src/ia/translation.service.spec.ts
 | **Assigned To**        | Desarrollador Backend / IA |
 | **State**              | To Do |
 | **Activity**           | Documentation |
-| **Iteration Path**     | SaludDeUna\\Sprint 4 |
+| **Iteration Path**     | SaludDeUna\\Sprint 8 |
 | **Remaining Work (h)** | 1 |
 
 **Descripción:**
@@ -1126,7 +1131,7 @@ Actualizar la Wiki con:
 - Política de no persistencia de los textos y política de privacidad del log.
 - Comportamiento del guardrail en el módulo de traducción.
 - Disclaimer reglamentario y cuándo aparece.
-- Referencia a HU-009, sprint 4, y a la dependencia con HU-005.
+- Referencia a HU-009 como candidata de Sprint 8 y a la dependencia con HU-005.
 ```
 
 **Criterios de aceptación de la tarea:**
@@ -1155,7 +1160,7 @@ Actualizar la Wiki con:
 │
 └── 🔷 FEATURE: F4.2 – Traducción Paciente-Clínico Bidireccional (5 SP)
     │
-    └── 📖 USER STORY: HU-009 – Como paciente quiero explicaciones en lenguaje simple (5 SP)
+    └── 📖 USER STORY: HU-009 – Como paciente quiero explicaciones en lenguaje simple (5 SP, candidata Sprint 8)
         ├── [ ] T-009-01 – Diseño del TranslationService y contrato de API (2h)
         ├── [ ] T-009-02 – Traducción clínico → paciente (lenguaje simple) (3h)
         ├── [ ] T-009-03 – Traducción paciente → clínico (terminología médica) (3h)
@@ -1165,9 +1170,9 @@ Actualizar la Wiki con:
         └── [ ] T-009-07 – Documentación técnica del módulo de traducción en la Wiki (1h)
 ```
 
-**Total horas estimadas Sprint 4 (Épica 4):** 42 horas de trabajo  
+  **Total horas estimadas Épica 4:** 42 horas de trabajo  
 **Total Story Points Épica 4:** 13 SP (HU-005: 8 SP + HU-009: 5 SP)  
-**Sprint objetivo:** Sprint 4
+  **Sprint objetivo:** Sprint 4 (HU-005 comprometida) / Sprint 8 (HU-009 candidata)
 
 ---
 

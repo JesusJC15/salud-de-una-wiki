@@ -134,6 +134,8 @@ flowchart LR
 | GET | `/v1/patients/dependents` | Listar perfiles dependientes |
 | GET | `/v1/dashboard/technical` | Dashboard tecnico |
 | GET | `/v1/dashboard/business` | Dashboard de KPIs |
+| GET | `/v1/observability/alerts` | Consultar alertas operativas |
+| GET | `/v1/observability/reports/weekly/export` | Exportar reporte semanal de observabilidad |
 | POST | `/v1/billing/simulate-checkout` | Simular compra/plan |
 | GET | `/v1/knowledge/articles` | Consultar base de conocimiento |
 | POST | `/v1/knowledge/articles/{id}/approve` | Aprobar contenido medico |
@@ -146,6 +148,7 @@ flowchart LR
 | `consultation.priority.updated` | `consultationId`, `oldPriority`, `newPriority`, `reason` |
 | `consultation.queue.updated` | `doctorId`, `queueSize`, `topCases` |
 | `consultation.followup.reminder.triggered` | `patientId`, `consultationId`, `followupDate` |
+| `consultation.summary.ready` | `consultationId`, `summaryId`, `timestamp` |
 
 ### Tipos Publicos (contratos)
 ```ts

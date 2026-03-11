@@ -75,9 +75,11 @@ Se conserva la convencion interna `Sprint 0..9` para continuidad del equipo, con
 20. `GET /v1/patients/dependents`
 21. `GET /v1/dashboard/technical`
 22. `GET /v1/dashboard/business`
-23. `POST /v1/billing/simulate-checkout`
-24. `GET /v1/knowledge/articles`
-25. `POST /v1/knowledge/articles/{id}/approve`
+23. `GET /v1/observability/alerts`
+24. `GET /v1/observability/reports/weekly/export`
+25. `POST /v1/billing/simulate-checkout`
+26. `GET /v1/knowledge/articles`
+27. `POST /v1/knowledge/articles/{id}/approve`
 
 ### WebSocket events (`namespace: consultation`)
 1. `consultation.message.created`
@@ -85,6 +87,7 @@ Se conserva la convencion interna `Sprint 0..9` para continuidad del equipo, con
 3. `consultation.priority.updated`
 4. `consultation.queue.updated`
 5. `consultation.followup.reminder.triggered`
+6. `consultation.summary.ready`
 
 ### Tipos/contratos clave
 1. `PriorityLevel = LOW | MODERATE | HIGH`
@@ -118,8 +121,8 @@ Se conserva la convencion interna `Sprint 0..9` para continuidad del equipo, con
 5. **Sprint 4:** generacion de resumen clinico automatico con Gemini + RAG; guardrails (no diagnostico/no prescripcion); traduccion paciente-clinico y clinico-paciente.
 6. **Sprint 5:** chat clinico real-time con WebSocket; estados de consulta; persistencia de mensajes; notificaciones internas; hardening de seguridad de sesion.
 7. **Sprint 6:** seguimiento post-consulta automatizado; timeline evolutivo del paciente; indicadores de cambio de sintomas; recordatorios.
-8. **Sprint 7:** panel medico/admin avanzado; dashboard tecnico y de negocio; validacion semiautomatica REThUS; gestion de banco de conocimiento validado.
-9. **Sprint 8:** monetizacion simulada (planes/pago por consulta); analitica de conversion simulada; optimizacion de performance para cumplir SLO.
+8. **Sprint 7:** panel medico/admin avanzado; dashboard tecnico y de negocio; validacion semiautomatica REThUS; alertamiento y observabilidad operativa completa.
+9. **Sprint 8:** monetizacion simulada (planes/pago por consulta); analitica de conversion simulada; y, si hay capacidad, banco de conocimiento validado con aprobaciones medicas.
 10. **Sprint 9 (hardening y cierre):** pruebas E2E completas, prueba de carga y concurrencia, correcciones, documentacion final, demo final, retrospectiva y backlog postcurso.
 
 ## MoSCoW del producto

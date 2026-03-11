@@ -331,7 +331,8 @@ Feature: Timeline evolutivo del paciente
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-007 |
 | **Title**              | Como paciente en seguimiento quiero reportar mi evolución después de la consulta para que el sistema detecte empeoramiento o mejora de forma oportuna |
-| **Parent (Feature)**   | F5.1 – Seguimiento Post-Consulta Automatizado / F5.2 – Timeline Evolutivo del Paciente |
+| **Parent (Feature)**   | F5.1 – Seguimiento Post-Consulta Automatizado |
+| **Related (Feature)**  | F5.2 – Timeline Evolutivo del Paciente |
 | **State**              | Active |
 | **Area Path**          | SaludDeUna\\Backend / SaludDeUna\\Mobile / SaludDeUna\\Web |
 | **Iteration Path**     | SaludDeUna\\Sprint 6 |
@@ -465,13 +466,14 @@ Feature: Seguimiento automatizado de evolución
 | **Parent (Feature)**   | F5.1 – Seguimiento Post-Consulta Automatizado |
 | **State**              | Active |
 | **Area Path**          | SaludDeUna\\Backend / SaludDeUna\\Mobile |
-| **Iteration Path**     | SaludDeUna\\Sprint 6 |
+| **Iteration Path**     | SaludDeUna\\Sprint 9 |
+| **Estado de planificación** | Candidata – Sprint 9 |
 | **Priority**           | 3 – Medium |
 | **MoSCoW**             | Could |
 | **Story Points**       | 8 |
 | **Risk**               | Medium – Requiere modelo de datos adicional y control de permisos por custodia |
 | **Dependencias**       | HU-001 (registro del cuidador como paciente base), HU-007 (seguimiento activo para el perfil gestionado) |
-| **Tags**               | cuidador; perfil; menor; adulto-mayor; could; sprint6 |
+| **Tags**               | cuidador; perfil; menor; adulto-mayor; could; sprint9 |
 
 #### Descripción completa (campo Description)
 
@@ -504,9 +506,10 @@ Restricciones:
   iniciar sesión con sus propias credenciales en este sprint).
 - La relación de custodia no se valida jurídicamente en el MVP; se declara
   como autodeclaración del cuidador.
-- Esta historia es Could: solo se implementa si el sprint ha cumplido todas
-  las historias Must y Should comprometidas con holgura suficiente.
-- Si no se implementa en Sprint 6, se mueve al backlog de sprints posteriores.
+- Esta historia es Could y queda propuesta como candidata para Sprint 9: solo se
+  implementa si el sprint ha cumplido todas las historias Must y Should comprometidas
+  con holgura suficiente.
+- Si no se implementa en Sprint 9, se mantiene en el backlog de sprints posteriores.
 
 Notas de UX:
 - El cuidador debe poder cambiar de perfil activo desde la app sin necesidad
@@ -1148,7 +1151,7 @@ Actualizar la Wiki de Azure DevOps con:
 
 ### Tareas de HU-012 – Gestión de Perfil de Familiar o Cuidador
 
-> **Nota:** Las tareas de HU-012 solo se ejecutan si el sprint ha cumplido todas las historias Must y Should con holgura suficiente. De lo contrario, se mueven al backlog de sprints posteriores.
+> **Nota:** Las tareas de HU-012 quedan como trabajo candidato de Sprint 9 y solo se ejecutan si el sprint ha cumplido todas las historias Must y Should con holgura suficiente. De lo contrario, se mantienen en backlog posterior.
 
 ---
 
@@ -1162,7 +1165,7 @@ Actualizar la Wiki de Azure DevOps con:
 | **Assigned To**        | Desarrollador Backend |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 6 |
+| **Iteration Path**     | SaludDeUna\\Sprint 9 |
 | **Remaining Work (h)** | 2 |
 
 **Descripción:**
@@ -1205,7 +1208,7 @@ Ubicar en: apps/api/src/patients/schemas/dependent-profile.schema.ts
 | **Assigned To**        | Desarrollador Backend |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 6 |
+| **Iteration Path**     | SaludDeUna\\Sprint 9 |
 | **Remaining Work (h)** | 4 |
 
 **Descripción:**
@@ -1251,7 +1254,7 @@ Ubicar en: apps/api/src/patients/
 | **Assigned To**        | Desarrollador Mobile |
 | **State**              | To Do |
 | **Activity**           | Development |
-| **Iteration Path**     | SaludDeUna\\Sprint 6 |
+| **Iteration Path**     | SaludDeUna\\Sprint 9 |
 | **Remaining Work (h)** | 4 |
 
 **Descripción:**
@@ -1294,7 +1297,7 @@ Ubicar en: apps/mobile/src/screens/profile/DependentProfilesScreen.tsx
 | **Assigned To**        | Desarrollador Backend / QA |
 | **State**              | To Do |
 | **Activity**           | Testing |
-| **Iteration Path**     | SaludDeUna\\Sprint 6 |
+| **Iteration Path**     | SaludDeUna\\Sprint 9 |
 | **Remaining Work (h)** | 3 |
 
 **Descripción:**
@@ -1351,14 +1354,14 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 │
 └── 🔷 FEATURE: F5.1 (extensión Could) – Perfil de Familiar Cuidador
     │
-    └── 📖 USER STORY: HU-012 – Como familiar cuidador quiero gestionar perfil de dependiente (8 SP)
+    └── 📖 USER STORY: HU-012 – Como familiar cuidador quiero gestionar perfil de dependiente (8 SP, candidata Sprint 9)
         ├── [ ] T-012-01 – Diseño schema DependentProfile y relación CaregiverOf (2h)
         ├── [ ] T-012-02 – Endpoints POST/GET /v1/patients/dependents (4h)
         ├── [ ] T-012-03 – Pantalla de gestión de perfiles en React Native (4h)
         └── [ ] T-012-04 – Pruebas unitarias e integración de gestión de cuidador (3h)
 ```
 
-**Total horas estimadas Sprint 6 (Épica 5):**
+**Total horas estimadas Épica 5:**
 
 | Historia | Tareas | Horas |
 |----------|--------|-------|
@@ -1367,7 +1370,7 @@ Ubicar en: apps/api/src/patients/caregiver.service.spec.ts
 | **Total** | | **53 horas** |
 
 **Total Story Points Épica 5:** 16 SP (HU-007: 8 SP + HU-012: 8 SP Could)  
-**Sprint objetivo:** Sprint 6
+**Sprint objetivo:** Sprint 6 (HU-007 comprometida) / Sprint 9 (HU-012 candidata)
 
 ---
 

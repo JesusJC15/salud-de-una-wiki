@@ -299,7 +299,8 @@ Feature: Cola de casos priorizada para médico
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-006 |
 | **Title**              | Como paciente y médico quiero intercambiar mensajes en tiempo real con estado de caso para mejorar la continuidad y oportunidad de respuesta |
-| **Parent (Feature)**   | F3.1 – Chat Clínico en Tiempo Real / F3.2 – Cola de Casos Priorizada |
+| **Parent (Feature)**   | F3.1 – Chat Clínico en Tiempo Real |
+| **Related (Feature)**  | F3.2 – Cola de Casos Priorizada |
 | **State**              | Active |
 | **Area Path**          | SaludDeUna\\Backend / SaludDeUna\\Mobile / SaludDeUna\\Web |
 | **Iteration Path**     | SaludDeUna\\Sprint 5 |

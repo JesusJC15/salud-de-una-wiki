@@ -2,11 +2,11 @@
 Definir criterios de aceptacion concretos en formato Gherkin para historias Must, incluyendo escenario principal y escenario alterno por historia.
 
 ## Alcance
-Cubre historias Must del backlog `HU-001` a `HU-008` y `HU-010`, y aplica tambien a historias Should/Could cuando sean comprometidas en sprint. No incluye pruebas tecnicas de rendimiento detalladas.
+Cubre historias Must del backlog `HU-001` a `HU-008` y `HU-010`, y mantiene criterios base para historias candidatas `HU-009`, `HU-011`, `HU-012` y `HU-013`. No incluye pruebas tecnicas de rendimiento detalladas.
 
 ## Regla de aplicacion
 - Todo item comprometido en sprint debe tener 2 escenarios Gherkin (principal y alterno) antes de iniciar desarrollo.
-- Las historias no comprometidas pueden mantener criterios en borrador hasta entrar a planificacion formal.
+- Las historias candidatas pueden mantener estos criterios como base de refinement hasta entrar a planificacion formal.
 
 ## HU-001 Registro e inicio de sesion paciente
 ```gherkin
@@ -159,4 +159,72 @@ Scenario: Simulacion alterna cancelada
   When cancela la operacion
   Then no se crea transaccion
   And el estado del plan se mantiene sin cambios
+```
+
+## HU-009 Traduccion a lenguaje simple para paciente
+```gherkin
+Feature: Traduccion bidireccional de lenguaje clinico
+
+Scenario: Traduccion principal a lenguaje simple
+  Given una consulta activa con un mensaje medico con terminologia especializada
+  When el paciente solicita explicacion en lenguaje simple
+  Then el sistema devuelve la orientacion en lenguaje coloquial
+  And muestra un disclaimer visible de que no constituye diagnostico
+
+Scenario: Traduccion alterna bloqueada por guardrail
+  Given un texto que implica solicitud de diagnostico o prescripcion
+  When el servicio de traduccion evalua la solicitud
+  Then el sistema rechaza la operacion con mensaje de disclaimer
+  And no invoca al proveedor IA
+```
+
+## HU-011 Banco de conocimiento validado por pares
+```gherkin
+Feature: Base de conocimiento validada
+
+Scenario: Aprobacion principal de articulo pendiente
+  Given un articulo del banco de conocimiento en estado PENDING
+  When un medico autorizado lo aprueba
+  Then el articulo cambia a estado APPROVED
+  And queda disponible para consulta publica
+
+Scenario: Rechazo alterno por revisor
+  Given un articulo del banco de conocimiento en estado PENDING
+  When un medico autorizado lo marca como REJECTED
+  Then el articulo cambia a estado REJECTED
+  And no aparece en el endpoint de consulta publica
+```
+
+## HU-012 Gestion de perfil de familiar o cuidador
+```gherkin
+Feature: Gestion de perfiles dependientes
+
+Scenario: Registro principal de perfil dependiente
+  Given un cuidador autenticado sin exceder el limite de perfiles
+  When crea un perfil dependiente con los datos requeridos
+  Then el sistema registra el dependiente asociado al cuidador
+  And permite usarlo en flujos de seguimiento y triage
+
+Scenario: Creacion alterna excediendo el limite permitido
+  Given un cuidador con 3 perfiles dependientes activos
+  When intenta crear un nuevo perfil dependiente
+  Then el sistema rechaza la operacion
+  And informa que se alcanzo el limite permitido
+```
+
+## HU-013 Exportacion de reporte semanal del tablero
+```gherkin
+Feature: Exportacion semanal del tablero
+
+Scenario: Exportacion principal con datos consolidados
+  Given un dashboard con metricas y KPIs agregados para una semana cerrada
+  When el equipo solicita exportar el reporte semanal
+  Then el sistema genera un archivo identificable por semana
+  And el archivo incluye metricas tecnicas, KPIs y alertas del periodo
+
+Scenario: Exportacion alterna con fuente degradada
+  Given una fuente marcada como DEGRADED en el dashboard
+  When el equipo exporta el reporte semanal
+  Then el archivo incluye una nota explicita de degradacion
+  And no omite silenciosamente la fuente incompleta
 ```

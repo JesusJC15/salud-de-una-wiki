@@ -36,8 +36,8 @@ Para mantener continuidad historica del equipo se conserva `Sprint 0..9` y se ma
 | Sprint 4 | Resumen clinico IA | HU-005 | Resumen preconsulta, guardrails IA, telemetria de modelo |
 | Sprint 5 | Consulta en tiempo real | HU-006 | Chat WS funcional, estado de consulta, cola medica priorizada |
 | Sprint 6 | Seguimiento y timeline | HU-007 | Formularios post-consulta, linea de evolucion, alertas por empeoramiento |
-| Sprint 7 | Observabilidad y dashboard | HU-008, OBS-001..004 | Logs estructurados, metricas tecnicas, 4 KPIs de negocio visibles |
-| Sprint 8 | Monetizacion simulada y knowledge | HU-010, HU-011 | Checkout simulado, gestion de contenido validado medico |
+| Sprint 7 | Observabilidad y dashboard | HU-008, OBS-001..004 | Logs estructurados, metricas tecnicas, alertas y 4 KPIs de negocio visibles |
+| Sprint 8 | Monetizacion simulada y knowledge | HU-010 (comprometida), HU-011 (candidata) | Checkout simulado y, si hay capacidad, gestion de contenido validado medico |
 | Sprint 9 | Hardening y cierre | Ajustes Must pendientes | Pruebas E2E, carga final, correcciones, evidencia para presentacion final |
 
 ## Definition of Done por Sprint (resumen)
@@ -56,3 +56,13 @@ Para mantener continuidad historica del equipo se conserva `Sprint 0..9` y se ma
 - Si HU-002 no se cierra temprano, se afecta validacion de rol medico.
 - Si HU-005 se retrasa, bloquea HU-006 y se compromete reto de concurrencia/real-time.
 - Si HU-008 se retrasa, se compromete evidencia de observabilidad exigida.
+
+## Historias Should/Could con sprint candidato
+Estas historias no se consideran comprometidas por defecto; se listan para facilitar refinement y planeacion cuando los Must del sprint esten cubiertos.
+
+| ID | Tipo | Sprint candidato | Condicion de activacion |
+|---|---|---|---|
+| HU-009 | Should | Sprint 8 | Solo si el trabajo Must de IA y monetizacion no compromete capacidad |
+| HU-011 | Should | Sprint 8 | Solo si HU-010 queda estable y existe capacidad del sprint |
+| HU-012 | Could | Sprint 9 | Solo si no hay deuda critica Must pendiente |
+| HU-013 | Could | Sprint 9 | Solo si E6 queda estable y el hardening no absorbe la capacidad |

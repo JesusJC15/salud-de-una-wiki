@@ -474,7 +474,8 @@ Feature: Triage IA para medicina general
 | **Work Item Type**     | User Story |
 | **ID**                 | HU-004 |
 | **Title**              | Como paciente odontológico quiero recibir clasificación de prioridad por red flags para identificar casos que requieren atención presencial |
-| **Parent (Feature)**   | F2.2 / F2.3 – Flujo Triage Odontología / Motor de Red Flags |
+| **Parent (Feature)**   | F2.2 – Flujo Triage Odontología |
+| **Related (Feature)**  | F2.3 – Motor de Red Flags |
 | **State**              | Active |
 | **Area Path**          | SaludDeUna\\Backend / SaludDeUna\\Mobile |
 | **Iteration Path**     | SaludDeUna\\Sprint 3 |
