@@ -1,0 +1,276 @@
+<svg viewBox="0 0 900 660" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Helvetica,Arial,sans-serif">
+  <title>Backend Modules — NestJS Monolito Modular SaludDeUna</title>
+  <defs>
+    <marker id="arr-dep" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arr-red" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#DC2626"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0077B6"/>
+    </marker>
+  </defs>
+
+  <!-- Background — mismo tamaño que viewBox -->
+  <rect width="900" height="660" fill="#F8FAFC"/>
+
+  <!-- ── Title bar ── -->
+  <rect x="0" y="0" width="900" height="44" fill="#0A1628"/>
+  <rect x="0" y="0" width="5"   height="44" fill="#00B4D8"/>
+  <text x="16" y="16" font-size="9"  font-weight="bold" fill="#00B4D8">C4 MODEL — LEVEL 3 · COMPONENTS</text>
+  <text x="16" y="32" font-size="14" font-weight="bold" fill="white">Vista de Componentes — NestJS Monolito Modular (17 módulos reales)</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       GRUPO 1: CORE GLOBAL   y=54 h=90 → bottom=144
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="16" y="54" width="868" height="90" rx="6" fill="#EFF6FF" stroke="#0077B6" stroke-width="1.3"/>
+  <text x="26" y="70" font-size="9" font-weight="bold" fill="#0077B6">CORE GLOBAL  [AppModule — Guards · Filters · Interceptors · Config · Database · Redis · Throttler]</text>
+
+  <!-- AppModule: x=26, w=120 -->
+  <rect x="26"  y="75" width="120" height="62" rx="4" fill="#0077B6"/>
+  <text x="86"  y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">AppModule</text>
+  <text x="86"  y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">Bootstrap · PORT 3000</text>
+  <text x="86"  y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">DI Root · prefix /v1</text>
+
+  <!-- ConfigModule: x=154, w=120 -->
+  <rect x="154" y="75" width="120" height="62" rx="4" fill="#0077B6"/>
+  <text x="214" y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">ConfigModule</text>
+  <text x="214" y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">Joi Validation · .env</text>
+  <text x="214" y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">Global · fail-fast</text>
+
+  <!-- CommonModule: x=282, w=148 -->
+  <rect x="282" y="75" width="148" height="62" rx="4" fill="#0077B6"/>
+  <text x="356" y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">CommonModule</text>
+  <text x="356" y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">GlobalExceptionFilter</text>
+  <text x="356" y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">CorrelationId · Logging</text>
+
+  <!-- DatabaseModule: x=438, w=130 -->
+  <rect x="438" y="75" width="130" height="62" rx="4" fill="#0077B6"/>
+  <text x="503" y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">DatabaseModule</text>
+  <text x="503" y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">Mongoose · MongoDB</text>
+  <text x="503" y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">Atlas URI · Schemas</text>
+
+  <!-- RedisModule: x=576, w=120 -->
+  <rect x="576" y="75" width="120" height="62" rx="4" fill="#0077B6"/>
+  <text x="636" y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">RedisModule</text>
+  <text x="636" y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">ioredis · BullMQ</text>
+  <text x="636" y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">Socket.IO adapter</text>
+
+  <!-- ThrottlerModule: x=704, w=120 -->
+  <rect x="704" y="75" width="176" height="62" rx="4" fill="#0077B6"/>
+  <text x="792" y="100" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">ThrottlerModule</text>
+  <text x="792" y="113" text-anchor="middle" font-size="7.5" fill="#90E0EF">20 req / 60s / IP</text>
+  <text x="792" y="126" text-anchor="middle" font-size="7"   fill="#CBD5E1">Redis Store distribuido</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       GRUPO 2: USUARIOS   x=16 y=154 w=420 h=100 → bottom=254
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="16" y="154" width="420" height="100" rx="6" fill="#F0FDF4" stroke="#10B981" stroke-width="1.3"/>
+  <text x="26" y="170" font-size="9" font-weight="bold" fill="#10B981">DOMINIO: USUARIOS  [Auth · RBAC · Sesiones · Perfiles]</text>
+
+  <!-- AuthModule: x=26, w=120 -->
+  <rect x="26"  y="175" width="120" height="68" rx="4" fill="#10B981"/>
+  <text x="86"  y="198" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">AuthModule</text>
+  <text x="86"  y="211" text-anchor="middle" font-size="7.5" fill="#D1FAE5">JWT HS256+RS256 · Auth0</text>
+  <text x="86"  y="222" text-anchor="middle" font-size="7"   fill="white">Login · Register · Refresh</text>
+  <text x="86"  y="232" text-anchor="middle" font-size="7"   fill="white">Max 3 sessions · PKCE</text>
+
+  <!-- PatientsModule: x=154, w=118 -->
+  <rect x="154" y="175" width="118" height="68" rx="4" fill="#059669"/>
+  <text x="213" y="198" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">PatientsModule</text>
+  <text x="213" y="211" text-anchor="middle" font-size="7.5" fill="#D1FAE5">Perfil paciente</text>
+  <text x="213" y="222" text-anchor="middle" font-size="7"   fill="white">Timeline clínico</text>
+
+  <!-- DoctorsModule: x=280, w=118 -->
+  <rect x="280" y="175" width="118" height="68" rx="4" fill="#047857"/>
+  <text x="339" y="198" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">DoctorsModule</text>
+  <text x="339" y="211" text-anchor="middle" font-size="7.5" fill="#D1FAE5">Specialty · Schedule</text>
+  <text x="339" y="222" text-anchor="middle" font-size="7"   fill="white">REThUS verify · Push token</text>
+
+  <!-- AdminsModule: x=406, w=22 — narrow seeder -->
+  <rect x="406" y="175" width="22" height="68" rx="4" fill="#064E3B"/>
+  <text x="417" y="210" text-anchor="middle" font-size="6"   font-weight="bold" fill="#D1FAE5" writing-mode="tb">AdminsModule</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       GRUPO 3: CLÍNICO   x=446 y=154 w=438 h=100 → bottom=254
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="446" y="154" width="438" height="100" rx="6" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.3"/>
+  <text x="456" y="170" font-size="9" font-weight="bold" fill="#B45309">DOMINIO: CLÍNICO  [Triage · Consultas · Chat · Billing · Followup · Notificaciones]</text>
+
+  <!-- TriageModule: x=456, w=68 -->
+  <rect x="456" y="175" width="68"  height="68" rx="4" fill="#D97706"/>
+  <text x="490" y="197" text-anchor="middle" font-size="8"   font-weight="bold" fill="white">Triage</text>
+  <text x="490" y="210" text-anchor="middle" font-size="7"   fill="#FEF3C7">AI Quest.</text>
+  <text x="490" y="221" text-anchor="middle" font-size="7"   fill="#FEF3C7">RedFlags</text>
+  <text x="490" y="232" text-anchor="middle" font-size="7"   fill="#FEF3C7">Guardrail</text>
+
+  <!-- ConsultationsModule: x=530, w=76 -->
+  <rect x="530" y="175" width="76"  height="68" rx="4" fill="#D97706"/>
+  <text x="568" y="197" text-anchor="middle" font-size="8"   font-weight="bold" fill="white">Consultations</text>
+  <text x="568" y="210" text-anchor="middle" font-size="7"   fill="#FEF3C7">Queue · State</text>
+  <text x="568" y="221" text-anchor="middle" font-size="7"   fill="#FEF3C7">Assign · Close</text>
+  <text x="568" y="232" text-anchor="middle" font-size="7"   fill="#FEF3C7">Rate · Feedback</text>
+
+  <!-- ChatModule: x=612, w=68 -->
+  <rect x="612" y="175" width="68"  height="68" rx="4" fill="#D97706"/>
+  <text x="646" y="197" text-anchor="middle" font-size="8"   font-weight="bold" fill="white">Chat</text>
+  <text x="646" y="210" text-anchor="middle" font-size="7"   fill="#FEF3C7">Socket.IO</text>
+  <text x="646" y="221" text-anchor="middle" font-size="7"   fill="#FEF3C7">rooms · msgs</text>
+  <text x="646" y="232" text-anchor="middle" font-size="7"   fill="#FEF3C7">Redis adapter</text>
+
+  <!-- BillingModule: x=686, w=68 -->
+  <rect x="686" y="175" width="68"  height="68" rx="4" fill="#B45309"/>
+  <text x="720" y="197" text-anchor="middle" font-size="8"   font-weight="bold" fill="white">Billing</text>
+  <text x="720" y="210" text-anchor="middle" font-size="7"   fill="#FEF3C7">Tx COP</text>
+  <text x="720" y="221" text-anchor="middle" font-size="7"   fill="#FEF3C7">Revenue</text>
+  <text x="720" y="232" text-anchor="middle" font-size="7"   fill="#FEF3C7">Price seeder</text>
+
+  <!-- FollowupsModule: x=760, w=68 -->
+  <rect x="760" y="175" width="68"  height="68" rx="4" fill="#92400E"/>
+  <text x="794" y="197" text-anchor="middle" font-size="8"   font-weight="bold" fill="white">Followups</text>
+  <text x="794" y="210" text-anchor="middle" font-size="7"   fill="#FEF3C7">BullMQ</text>
+  <text x="794" y="221" text-anchor="middle" font-size="7"   fill="#FEF3C7">72h · 7d</text>
+  <text x="794" y="232" text-anchor="middle" font-size="7"   fill="#FEF3C7">Escalación</text>
+
+  <!-- NotificationsModule: x=834, w=42 — narrow -->
+  <rect x="834" y="175" width="42"  height="68" rx="4" fill="#78350F"/>
+  <text x="855" y="211" text-anchor="middle" font-size="6"   font-weight="bold" fill="#FEF3C7" writing-mode="tb">Notifications</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       GRUPO 4: IA / RAG   x=16 y=264 w=560 h=100 → bottom=364
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="16" y="264" width="560" height="100" rx="6" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="1.3"/>
+  <text x="26" y="280" font-size="9" font-weight="bold" fill="#7C3AED">DOMINIO: IA / RAG  [Gemini 2.5-flash · Vector Search HNSW · Knowledge Base · AI Audit]</text>
+
+  <!-- AiModule: x=26, w=130 -->
+  <rect x="26"  y="285" width="130" height="68" rx="4" fill="#7C3AED"/>
+  <text x="91"  y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">AiModule</text>
+  <text x="91"  y="321" text-anchor="middle" font-size="7.5" fill="#EDE9FE">Gemini 2.5-flash</text>
+  <text x="91"  y="332" text-anchor="middle" font-size="7"   fill="white">Generate · Summarize</text>
+  <text x="91"  y="342" text-anchor="middle" font-size="7"   fill="white">Prompt versions · Audit</text>
+
+  <!-- KnowledgeModule: x=164, w=140 -->
+  <rect x="164" y="285" width="140" height="68" rx="4" fill="#5B21B6"/>
+  <text x="234" y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">KnowledgeModule</text>
+  <text x="234" y="321" text-anchor="middle" font-size="7.5" fill="#EDE9FE">KnowledgeChunks · Chunking</text>
+  <text x="234" y="332" text-anchor="middle" font-size="7"   fill="white">embedding-001 · 768d</text>
+  <text x="234" y="342" text-anchor="middle" font-size="7"   fill="white">Atlas Vector Search HNSW</text>
+
+  <!-- RagModule: x=312, w=130 -->
+  <rect x="312" y="285" width="130" height="68" rx="4" fill="#4C1D95"/>
+  <text x="377" y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">RagModule</text>
+  <text x="377" y="321" text-anchor="middle" font-size="7.5" fill="#EDE9FE">Pipeline 8 pasos</text>
+  <text x="377" y="332" text-anchor="middle" font-size="7"   fill="white">Cache Redis 300s</text>
+  <text x="377" y="342" text-anchor="middle" font-size="7"   fill="white">RagTrace · Feedback</text>
+
+  <!-- AdminModule: x=450, w=118 — admin console (doctor verify, user mgmt) -->
+  <rect x="450" y="285" width="118" height="68" rx="4" fill="#6D28D9"/>
+  <text x="509" y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">AdminModule</text>
+  <text x="509" y="321" text-anchor="middle" font-size="7.5" fill="#EDE9FE">Doctor verification</text>
+  <text x="509" y="332" text-anchor="middle" font-size="7"   fill="white">User management</text>
+  <text x="509" y="342" text-anchor="middle" font-size="7"   fill="white">CSV export · REThUS</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       GRUPO 5: INFRAESTRUCTURA   x=586 y=264 w=298 h=100 → bottom=364
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="586" y="264" width="298" height="100" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.3"/>
+  <text x="596" y="280" font-size="9" font-weight="bold" fill="#DC2626">INFRAESTRUCTURA  [Outbox · Dashboard · OTel]</text>
+
+  <!-- OutboxModule: x=596, w=88 → ends 684 -->
+  <rect x="596" y="285" width="88"  height="68" rx="4" fill="#DC2626"/>
+  <text x="640" y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">OutboxModule</text>
+  <text x="640" y="321" text-anchor="middle" font-size="7.5" fill="#FEE2E2">Transactional</text>
+  <text x="640" y="332" text-anchor="middle" font-size="7"   fill="white">Retry · Backoff x5</text>
+  <text x="640" y="342" text-anchor="middle" font-size="7"   fill="white">Exactly-once</text>
+
+  <!-- DashboardModule: x=692, w=88 → ends 780 -->
+  <rect x="692" y="285" width="88"  height="68" rx="4" fill="#B91C1C"/>
+  <text x="736" y="308" text-anchor="middle" font-size="9"   font-weight="bold" fill="white">Dashboard</text>
+  <text x="736" y="321" text-anchor="middle" font-size="7.5" fill="#FEE2E2">KPIs · AI metrics</text>
+  <text x="736" y="332" text-anchor="middle" font-size="7"   fill="white">Revenue · Business</text>
+  <text x="736" y="342" text-anchor="middle" font-size="7"   fill="white">4 KPIs reales</text>
+
+  <!-- OtelBootstrap: x=788, w=88 → ends 876 (within INFRA right edge 884) -->
+  <rect x="788" y="285" width="88"  height="68" rx="4" fill="#991B1B" stroke="#F87171" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="832" y="308" text-anchor="middle" font-size="8.5" font-weight="bold" fill="white">OTel Bootstrap</text>
+  <text x="832" y="321" text-anchor="middle" font-size="7.5" fill="#FEE2E2">main.ts · NodeSDK</text>
+  <text x="832" y="332" text-anchor="middle" font-size="7"   fill="white">OTLP HTTP exporter</text>
+  <text x="832" y="342" text-anchor="middle" font-size="7"   fill="#FCA5A5">⚠ No NestJS module</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       CROSS-CUTTING CONCERNS   y=374 h=52 → bottom=426
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="16" y="374" width="868" height="52" rx="6" fill="#F1F5F9" stroke="#64748B" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="26" y="390" font-size="9" font-weight="bold" fill="#475569">CROSS-CUTTING CONCERNS  [Aplicado globalmente via APP_GUARD / APP_INTERCEPTOR en AppModule]</text>
+  <!-- 6 pills distribuidas uniformemente -->
+  <rect x="26"  y="397" width="110" height="22" rx="3" fill="#475569"/>
+  <text x="81"  y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">JwtAuthGuard</text>
+  <rect x="144" y="397" width="96"  height="22" rx="3" fill="#475569"/>
+  <text x="192" y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">RolesGuard</text>
+  <rect x="248" y="397" width="112" height="22" rx="3" fill="#475569"/>
+  <text x="304" y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">ThrottlerGuard</text>
+  <rect x="368" y="397" width="128" height="22" rx="3" fill="#475569"/>
+  <text x="432" y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">LoggingInterceptor</text>
+  <rect x="504" y="397" width="152" height="22" rx="3" fill="#475569"/>
+  <text x="580" y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">GlobalExceptionFilter</text>
+  <rect x="664" y="397" width="208" height="22" rx="3" fill="#475569"/>
+  <text x="768" y="412" text-anchor="middle" font-size="8" font-weight="bold" fill="white">ValidationPipe (class-validator)</text>
+
+  <!-- ──────────────────────────────────────────────────────────
+       FLECHAS DE DEPENDENCIA (entre grupos)
+       Todas parten desde el BORDE INFERIOR del módulo origen
+       y llegan al BORDE SUPERIOR del módulo destino
+  ────────────────────────────────────────────────────────────── -->
+
+  <!-- TriageModule (bottom center: x=490, y=243) → AiModule (top center: x=91, y=285) -->
+  <line x1="490" y1="243" x2="91" y2="285" stroke="#7C3AED" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-dep)"/>
+
+  <!-- RagModule (bottom left: x=320, y=353) → KnowledgeModule (bottom right: x=304, y=353) — mismo nivel, flecha horizontal -->
+  <line x1="312" y1="319" x2="304" y2="319" stroke="#7C3AED" stroke-width="1"   stroke-dasharray="4,2" marker-end="url(#arr-dep)"/>
+
+  <!-- RagModule (top: x=377, y=285) → AiModule (right: x=156, y=319) -->
+  <line x1="312" y1="319" x2="156" y2="319" stroke="#7C3AED" stroke-width="1"   stroke-dasharray="4,2" marker-end="url(#arr-dep)"/>
+
+  <!-- ConsultationsModule (bottom center: x=568, y=243) → OutboxModule (top center: x=640, y=285) -->
+  <line x1="568" y1="243" x2="640" y2="285" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
+
+  <!-- FollowupsModule (bottom center: x=794, y=243) → OutboxModule (right edge: x=684, y=310) -->
+  <line x1="794" y1="243" x2="686" y2="310" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
+
+  <!-- ChatModule (top center: x=646, y=175) → RedisModule (bottom center: x=636, y=137) -->
+  <line x1="646" y1="175" x2="636" y2="137" stroke="#0077B6" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-blue)"/>
+
+  <!-- ──────────────────────────────────────────────────────────
+       LEYENDA   y=436 h=70 → bottom=506
+  ────────────────────────────────────────────────────────────── -->
+  <rect x="16" y="436" width="868" height="70" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
+  <text x="28" y="452" font-size="8" font-weight="bold" fill="#0A1628">LEYENDA DE DOMINIOS</text>
+
+  <rect x="28"  y="458" width="12" height="8" rx="2" fill="#0077B6"/>
+  <text x="45"  y="466" font-size="8" fill="#334155">Core / Global</text>
+  <rect x="130" y="458" width="12" height="8" rx="2" fill="#10B981"/>
+  <text x="147" y="466" font-size="8" fill="#334155">Usuarios / Auth</text>
+  <rect x="250" y="458" width="12" height="8" rx="2" fill="#D97706"/>
+  <text x="267" y="466" font-size="8" fill="#334155">Clínico</text>
+  <rect x="340" y="458" width="12" height="8" rx="2" fill="#7C3AED"/>
+  <text x="357" y="466" font-size="8" fill="#334155">IA / RAG</text>
+  <rect x="430" y="458" width="12" height="8" rx="2" fill="#DC2626"/>
+  <text x="447" y="466" font-size="8" fill="#334155">Infraestructura</text>
+  <rect x="540" y="458" width="12" height="8" rx="2" fill="#475569"/>
+  <text x="557" y="466" font-size="8" fill="#334155">Cross-cutting</text>
+  <rect x="640" y="458" width="12" height="8" rx="2" fill="#991B1B" stroke="#F87171" stroke-width="1" stroke-dasharray="3,1"/>
+  <text x="657" y="466" font-size="8" fill="#334155">Bootstrap (no NestJS module)</text>
+
+  <!-- Flechas en leyenda -->
+  <line x1="28"  y1="486" x2="50"  y2="486" stroke="#7C3AED" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-dep)"/>
+  <text x="56"  y="490" font-size="8" fill="#334155">Dependencia IA/RAG</text>
+  <line x1="180" y1="486" x2="202" y2="486" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
+  <text x="208" y="490" font-size="8" fill="#334155">Dependencia Outbox</text>
+  <line x1="340" y1="486" x2="362" y2="486" stroke="#0077B6" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-blue)"/>
+  <text x="368" y="490" font-size="8" fill="#334155">Dependencia Redis</text>
+
+  <!-- Footer -->
+  <text x="28" y="522" font-size="7.5" fill="#64748B">app.module.ts: AiModule · AuthModule · PatientsModule · DoctorsModule · AdminModule · AdminsModule · NotificationsModule · FollowupsModule</text>
+  <text x="28" y="534" font-size="7.5" fill="#64748B">+ DashboardModule · ChatModule · ConsultationsModule · TriageModule · OutboxModule · BillingModule · KnowledgeModule · RagModule · RedisModule  =  17 módulos</text>
+</svg>
