@@ -1,5 +1,5 @@
 ## Objetivo
-Centralizar la documentacion oficial del proyecto `SaludDeUna` para cumplir todos los requisitos del proyecto de `IETI-2026-I`.  
+Centralizar la documentacion oficial del proyecto `SaludDeUna` para cumplir todos los requisitos del proyecto de `IETI-2026-I`.
 
 ## Alcance
 Este documento define el indice, el estado ejecutivo y la trazabilidad general de la documentacion.
@@ -11,22 +11,25 @@ Este documento define el indice, el estado ejecutivo y la trazabilidad general d
 - `Santiago Hurtado Martínez`
 
 ## Resumen Ejecutivo
-`SaludDeUna` es una plataforma de comunicacion clinica asistida por IA que conecta pacientes y medicos con triage predictivo no diagnostico, estructuracion clinica automatica y seguimiento inteligente.  
+`SaludDeUna` es una plataforma de comunicacion y priorizacion clinica asistida por IA que conecta pacientes y medicos mediante triage guiado, chat en tiempo real, seguimiento post-consulta y facturacion simulada.
 
-El MVP cubre:
-- 2 especialidades: Medicina General y Odontologia.
-- App paciente (React Native) y panel medico/admin web (React + Next).
-- Backend NestJS con MongoDB, WebSocket para tiempo real y modulo IA (RAG + Gemini + reglas clinicas).
-- Observabilidad completa con logs estructurados, metricas tecnicas y 4 KPIs de negocio.
+El MVP implementado cubre:
+- 3 especialidades de triage: Medicina General, Odontologia y Urgencias.
+- App movil para pacientes (React Native / Expo 55): triage, consultas, chat clinico, followups, notificaciones y perfil.
+- Panel web para staff (Next.js 16): flujos de doctor (cola de consultas, chat, resumen IA) y administrador (usuarios, verificacion REThUS, billing, dashboard KPIs).
+- Backend NestJS 11 con MongoDB Atlas, Redis, WebSocket (Socket.IO), modulo IA (RAG + Gemini 2.5-flash + reglas clinicas), outbox transaccional y billing simulado.
+- Observabilidad: logs estructurados, metricas tecnicas (p95 latencia, error rate), 4 KPIs de negocio, preparacion OpenTelemetry.
+- 406+ tests en backend (cobertura statements 93%, branches 80%); 82 tests en web.
 
-## Estado Del Proyecto
-- Fase actual: `Sprint 0 (Inception)`.
-- Horizonte de trabajo: `10 sprints (Sprint 0 a Sprint 9)`.
-- Fecha de presentacion Inception: `9 de marzo de 2026`.
-- Riesgo principal inicial: control de alcance para cumplir Must de MoSCoW en tiempo.
+## Estado del Proyecto
+- **Estado actual:** `Version Final — Proyecto completado (mayo 2026)`.
+- **Sustentacion IETI-2026-I:** `21 de mayo de 2026`.
+- **Funcionalidad core:** ~95% implementada y probada (triage → consulta → chat → followup).
+- **Billing simulado:** completado el 2026-05-09 (checkout, transacciones, metricas de revenue, admin CRUD de precios).
+- **Deuda tecnica pendiente:** produccion/infraestructura (Redis adapter Socket.IO, CI/CD deploy, EAS Build, Auth0 mobile), no de funcionalidad.
 
 ## Convencion de Sprints (alineacion lineamientos 2026-1)
-Se mantiene el esquema operativo del equipo `Sprint 0..9` y se publica equivalencia con el lineamiento oficial:
+Se mantuvo el esquema operativo del equipo `Sprint 0..9` con equivalencia al lineamiento oficial:
 
 | Esquema interno | Esquema lineamiento |
 |---|---|
@@ -72,6 +75,8 @@ Se mantiene el esquema operativo del equipo `Sprint 0..9` y se publica equivalen
 
 15. [Cumplimiento de Lineamientos 2026-1](15-Cumplimiento-Lineamientos-2026-1.md)
 
+16. [Plan Tecnico Actualizado — Version Final (mayo 2026)](16-Plan-Tecnico-Actualizado-2026-05.md)
+
 ## Documentos Azure Boards (detalle por epica)
 1. [Epica 1 - Onboarding y Acceso Seguro](../epics/Azure-Boards-Epica1.md)
 2. [Epica 2 - Triage Inteligente por Especialidad](../epics/Azure-Boards-Epica2.md)
@@ -80,3 +85,6 @@ Se mantiene el esquema operativo del equipo `Sprint 0..9` y se publica equivalen
 5. [Epica 5 - Seguimiento y Evolucion del Paciente](../epics/Azure-Boards-Epica5.md)
 6. [Epica 6 - Observabilidad y Analitica](../epics/Azure-Boards-Epica6.md)
 7. [Epica 7 - Monetizacion Simulada y Gobierno](../epics/Azure-Boards-Epica7.md)
+
+## Diagramas Arquitectonicos
+- [Diagramas Mermaid — C4, RAG, Backend, AWS, Auth, Datos, CI/CD, Observabilidad](../../diagrams/DIAGRAMAS-MERMAID.md)

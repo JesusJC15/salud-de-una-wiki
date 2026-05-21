@@ -582,6 +582,115 @@ graph TB
 
 ---
 
+## 11. Flujo Clínico del Paciente — End to End
+
+```mermaid
+flowchart TD
+    A(["👤 Paciente\ninicia sesión"])
+
+    subgraph TRIAGE["📋 TRIAGE ASISTIDO POR IA"]
+        T1["Selecciona especialidad\n(MG · Odontología · Urgencias)"]
+        T2["Responde cuestionario\nguiado por especialidad"]
+        T3["Motor IA analiza respuestas\nGemini 2.5-flash + red-flags"]
+        T4{"¿Red flags\ndetectadas?"}
+        T5["Prioridad: ALTA\n⚠️ Atención urgente"]
+        T6["Prioridad: MODERADA / BAJA\n📋 Cola normal"]
+    end
+
+    subgraph BILLING["💳 CHECKOUT SIMULADO"]
+        B1["Ver precio por especialidad\nGET /billing/prices"]
+        B2["Iniciar checkout\nPOST /billing/checkout"]
+        B3["Confirmar pago\nPOST /billing/checkout/:id/confirm"]
+        B4["Transacción: COMPLETED\nConsulta: WAITING"]
+    end
+
+    subgraph CONSULTA["🩺 CONSULTA MÉDICA"]
+        C1["Doctor verifica cola\nGET /consultations/queue"]
+        C2["Doctor asigna consulta\nPATCH /consultations/:id/assign"]
+        C3["Chat clínico en tiempo real\nSocket.IO — sala consultation:{id}"]
+        C4["Doctor genera resumen IA\nGemini 2.5-flash + guardrail"]
+        C5["Doctor cierra consulta\nPATCH /consultations/:id/close"]
+    end
+
+    subgraph FOLLOWUP["🔄 SEGUIMIENTO POST-CONSULTA"]
+        F1["Outbox crea 2 followup docs\n72h · 7d (BullMQ scheduler)"]
+        F2["Notificación push al paciente\nExpo FCM/APNs"]
+        F3["Paciente responde followup\nPOST /followups/:id/submit"]
+        F4{"symptomSeverity\n- baseline ≥ 2?"}
+        F5["✅ Seguimiento completado\nTimeline actualizado"]
+        F6["🚨 Escalación automática\nNueva consulta ALTA prioridad"]
+    end
+
+    A --> T1 --> T2 --> T3 --> T4
+    T4 -- "Sí" --> T5 --> B1
+    T4 -- "No" --> T6 --> B1
+    B1 --> B2 --> B3 --> B4
+
+    B4 --> C1
+    C1 --> C2 --> C3 --> C4 --> C5
+
+    C5 --> F1 --> F2 --> F3 --> F4
+    F4 -- "No" --> F5
+    F4 -- "Sí" --> F6
+
+    F6 -.->|"Nueva consulta\nalta prioridad"| C1
+
+    style T5 fill:#DC2626,color:#fff
+    style T6 fill:#D97706,color:#fff
+    style F6 fill:#DC2626,color:#fff
+    style F5 fill:#16A34A,color:#fff
+    style C3 fill:#1D4ED8,color:#fff
+```
+
+---
+
+## 12. Flujo del Doctor y Administrador — Panel Web
+
+```mermaid
+flowchart TD
+    subgraph LOGIN["🔐 AUTENTICACIÓN STAFF"]
+        L1["POST /auth/staff/login\nDOCTOR o ADMIN"]
+        L2{"Rol?"}
+    end
+
+    subgraph ADMIN_FLOW["🛡️ FLUJO ADMINISTRADOR"]
+        A1["Dashboard KPIs\nGET /dashboard/business"]
+        A2["Bandeja REThUS\nGET /admin/doctors"]
+        A3["Verificar doctor\nPOST /admin/doctors/:id/doctor-verify"]
+        A4["Gestión usuarios\nGET/PATCH /admin/users"]
+        A5["Billing & Revenue\nGET /billing/admin/revenue\nPATCH /billing/admin/prices/:specialty"]
+        A6["Dashboard técnico\nGET /dashboard/technical\n(p95 latencia · error rate)"]
+        A7["AI Health-check\nPOST /admin/ai/health-check"]
+    end
+
+    subgraph DOCTOR_FLOW["🩺 FLUJO DOCTOR (solo VERIFIED)"]
+        D1["Cola de consultas\nGET /consultations/queue"]
+        D2["Asignar consulta\nPATCH /consultations/:id/assign"]
+        D3["Chat clínico\nSocket.IO sala consultation:{id}"]
+        D4["Generar resumen IA\n→ AiModule + Gemini 2.5-flash\nGuardrail: sin diagnóstico"]
+        D5["Cerrar consulta\nPATCH /consultations/:id/close\n→ Outbox → Followup BullMQ"]
+        D6["Ver historial paciente\ntimeline + followups anteriores"]
+    end
+
+    L1 --> L2
+    L2 -- "ADMIN" --> A1
+    A1 --- A2 --- A3 --- A4 --- A5 --- A6 --- A7
+
+    L2 -- "DOCTOR" --> D1
+    D1 --> D2 --> D3 --> D4 --> D5
+    D5 --> D6
+
+    note1["⚠️ Doctor PENDING o REJECTED\nNo puede acceder a la cola\n(DoctorVerifiedGuard)"]
+    D1 -. "sin verificar" .-> note1
+
+    style A1 fill:#7C3AED,color:#fff
+    style D3 fill:#1D4ED8,color:#fff
+    style D4 fill:#059669,color:#fff
+    style note1 fill:#9CA3AF,color:#fff
+```
+
+---
+
 ## Instrucciones para visualización local
 
 ### VS Code
@@ -602,4 +711,4 @@ mmdc -i DIAGRAMAS-MERMAID.md -o output/ -f svg
 
 ---
 
-*Generado: 2026-05-19 | Versión corregida post-auditoría arquitectónica*
+*Actualizado: 2026-05-20 | Auditoría y alineación final de documentación — diagramas 11 y 12 añadidos (flujo E2E paciente y flujo doctor/admin)*

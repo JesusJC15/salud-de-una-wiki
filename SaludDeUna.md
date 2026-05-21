@@ -1,235 +1,203 @@
 # Salud De Una
 
-**Salud De Una** es una plataforma inteligente de comunicación clínica que conecta pacientes y médicos mediante IA que estructura, prioriza y optimiza la información médica antes de que el profesional intervenga.
+**Salud De Una** es una plataforma inteligente de comunicacion clinica que conecta pacientes y medicos mediante IA que estructura, prioriza y optimiza la informacion medica antes de que el profesional intervenga.
 
-No es telemedicina tradicional.  
-No es un chat médico.
+No es telemedicina tradicional.
+No es un chat medico.
 
-Es un sistema de **triage predictivo + estructuración clínica + seguimiento inteligente**.
+Es un sistema de **triage asistido por IA + estructuracion clinica + seguimiento inteligente**.
+
+> **Nota sobre el alcance del MVP:** Este documento describe la vision completa del producto. El MVP academico implementado en IETI-2026-I cubre un subconjunto priorizaado de estas capacidades. Las secciones marcadas con `[MVP]` estan implementadas; las marcadas con `[Roadmap]` son parte de la vision de producto pero no del MVP actual. Ver [16-Plan-Tecnico-Actualizado-2026-05.md](docs/wiki/16-Plan-Tecnico-Actualizado-2026-05.md) para el estado real de implementacion.
 
 ---
 
-# Problemática
+# Problematica
 
 ## Del lado del paciente
 
-- No sabe si su síntoma es urgente.
+- No sabe si su sintoma es urgente.
 - No sabe explicar correctamente lo que siente.
-- Olvida información importante.
+- Olvida informacion importante.
 - Tiene consultas cortas y costosas.
-- Tiene acceso limitado a orientación médica oportuna.
+- Tiene acceso limitado a orientacion medica oportuna.
 
-## Del lado del médico
+## Del lado del medico
 
-- Información desorganizada.
-- Consultas repetitivas.
-- Tiempo desperdiciado recolectando antecedentes.
-- Saturación de agenda.
-- Falta de continuidad estructurada.
+- Informacion desorganizada al recibir al paciente.
+- Consultas repetitivas con recoleccion manual de antecedentes.
+- Tiempo desperdiciado en anamnesis basica.
+- Saturacion de agenda sin prioridad clara.
+- Falta de continuidad estructurada entre consultas.
 
 ---
 
 # Propuesta de Valor
 
-**“IA como asistente clínico de comunicación”**
+**"IA como asistente clinico de comunicacion — no como diagnosticador"**
 
 La IA:
 
-- Guía al paciente con preguntas estructuradas por especialidad.
-- Detecta *red flags*.
-- Clasifica prioridad.
-- Genera resumen clínico profesional.
-- Traduce lenguaje cotidiano a lenguaje médico.
-- Traduce respuesta médica a lenguaje claro.
+- Guia al paciente con preguntas estructuradas por especialidad. `[MVP]`
+- Detecta *red flags* y clasifica prioridad. `[MVP]`
+- Genera resumen clinico profesional para el medico. `[MVP]`
+- Apoya la comunicacion entre paciente y medico con informacion organizada. `[MVP]`
 
-La IA:
+La IA **nunca**:
 
-- **Nunca diagnostica**
-- **Nunca prescribe**
-- **Nunca reemplaza al médico**
+- **Diagnostica**
+- **Prescribe**
+- **Reemplaza al medico**
 
----
-
-# Solución a la problemática
-
-## Triage Predictivo Inteligente (No diagnóstico)
-
-La IA:
-
-- Analiza combinaciones de síntomas.
-- Detecta patrones de riesgo.
-- Clasifica:
-
-  - Baja prioridad
-  - Moderada
-  - Alta prioridad (recomendación de atención presencial)
-
-**Ejemplo en odontología**
-
-Dolor intenso + fiebre + inflamación facial → posible urgencia infecciosa.
-
-**Impacto**
-
-- Protección del paciente.
-- Reducción de riesgo legal.
-- Optimización del flujo médico.
+Toda salida de la IA pasa por un guardrail que filtra contenido de diagnostico, prescripcion y afirmacion clinica.
 
 ---
 
-## Módulos por Especialidad
+# Capacidades del MVP (Implementadas)
 
-Cada especialidad tiene:
+## `[MVP]` Triage Asistido por IA — No diagnostico
 
-- Flujo estructurado propio.
-- *Red flags* personalizadas.
-- Plantillas clínicas específicas.
-- Resúmenes adaptados.
+La plataforma guia al paciente con un cuestionario estructurado por especialidad. Una vez completado, el motor de IA (Gemini 2.5-flash + reglas clinicas) analiza las respuestas y:
 
-**Ejemplos**
+- Detecta combinaciones de sintomas que corresponden a *red flags* predefinidas.
+- Clasifica la prioridad de atencion: **Baja**, **Moderada** o **Alta**.
+- Genera un resumen clinico neutral de urgencia (sin diagnostico ni prescripcion).
 
-- Medicina general
-- Odontología
-- Ginecología
-- Psicología
-- Dermatología
+Especialidades disponibles en el MVP: **Medicina General**, **Odontologia**, **Urgencias**.
 
----
+**Ejemplo en odontologia:**
+Dolor intenso + fiebre + inflamacion facial → red flag de posible urgencia infecciosa → prioridad Alta.
 
-## Generador Automático de Resumen Clínico
+**Impacto:**
+- Proteccion del paciente ante signos de alarma no reconocidos.
+- Optimizacion del flujo medico por prioridad real.
+- Reduccion del riesgo clinico y legal.
 
-Antes de que el médico responda, recibe:
+## `[MVP]` Resumen Clinico Automatizado
+
+Antes de que el medico atienda la consulta, recibe informacion estructurada del paciente:
 
 - Motivo de consulta.
-- Duración.
-- Intensidad.
-- Síntomas asociados.
-- Factores agravantes.
-- Medicación actual.
+- Duracion e intensidad de sintomas.
+- Sintomas asociados y factores agravantes.
+- Medicacion actual reportada.
 - Antecedentes relevantes.
 - Nivel de prioridad estimado.
+- Red flags detectadas (si aplica).
 
-Formato tipo **nota médica**.
+Formato de nota medica generado por IA (Gemini 2.5-flash), filtrado por guardrail clinico.
 
----
+## `[MVP]` Chat Clinico en Tiempo Real
 
-## Historia Clínica Evolutiva Inteligente
+Canal de comunicacion directo entre paciente y medico via Socket.IO, dentro del contexto de una consulta activa. Los mensajes se persisten en MongoDB para trazabilidad clinica.
 
-No es solo una consulta aislada.
+## `[MVP]` Seguimiento Post-Consulta (Followup)
 
-La plataforma:
+Despues del cierre de consulta, la plataforma crea automaticamente dos seguimientos programados:
 
-- Construye historial acumulativo.
-- Detecta cambios entre consultas.
-- Muestra evolución gráfica.
-- Resume progresión de síntomas.
+- **72 horas:** evaluacion inicial de recuperacion.
+- **7 dias:** evaluacion de evolucion a mediano plazo.
 
-Esto convierte el sistema en una **mini HCE (Historia Clínica Electrónica) estructurada**.
+Si la severidad de sintomas aumenta 2 o mas puntos respecto a la baseline, se escala automaticamente creando una nueva consulta de alta prioridad.
 
----
+## `[MVP]` Historia Clinica Evolutiva
 
-## Seguimiento Automatizado Post-Consulta
+No es solo una consulta aislada. La plataforma construye un historial acumulativo del paciente con:
 
-Después de la respuesta médica:
+- Timeline de consultas y seguimientos.
+- Evolucion de sintomas entre consultas.
+- Trazabilidad de prioridades y red flags.
 
-- ¿Mejoró el síntoma?
-- ¿Persistió?
-- ¿Aumentó intensidad?
-- ¿Aparecieron nuevos síntomas?
+## `[MVP]` Facturacion Simulada
 
-Esto:
+Modelo de pago por consulta (simulado para el MVP academico):
 
-- Mejora continuidad.
-- Genera data evolutiva.
-- Aumenta fidelización.
+- Precios configurables por especialidad por el administrador.
+- Ciclo de vida de transacciones: PENDING → COMPLETED → REFUNDED.
+- Metricas de revenue en el dashboard administrativo.
 
----
+La integracion con pasarela de pago real (Stripe/Wompi) es parte del roadmap de produccion.
 
-## Perfil de Salud Dinámico
+## `[MVP]` Panel Administrativo
 
-El usuario puede registrar:
+Para administradores:
 
-- Condiciones crónicas.
-- Medicación actual.
-- Alergias.
-- Antecedentes.
-- Alertas personalizadas.
-
-En futuras consultas la IA ya tiene contexto.
-
-**Resultado:**  
-Consultas más rápidas y precisas.
+- Dashboard con KPIs de negocio (pacientes, doctores verificados, revenue).
+- Metricas tecnicas (p95 latencia, error rate).
+- Bandeja de verificacion de credenciales medicas (REThUS).
+- Gestion de usuarios (activar/desactivar).
+- Administracion de precios por especialidad.
 
 ---
 
-## Modo Acompañante Familiar
+# Capacidades del Roadmap (No en MVP)
 
-Un usuario puede:
+Estas capacidades son parte de la vision del producto pero no estan implementadas en el MVP IETI-2026-I:
 
-- Administrar perfil de adulto mayor.
-- Gestionar consultas de un menor.
-- Hacer seguimiento remoto.
+## `[Roadmap]` Especialidades Adicionales
 
-Impacto fuerte en Colombia donde familiares gestionan salud.
+Especialidades planeadas para iteraciones futuras: Ginecologia, Psicologia, Dermatologia, Pediatria, Cardiologia.
 
----
+## `[Roadmap]` Perfil de Salud Dinamico
 
-## Panel Profesional con Insights
+Registro de condiciones cronicas, medicacion habitual, alergias y antecedentes relevantes para que la IA tenga contexto en futuras consultas.
 
-Para médicos:
+## `[Roadmap]` Modo Acompanante Familiar
 
-**Dashboard con:**
+Un usuario puede gestionar consultas de adultos mayores o menores a su cargo (maximo 3 dependientes).
 
-- Tiempo promedio de respuesta.
-- Nivel de complejidad de casos.
-- Especialidades más consultadas.
-- Frecuencia de *red flags*.
-- Temas recurrentes.
+## `[Roadmap]` Banco de Conocimiento Validado con RAG
 
----
+La infraestructura RAG (Knowledge base + embeddings) esta preparada en el backend (KnowledgeModule + RagModule), pero el flujo completo de aprobacion de contenido medico y la UI de gestion son parte del roadmap.
 
-## Banco de Conocimiento Validado
+## `[Roadmap]` Traduccion Bidireccional Paciente-Clinico
 
-Respuestas frecuentes:
+Traduccion de lenguaje cotidiano a lenguaje medico y viceversa. La arquitectura soporta este caso de uso via AiModule pero no esta expuesta como endpoint en el MVP.
 
-- Escritas o aprobadas por médicos.
-- Lenguaje sencillo.
-- Con *disclaimers* claros.
+## `[Roadmap]` Integracion con Pasarela de Pago Real
 
-La IA puede:
-
-- Sugerir contenido antes de escalar.
-- Reducir consultas repetitivas.
+Reemplazo del checkout simulado por integracion real con Stripe o Wompi cuando haya usuarios de pago.
 
 ---
 
-# Innovaciones Clave
+# Innovaciones Clave del MVP
 
-1. Triage predictivo ético.
-2. Traducción bidireccional paciente–clínico.
-3. Resúmenes clínicos automatizados.
-4. Historia evolutiva acumulativa.
-5. Seguimiento automatizado.
-6. Perfil dinámico contextual.
+1. **Triage predictivo etico:** clasifica prioridad sin diagnosticar.
+2. **Guardrail clinico integrado:** filtra automaticamente contenido de diagnostico o prescripcion.
+3. **Resumen clinico automatizado:** el medico llega a la consulta con informacion organizada.
+4. **Historia evolutiva acumulativa:** seguimiento longitudinal del paciente.
+5. **Seguimiento automatizado post-consulta:** escalacion inteligente por deterioro.
+6. **Pipeline RAG preparado:** infraestructura de embeddings y Vector Search lista para enriquecer el contexto de la IA.
 
-Es **una capa inteligente entre paciente y médico**.
+Es **una capa inteligente de comunicacion entre paciente y medico**.
 
 ---
 
-# Modelo de Negocio Híbrido
+# Modelo de Negocio (Simulado en MVP)
 
-## 1. Pago por consulta
+## Pago por consulta `[MVP - simulado]`
 
-- Usuario paga por respuesta médica.
-- Comisión para la plataforma.
+- Paciente paga por acceso a consulta medica.
+- Precios configurables por especialidad.
+- Revenue calculado y visible en dashboard admin.
 
-## 2. Suscripción Premium paciente
+## Suscripcion Premium paciente `[Roadmap]`
 
 - Consultas ilimitadas.
 - Seguimiento avanzado.
 - Historial descargable.
 
-## 3. Suscripción médica
+## Suscripcion medica `[Roadmap]`
 
-- Acceso a pacientes.
-- Panel profesional.
-- Comisión reducida.
+- Acceso a pacientes priorizados.
+- Panel profesional con insights de practica.
+- Comision reducida sobre consultas.
+
+---
+
+# Limites Importantes
+
+- La plataforma **no es un servicio de telemedicina completo** en terminos regulatorios colombianos.
+- La IA **no diagnostica, no prescribe y no reemplaza al juicio clinico del medico**.
+- El MVP es un prototipo academico/profesional con funcionalidad real pero **sin usuarios de produccion validados**.
+- Los pagos en el MVP son **simulados** (no se procesan transacciones financieras reales).
+- La verificacion REThUS es **manual/administrativa** por el equipo de la plataforma, no automatizada via API oficial.
