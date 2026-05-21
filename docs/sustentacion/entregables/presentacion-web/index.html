@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaludDeUna · Sustentación Técnica IETI 2026-1</title>
+<style>
+:root{
+  --bg:#020817;--panel:#0F172A;--panel2:#1E293B;--border:rgba(148,163,184,.14);
+  --text:#F1F5F9;--muted:#94A3B8;--blue:#3B82F6;--mint:#10B981;
+  --violet:#8B5CF6;--amber:#F59E0B;--coral:#FB7185;--cyan:#06B6D4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--mint));
+  transition:width .3s ease;z-index:200}
+#section-label{position:fixed;top:12px;left:50%;transform:translateX(-50%);
+  font:700 11px/1 'Cascadia Mono','Courier New',monospace;letter-spacing:.18em;
+  color:var(--muted);text-transform:uppercase;z-index:190;pointer-events:none;
+  transition:opacity .3s}
+#deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;display:none;padding:5vh 6vw;overflow:hidden;
+  background:radial-gradient(circle at 80% 5%,rgba(59,130,246,.12),transparent 35%),
+             radial-gradient(circle at 10% 90%,rgba(16,185,129,.10),transparent 30%),
+             linear-gradient(135deg,#07111f,#0d1b2f 65%,#07111f)}
+.slide.backup{background:radial-gradient(circle at 80% 5%,rgba(139,92,246,.14),transparent 35%),
+             linear-gradient(135deg,#07111f,#120e26 65%,#07111f)}
+.slide.active{display:flex;flex-direction:column;animation:slideIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes slideIn{from{opacity:0;transform:translateY(18px) scale(.993)}to{opacity:1;transform:none}}
+.slide-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:3vh}
+.tag{font:700 11px/1 'Cascadia Mono','Courier New',monospace;letter-spacing:.18em;
+  color:var(--mint);text-transform:uppercase}
+.num{font:700 13px/1 'Cascadia Mono','Courier New',monospace;color:var(--muted)}
+.slide-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+h1{font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:-.06em;line-height:.9;
+  margin-bottom:2vh}
+h2{font-size:clamp(28px,4.2vw,60px);font-weight:800;letter-spacing:-.04em;line-height:.95;
+  margin-bottom:2vh;max-width:1100px}
+h3{font-size:clamp(16px,1.6vw,22px);font-weight:700;color:var(--mint);margin-bottom:10px}
+.lead{font-size:clamp(16px,1.8vw,24px);color:var(--muted);line-height:1.35;max-width:900px;margin-bottom:2.5vh}
+.claim{font-size:clamp(14px,1.5vw,20px);color:var(--muted);line-height:1.3;max-width:960px;margin-bottom:3vh}
+.eyebrow{font:700 11px/1 'Cascadia Mono','Courier New',monospace;letter-spacing:.18em;
+  color:var(--mint);text-transform:uppercase;margin-bottom:2vh}
+blockquote{font-size:clamp(28px,4.4vw,62px);font-weight:850;letter-spacing:-.05em;
+  line-height:1;max-width:1000px;margin:4vh 0}
+.mantra{border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);
+  border-radius:16px;padding:16px 24px;color:#d1fae5;font-size:clamp(14px,1.5vw,20px);
+  font-weight:700;text-align:center;margin-top:3vh}
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:2vh}
+.chips span{border:1px solid rgba(59,130,246,.35);background:rgba(15,23,42,.85);
+  padding:8px 14px;border-radius:999px;color:#BFDBFE;font-weight:700;
+  font-size:clamp(11px,1.1vw,14px);letter-spacing:.03em}
+/* CARDS */
+.cards{display:grid;gap:16px;margin-top:3vh}
+.cards.cols-2{grid-template-columns:repeat(2,1fr)}
+.cards.cols-3{grid-template-columns:repeat(3,1fr)}
+.cards.cols-4{grid-template-columns:repeat(4,1fr)}
+.cards.cols-6{grid-template-columns:repeat(3,1fr)}
+.card{background:linear-gradient(160deg,rgba(30,41,59,.95),rgba(15,23,42,.8));
+  border:1px solid var(--border);border-radius:20px;padding:22px;min-height:110px}
+.card.accent-blue{border-color:rgba(59,130,246,.4)}
+.card.accent-mint{border-color:rgba(16,185,129,.4)}
+.card.accent-violet{border-color:rgba(139,92,246,.4)}
+.card.accent-amber{border-color:rgba(245,158,11,.4)}
+.card p{color:#CBD5E1;font-size:clamp(13px,1.3vw,17px);line-height:1.4}
+/* FLOW */
+.flow{display:flex;align-items:center;gap:0;margin-top:3vh;flex-wrap:nowrap;overflow:hidden}
+.flow-step{flex:1;text-align:center;padding:14px 8px;
+  background:rgba(30,41,59,.8);border:1px solid var(--border);border-radius:12px;
+  font-weight:700;font-size:clamp(11px,1.1vw,14px);color:#E2E8F0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flow-arrow{color:var(--blue);font-size:20px;padding:0 6px;flex-shrink:0}
+/* METRICS */
+.metrics{display:grid;gap:16px;margin-top:3vh}
+.metrics.cols-4{grid-template-columns:repeat(4,1fr)}
+.metrics.cols-3{grid-template-columns:repeat(3,1fr)}
+.metric{background:rgba(15,23,42,.8);border:1px solid var(--border);
+  border-radius:16px;padding:20px;text-align:center}
+.metric-val{display:block;font-size:clamp(36px,5vw,64px);font-weight:900;
+  letter-spacing:-.04em;color:var(--blue);line-height:1}
+.metric-label{display:block;font:700 11px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-top:8px}
+/* ARCH GRID */
+.arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:3vh}
+.arch-col{background:rgba(15,23,42,.8);border:1px solid var(--border);
+  border-radius:16px;padding:18px}
+.arch-col .arch-title{font:700 10px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--cyan);text-transform:uppercase;letter-spacing:.16em;margin-bottom:14px}
+.arch-item{border:1px solid rgba(16,185,129,.25);border-radius:10px;
+  padding:9px 12px;margin:8px 0;background:#07111f;
+  font-size:clamp(11px,1.1vw,14px);color:#CBD5E1;font-weight:600}
+/* QUALITY GRID */
+.quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:3vh}
+.quality-item{background:rgba(15,23,42,.8);border:1px solid var(--border);
+  border-radius:16px;padding:20px}
+.quality-num{font:900 32px/1 'Cascadia Mono','Courier New',monospace;color:var(--blue);margin-bottom:6px}
+.quality-name{font-weight:800;font-size:clamp(14px,1.4vw,18px);margin-bottom:8px}
+.quality-desc{color:#94A3B8;font-size:clamp(12px,1.2vw,15px);line-height:1.4}
+/* DEMO STEPS */
+.demo-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:3vh}
+.demo-step{background:rgba(30,41,59,.8);border:1px solid var(--border);
+  border-radius:14px;padding:16px;text-align:center}
+.demo-step .step-num{display:block;font:900 28px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--blue);margin-bottom:8px}
+.demo-step .step-text{font-size:clamp(11px,1.1vw,14px);color:#CBD5E1;font-weight:600;line-height:1.3}
+/* AI PIPELINE */
+.ai-pipeline{display:flex;align-items:stretch;gap:0;margin-top:3vh;overflow:hidden}
+.pipe-step{flex:1;background:rgba(30,41,59,.8);border:1px solid var(--border);
+  border-radius:12px;padding:16px 12px;text-align:center;margin:0 4px}
+.pipe-step:first-child{margin-left:0}
+.pipe-step:last-child{margin-right:0}
+.pipe-icon{font-size:24px;margin-bottom:8px}
+.pipe-name{font-weight:800;font-size:clamp(12px,1.2vw,15px);margin-bottom:4px}
+.pipe-desc{color:var(--muted);font-size:clamp(10px,1vw,12px);line-height:1.3}
+/* GUARDRAIL */
+.guardrail-box{background:rgba(139,92,246,.08);border:2px solid rgba(139,92,246,.4);
+  border-radius:20px;padding:24px;margin-top:3vh}
+.guardrail-title{font:800 clamp(14px,1.5vw,20px)/1 inherit;color:var(--violet);margin-bottom:12px}
+.guardrail-rule{display:flex;align-items:flex-start;gap:12px;margin:10px 0;
+  font-size:clamp(13px,1.3vw,17px);line-height:1.4;color:#E2E8F0}
+.guardrail-rule .icon{font-size:20px;flex-shrink:0;margin-top:2px}
+/* DIAGRAM FRAME */
+.diagram-frame{background:#f8fafc;border-radius:20px;padding:14px;margin-top:3vh;
+  display:flex;align-items:center;justify-content:center}
+.diagram-frame img{max-width:100%;max-height:100%;object-fit:contain}
+.diagram-frame.h55{height:55vh}
+.diagram-frame.h48{height:48vh}
+/* TWO DIAGRAMS */
+.two-diags{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* COVER */
+.cover-logo{width:clamp(120px,14vw,200px);height:auto;margin-bottom:2vh}
+.cover-orb{position:absolute;right:-14vw;top:-22vh;width:60vw;height:60vw;
+  border:1px solid rgba(59,130,246,.25);border-radius:50%;
+  box-shadow:inset 0 0 150px rgba(59,130,246,.07);pointer-events:none}
+.cover-qr{position:absolute;right:7vw;top:18vh;background:#f8fafc;
+  border-radius:24px;padding:20px;text-align:center;width:220px;
+  box-shadow:0 24px 80px rgba(0,0,0,.4)}
+.cover-qr img{width:140px;height:140px;display:block;margin:0 auto 10px}
+.cover-qr strong{display:block;color:#0F172A;font-size:14px;font-weight:800}
+.cover-qr small{display:block;color:#475569;font:10px 'Cascadia Mono','Courier New',monospace;
+  margin-top:6px;word-break:break-all}
+/* QR BADGE (corner) */
+.qr-badge{position:absolute;right:3vw;bottom:4vh;width:64px;height:64px;
+  border-radius:10px;background:#fff;padding:4px;opacity:.85}
+.qr-badge:hover{opacity:1}
+/* TIMELINE (agenda) */
+.agenda-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:3vh}
+.agenda-item{background:rgba(15,23,42,.8);border:1px solid var(--border);
+  border-radius:14px;padding:16px 12px;text-align:center}
+.agenda-num{font:900 28px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--cyan);margin-bottom:8px}
+.agenda-name{font-weight:800;font-size:clamp(11px,1.1vw,14px);line-height:1.3;color:#E2E8F0}
+.agenda-time{font:600 10px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--muted);margin-top:8px}
+/* ROLES */
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:3vh}
+.role-card{background:rgba(15,23,42,.8);border-radius:20px;padding:24px;
+  border-top:3px solid var(--blue)}
+.role-card.doctor{border-top-color:var(--mint)}
+.role-card.admin{border-top-color:var(--violet)}
+.role-title{font-weight:900;font-size:clamp(18px,2vw,26px);margin-bottom:6px}
+.role-platform{font:700 11px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--muted);letter-spacing:.14em;margin-bottom:14px}
+.role-feature{font-size:clamp(12px,1.2vw,15px);color:#CBD5E1;padding:6px 0;
+  border-bottom:1px solid rgba(148,163,184,.1);display:block}
+/* PROBLEM */
+.problem-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:3vh}
+.problem-col{background:rgba(15,23,42,.8);border:1px solid var(--border);border-radius:16px;padding:22px}
+.problem-col h3{color:var(--coral);margin-bottom:14px}
+.problem-point{display:flex;align-items:flex-start;gap:10px;margin:10px 0;
+  font-size:clamp(13px,1.3vw,17px);line-height:1.35;color:#E2E8F0}
+/* STAT HIGHLIGHT */
+.stat-row{display:flex;gap:24px;margin:3vh 0;flex-wrap:wrap}
+.stat-box{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);
+  border-radius:14px;padding:16px 20px;min-width:140px;text-align:center}
+.stat-big{display:block;font:900 clamp(28px,4vw,48px)/1 inherit;color:var(--blue)}
+.stat-label{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-weight:600}
+/* BULLETS */
+.bullets{margin-top:2vh}
+.bullet{display:flex;align-items:flex-start;gap:12px;margin:12px 0;
+  font-size:clamp(14px,1.5vw,20px);color:#E2E8F0;line-height:1.4}
+.bullet .dot{color:var(--mint);font-weight:900;flex-shrink:0;margin-top:2px}
+/* HUD */
+#hud{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;align-items:center;
+  background:rgba(2,8,23,.75);backdrop-filter:blur(20px);
+  border:1px solid rgba(148,163,184,.18);border-radius:999px;
+  padding:8px 12px;z-index:150}
+.hud-btn{border:none;border-radius:999px;background:rgba(30,41,59,.8);
+  color:#E2E8F0;padding:8px 14px;font-weight:800;cursor:pointer;
+  font-size:14px;transition:background .2s}
+.hud-btn:hover{background:rgba(59,130,246,.3)}
+#counter{font:700 12px/1 'Cascadia Mono','Courier New',monospace;
+  color:#94A3B8;min-width:80px;text-align:center}
+/* NOTES PANEL */
+#notes{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);
+  width:min(800px,90vw);background:rgba(2,8,23,.95);backdrop-filter:blur(20px);
+  border:1px solid rgba(148,163,184,.25);border-radius:20px;
+  padding:20px 24px;z-index:140;display:none;max-height:28vh;overflow-y:auto}
+#notes.open{display:block}
+#notes-title{font:700 11px/1 'Cascadia Mono','Courier New',monospace;
+  color:var(--mint);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+#notes-content{font-size:14px;color:#CBD5E1;line-height:1.6}
+/* UTILITIES */
+.color-blue{color:var(--blue)}
+.color-mint{color:var(--mint)}
+.color-violet{color:var(--violet)}
+.color-amber{color:var(--amber)}
+.color-coral{color:var(--coral)}
+.mono{font-family:'Cascadia Mono','Courier New',monospace}
+.small{font-size:.85em}
+.mt2{margin-top:2vh}
+.mt3{margin-top:3vh}
+/* LIST */
+ul.list{list-style:none;margin-top:2vh}
+ul.list li{padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:clamp(14px,1.5vw,20px);color:#E2E8F0;padding-left:20px;position:relative}
+ul.list li::before{content:'→';position:absolute;left:0;color:var(--mint)}
+/* RESULTS TABLE */
+.results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:3vh}
+.result-row{background:rgba(15,23,42,.8);border:1px solid var(--border);
+  border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
+.result-key{font-size:clamp(13px,1.3vw,17px);color:#CBD5E1;font-weight:600}
+.result-val{font:800 clamp(16px,1.8vw,22px)/1 'Cascadia Mono','Courier New',monospace;color:var(--blue)}
+/* SECURITY */
+.security-items{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:3vh}
+.sec-item{background:rgba(15,23,42,.8);border-left:3px solid var(--blue);
+  border-radius:0 14px 14px 0;padding:16px 20px}
+.sec-item h3{color:var(--text);margin-bottom:6px;font-size:clamp(14px,1.4vw,18px)}
+.sec-item p{color:var(--muted);font-size:clamp(12px,1.2vw,15px);line-height:1.4}
+/* AI DEV GRID */
+.ai-dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:3vh}
+.ai-dev-item{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);
+  border-radius:16px;padding:18px}
+.ai-dev-item h3{color:var(--violet);margin-bottom:8px}
+.ai-dev-item p{color:#CBD5E1;font-size:clamp(12px,1.2vw,15px);line-height:1.4}
+/* PRINT */
+@media print{body{overflow:visible}#hud,#notes,#progress,#section-label{display:none!important}
+  .slide{position:relative;display:flex!important;page-break-after:always;height:100vh}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="section-label"></div>
+
+<main id="deck">
+
+<!-- ═══════════════════════════════════════
+     SLIDE 1 · PORTADA
+════════════════════════════════════════ -->
+<section class="slide active" data-section="APERTURA"
+  data-notes="Mientras se carga la presentación, QR ya visible. Decir: Buenos días. Somos el equipo SaludDeUna. Les vamos a mostrar una plataforma de comunicación clínica asistida por IA. El QR conecta directamente al APK.">
+  <div class="cover-orb"></div>
+  <div class="slide-header">
+    <span class="tag">IETI 2026-1 · GRUPO 1</span>
+    <span class="num">01 / 25</span>
+  </div>
+  <div class="slide-body" style="justify-content:flex-start;padding-top:4vh">
+    <img class="cover-logo" src="assets/logoSaludDeUna.png" alt="SaludDeUna">
+    <div class="eyebrow">SUSTENTACIÓN TÉCNICA · 21 MAYO 2026</div>
+    <h1 style="background:linear-gradient(135deg,#F1F5F9,#3B82F6,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">SaludDeUna</h1>
+    <p class="lead">Plataforma de Comunicación Clínica Asistida por IA</p>
+    <div class="chips">
+      <span>NestJS 11</span><span>Expo 55</span><span>Next.js 16</span>
+      <span>Gemini 2.5-flash</span><span>MongoDB Atlas</span><span>Redis Cloud</span>
+      <span>Auth0</span><span>OpenTelemetry</span>
+    </div>
+  </div>
+  <div class="cover-qr">
+    <img src="assets/qr-apk.png" alt="QR APK">
+    <strong>APK disponible</strong>
+    <small>Escanear para instalar demo</small>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 2 · AGENDA
+════════════════════════════════════════ -->
+<section class="slide" data-section="APERTURA"
+  data-notes="En los próximos 20 minutos cubrimos: el problema, la solución, arquitectura, criterios de calidad, uso de IA, y cerramos con demo en vivo. Empecemos con el problema.">
+  <div class="slide-header"><span class="tag">AGENDA</span><span class="num">02 / 25</span></div>
+  <div class="slide-body">
+    <h2>El recorrido demuestra problema, solución y solidez técnica.</h2>
+    <p class="claim">7 bloques temáticos · Demo en vivo como evidencia final · ~20 minutos</p>
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="agenda-num">01</div><div class="agenda-name">Problema e Impacto</div><div class="agenda-time">3 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">02</div><div class="agenda-name">Propuesta de Valor</div><div class="agenda-time">2 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">03</div><div class="agenda-name">MVP y Casos de Uso</div><div class="agenda-time">2.5 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">04</div><div class="agenda-name">Arquitectura C4</div><div class="agenda-time">3 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">05</div><div class="agenda-name">Calidad del Software</div><div class="agenda-time">3 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">06</div><div class="agenda-name">IA en Producto y Dev</div><div class="agenda-time">2.5 min</div></div>
+      <div class="agenda-item"><div class="agenda-num">07</div><div class="agenda-name">Demo + Conclusiones</div><div class="agenda-time">5–7 min</div></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3 · EL PROBLEMA EN UNA FRASE
+════════════════════════════════════════ -->
+<section class="slide" data-section="PROBLEMA"
+  data-notes="Mostrar la frase grande, esperar 3 segundos. Luego decir: Esta frase resume lo que encontramos. La información clínica llega al médico mal organizada, tarde, o incompleta. ¿Qué significa eso en la práctica? Transición a la siguiente slide.">
+  <div class="slide-header"><span class="tag">CONTEXTO DEL PROBLEMA</span><span class="num">03 / 25</span></div>
+  <div class="slide-body" style="justify-content:center;align-items:center;text-align:center">
+    <blockquote style="max-width:900px;text-align:center;color:#F1F5F9">
+      "La información clínica llega al médico<br>
+      <span class="color-coral">mal organizada,</span>
+      <span class="color-amber">tarde,</span>
+      <span style="color:var(--muted)">o incompleta."</span>
+    </blockquote>
+    <p class="claim" style="text-align:center;margin:0 auto">Pacientes de atención primaria en Colombia — Contexto de consulta ambulatoria</p>
+    <div class="stat-row" style="justify-content:center;margin-top:3vh">
+      <div class="stat-box"><span class="stat-big">10 min</span><span class="stat-label">Duración consulta promedio</span></div>
+      <div class="stat-box"><span class="stat-big">40–60%</span><span class="stat-label">Tiempo en anamnesis</span></div>
+      <div class="stat-box"><span class="stat-big">Urgencias</span><span class="stat-label">Saturadas por triage manual</span></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 4 · DEL LADO DEL PACIENTE
+════════════════════════════════════════ -->
+<section class="slide" data-section="PROBLEMA"
+  data-notes="El problema del paciente es de estructura. No es que no sepa lo que siente — es que no sabe cómo comunicarlo de forma útil. No distingue urgencia. No recuerda antecedentes. En 10 minutos esa información se pierde.">
+  <div class="slide-header"><span class="tag">PROBLEMA · PACIENTE</span><span class="num">04 / 25</span></div>
+  <div class="slide-body">
+    <h2>El paciente no sabe cómo comunicar sus síntomas de forma clínicamente útil.</h2>
+    <p class="claim">El problema no es la información — es la falta de estructura para transmitirla.</p>
+    <div class="cards cols-2 mt3">
+      <div class="card accent-coral">
+        <h3 style="color:var(--coral)">Dolor de comunicación</h3>
+        <div class="problem-point"><span>❌</span><span>No distingue si el síntoma es urgente o puede esperar</span></div>
+        <div class="problem-point"><span>❌</span><span>Olvida antecedentes, medicamentos y duración exacta</span></div>
+        <div class="problem-point"><span>❌</span><span>Describe síntomas sin contexto temporal ni evolutivo</span></div>
+      </div>
+      <div class="card accent-amber">
+        <h3 style="color:var(--amber)">Consecuencias reales</h3>
+        <div class="problem-point"><span>⚠️</span><span>Visitas innecesarias a urgencias por falta de triage</span></div>
+        <div class="problem-point"><span>⚠️</span><span>Diagnósticos tardíos por información fragmentada</span></div>
+        <div class="problem-point"><span>⚠️</span><span>Consultas costosas y cortas con valor reducido</span></div>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5 · DEL LADO DEL MÉDICO
+════════════════════════════════════════ -->
+<section class="slide" data-section="PROBLEMA"
+  data-notes="El médico dedica entre el 40 y el 60% de cada consulta a recolectar información básica: antecedentes, medicación, duración de síntomas. Esa es información que el paciente ya tiene — solo que no está organizada. Y no hay continuidad estructurada entre consultas.">
+  <div class="slide-header"><span class="tag">PROBLEMA · MÉDICO</span><span class="num">05 / 25</span></div>
+  <div class="slide-body">
+    <h2>El médico reconstruye el contexto clínico desde cero en cada consulta.</h2>
+    <p class="claim">El tiempo clínico efectivo se reduce cuando el médico recolecta información básica.</p>
+    <div class="cards cols-3 mt3">
+      <div class="card accent-amber">
+        <h3>Anamnesis repetida</h3>
+        <p>El médico hace las mismas preguntas básicas en cada consulta. Información que el paciente ya tiene pero no estructura.</p>
+      </div>
+      <div class="card accent-amber">
+        <h3>Sin continuidad</h3>
+        <p>Entre una consulta y la siguiente no hay contexto estructurado. El historial existe pero fragmentado y difícil de acceder.</p>
+      </div>
+      <div class="card accent-amber">
+        <h3>Alta carga operativa</h3>
+        <p>El triage manual consume tiempo de atención clínica. El médico es el cuello de botella del sistema completo.</p>
+      </div>
+    </div>
+    <div class="mantra">40–60% de cada consulta se va en recolectar información que el paciente ya tiene.</div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 6 · PROPUESTA DE VALOR
+════════════════════════════════════════ -->
+<section class="slide" data-section="SOLUCIÓN"
+  data-notes="SaludDeUna propone ser una capa inteligente entre paciente y médico. Tres cosas concretas: triage asistido, resumen clínico automático, seguimiento post-consulta. No es una idea — está implementado y funcionando.">
+  <div class="slide-header"><span class="tag">PROPUESTA DE VALOR</span><span class="num">06 / 25</span></div>
+  <div class="slide-body">
+    <h2>SaludDeUna es la capa inteligente entre paciente y médico.</h2>
+    <p class="claim">IA con guardrails clínicos que estructura información, clasifica prioridad y da continuidad.</p>
+    <div class="cards cols-3 mt3">
+      <div class="card accent-blue">
+        <h3>01 · Triage Asistido IA</h3>
+        <p>Cuestionario estructurado por especialidad. Detección de red flags. Clasificación de prioridad LOW / MODERATE / HIGH antes del médico.</p>
+      </div>
+      <div class="card accent-mint">
+        <h3>02 · Resumen Clínico</h3>
+        <p>Gemini 2.5-flash genera nota médica estructurada basada en el cuestionario y el chat. El médico llega informado, no en blanco.</p>
+      </div>
+      <div class="card accent-violet">
+        <h3>03 · Seguimiento</h3>
+        <p>Followups automáticos a 72 horas y 7 días post-consulta. Si el paciente empeora, el sistema escala a consulta de alta prioridad.</p>
+      </div>
+    </div>
+    <div class="mantra" style="margin-top:2vh">La IA organiza, clasifica y comunica. El médico decide.</div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 7 · QUÉ NO ES SALUDDEUNA
+════════════════════════════════════════ -->
+<section class="slide" data-section="SOLUCIÓN"
+  data-notes="Muy explícito: SaludDeUna no es telemedicina regulada, no diagnostica, no prescribe. La IA clasifica prioridad, estructura información y genera resúmenes. Nada más. Esta es una decisión técnica y ética — no una limitación.">
+  <div class="slide-header"><span class="tag">ALCANCE Y ÉTICA</span><span class="num">07 / 25</span></div>
+  <div class="slide-body">
+    <h2>Claridad de alcance: SaludDeUna NO reemplaza al médico.</h2>
+    <p class="claim">Límites técnicos y éticos explícitos. No es una promesa — es código ejecutable.</p>
+    <div class="cards cols-2 mt3">
+      <div class="card" style="border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.06)">
+        <h3 style="color:var(--coral)">❌ Fuera de alcance</h3>
+        <div class="bullet"><span class="dot">×</span><span>Telemedicina en el sentido regulatorio (Res. 2654/2019)</span></div>
+        <div class="bullet"><span class="dot">×</span><span>Diagnóstico automático de enfermedades</span></div>
+        <div class="bullet"><span class="dot">×</span><span>Prescripción de medicamentos</span></div>
+        <div class="bullet"><span class="dot">×</span><span>Integración productiva con HCE de terceros</span></div>
+        <div class="bullet"><span class="dot">×</span><span>Videollamada en tiempo real</span></div>
+      </div>
+      <div class="card accent-mint">
+        <h3>✅ Lo que SÍ hace la IA</h3>
+        <div class="bullet"><span class="dot">→</span><span>Clasifica prioridad clínica (LOW / MODERATE / HIGH)</span></div>
+        <div class="bullet"><span class="dot">→</span><span>Detecta red flags en las respuestas del paciente</span></div>
+        <div class="bullet"><span class="dot">→</span><span>Genera resumen clínico neutral de urgencia</span></div>
+        <div class="bullet"><span class="dot">→</span><span>Enriquece contexto con evidencia clínica (RAG)</span></div>
+        <div class="bullet"><span class="dot">→</span><span>Guardrail bloquea diagnóstico y prescripción</span></div>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 8 · ALCANCE DEL MVP
+════════════════════════════════════════ -->
+<section class="slide" data-section="EL SISTEMA"
+  data-notes="¿Qué está implementado? Todo lo que ven en esta tabla. Autenticación, triage con IA, cola de consultas, chat en tiempo real, resumen clínico, seguimiento, verificación REThUS, dashboard, facturación simulada. 406 tests pasando.">
+  <div class="slide-header"><span class="tag">MVP IMPLEMENTADO</span><span class="num">08 / 25</span></div>
+  <div class="slide-body">
+    <h2>Todo lo que se prometió está implementado y con tests.</h2>
+    <p class="claim">3 especialidades · 3 roles · 2 frontends · 17 módulos backend · 406 tests</p>
+    <div class="cards cols-4 mt3">
+      <div class="card accent-blue"><h3>Auth & Roles</h3><p>Registro, login JWT+Auth0, RBAC, máx 3 sesiones, refresh tokens</p></div>
+      <div class="card accent-blue"><h3>Triage IA</h3><p>Cuestionario por especialidad, red flags, prioridad, guardrail, fallback reglas</p></div>
+      <div class="card accent-mint"><h3>Cola Médica</h3><p>PENDING→IN_PROGRESS→COMPLETED, ordenada por prioridad, asignación</p></div>
+      <div class="card accent-mint"><h3>Chat Real-time</h3><p>Socket.IO, persistido en MongoDB, Redis adapter multi-instancia</p></div>
+      <div class="card accent-violet"><h3>Resumen IA</h3><p>Gemini genera nota clínica, guardrail valida, historial acumulativo</p></div>
+      <div class="card accent-violet"><h3>Seguimiento</h3><p>Followups 72h + 7d, escalación automática si empeora, BullMQ</p></div>
+      <div class="card accent-amber"><h3>Admin Panel</h3><p>Verificación REThUS, gestión usuarios, billing, dashboard KPIs</p></div>
+      <div class="card accent-amber"><h3>Billing</h3><p>Precios por especialidad, transacciones COP, revenue metrics</p></div>
+    </div>
+    <div class="chips mt2">
+      <span class="color-mint">Medicina General</span>
+      <span class="color-mint">Odontología</span>
+      <span class="color-mint">Urgencias</span>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 9 · TRES ROLES
+════════════════════════════════════════ -->
+<section class="slide" data-section="EL SISTEMA"
+  data-notes="El sistema tiene 3 actores con interfaces separadas. Paciente en app móvil (Expo). Médico en panel web (Next.js). Admin también en web. Comparten el mismo backend NestJS.">
+  <div class="slide-header"><span class="tag">CASOS DE USO</span><span class="num">09 / 25</span></div>
+  <div class="slide-body">
+    <h2>Tres roles, interfaces separadas, backend compartido.</h2>
+    <p class="claim">Patient-only en mobile. Doctor y Admin en web. Permisos RBAC en cada endpoint.</p>
+    <div class="roles-grid mt3">
+      <div class="role-card">
+        <div class="role-title color-blue">Paciente</div>
+        <div class="role-platform">EXPO 55 · REACT NATIVE</div>
+        <span class="role-feature">Registro y autenticación</span>
+        <span class="role-feature">Selección de especialidad</span>
+        <span class="role-feature">Triage IA guiado</span>
+        <span class="role-feature">Checkout y pago simulado</span>
+        <span class="role-feature">Chat con médico en tiempo real</span>
+        <span class="role-feature">Seguimiento post-consulta</span>
+        <span class="role-feature">Historial clínico acumulativo</span>
+      </div>
+      <div class="role-card doctor">
+        <div class="role-title color-mint">Médico</div>
+        <div class="role-platform">NEXT.JS 16 · APP ROUTER</div>
+        <span class="role-feature">Registro y verificación REThUS</span>
+        <span class="role-feature">Cola de consultas por prioridad</span>
+        <span class="role-feature">Chat bidireccional paciente</span>
+        <span class="role-feature">Generación resumen clínico IA</span>
+        <span class="role-feature">Cierre y calificación consulta</span>
+        <span class="role-feature">Dashboard de métricas propias</span>
+      </div>
+      <div class="role-card admin">
+        <div class="role-title color-violet">Administrador</div>
+        <div class="role-platform">NEXT.JS 16 · APP ROUTER</div>
+        <span class="role-feature">Verificación manual REThUS</span>
+        <span class="role-feature">Gestión de usuarios y roles</span>
+        <span class="role-feature">Gestión de precios por especialidad</span>
+        <span class="role-feature">Dashboard KPIs del negocio</span>
+        <span class="role-feature">Revenue metrics y transacciones</span>
+        <span class="role-feature">Métricas técnicas de la plataforma</span>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 10 · FLUJO E2E
+════════════════════════════════════════ -->
+<section class="slide" data-section="EL SISTEMA"
+  data-notes="Este es el flujo completo. Paciente hace login, responde el cuestionario de triage (5-8 preguntas según especialidad), Gemini analiza, detecta red flags, asigna prioridad. Paciente hace checkout. Consulta entra a cola. Médico la asigna, abre chat. Al cerrar puede pedir resumen a Gemini. Al cerrar consulta se crean dos followups: 72h y 7d.">
+  <div class="slide-header"><span class="tag">FLUJO DEL NEGOCIO E2E</span><span class="num">10 / 25</span></div>
+  <div class="slide-body">
+    <h2>Flujo completo de principio a fin — trazable y auditable.</h2>
+    <p class="claim">Cada consulta tiene CorrelationId. Cada evento pasa por el Outbox transaccional.</p>
+    <div class="flow mt3">
+      <div class="flow-step" style="border-color:rgba(59,130,246,.5)">🔐 Login<br><small class="mono" style="font-size:10px">JWT + Auth0</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(16,185,129,.5)">🤖 Triage IA<br><small class="mono" style="font-size:10px">Gemini + Guardrail</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(245,158,11,.5)">💳 Checkout<br><small class="mono" style="font-size:10px">Billing COP</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(6,182,212,.5)">📋 Cola<br><small class="mono" style="font-size:10px">Por prioridad</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(139,92,246,.5)">💬 Chat<br><small class="mono" style="font-size:10px">Socket.IO</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(59,130,246,.5)">📝 Resumen<br><small class="mono" style="font-size:10px">Gemini + Guardrail</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:rgba(16,185,129,.5)">🔔 Followup<br><small class="mono" style="font-size:10px">72h + 7d BullMQ</small></div>
+    </div>
+    <div class="cards cols-4" style="margin-top:2vh">
+      <div class="card" style="min-height:80px;padding:14px"><p class="small">Mensajes persistidos en MongoDB con correlationId</p></div>
+      <div class="card" style="min-height:80px;padding:14px"><p class="small">Outbox transaccional crea eventos de dominio</p></div>
+      <div class="card" style="min-height:80px;padding:14px"><p class="small">Worker BullMQ procesa followups asincrónicamente</p></div>
+      <div class="card" style="min-height:80px;padding:14px"><p class="small">Escalación automática si severidad aumenta ≥2 puntos</p></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 11 · ARQUITECTURA C4 NIVEL 1
+════════════════════════════════════════ -->
+<section class="slide" data-section="ARQUITECTURA"
+  data-notes="Diagrama C4 nivel 1, contexto del sistema. 3 actores humanos: paciente, médico, admin. 1 sistema central SaludDeUna. 6 sistemas externos: Gemini para IA, MongoDB Atlas para datos, Redis Cloud para cache/colas, Auth0 para identidad, REThUS para verificar médicos, Expo Notifications para push. Todo HTTPS. Chat usa WebSocket via Socket.IO.">
+  <div class="slide-header"><span class="tag">ARQUITECTURA · C4 NIVEL 1</span><span class="num">11 / 25</span></div>
+  <div class="slide-body">
+    <h2>Diagrama de Contexto: actores humanos y sistemas externos.</h2>
+    <p class="claim">3 actores · 1 sistema central · 6 servicios externos · HTTPS / WebSocket</p>
+    <div class="diagram-frame h55">
+      <img src="assets/sad_c4_context_diagram.png" alt="C4 Contexto">
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 12 · ARQUITECTURA C4 NIVEL 2
+════════════════════════════════════════ -->
+<section class="slide" data-section="ARQUITECTURA"
+  data-notes="Nivel de contenedores: 2 frontends (mobile y web), 2 procesos backend (API y Worker). El Worker maneja jobs asincrónicos: followups, outbox, notificaciones push. Corre con BullMQ sobre Redis. MongoDB Atlas con índice vectorial de 768 dimensiones para RAG.">
+  <div class="slide-header"><span class="tag">ARQUITECTURA · C4 NIVEL 2</span><span class="num">12 / 25</span></div>
+  <div class="slide-body">
+    <h2>Contenedores: frontends, API, Worker y capa de datos.</h2>
+    <p class="claim">API para request-response · Worker para jobs asincrónicos · MongoDB Vector Search 768d</p>
+    <div class="diagram-frame h55">
+      <img src="assets/sad_c4_container_view.png" alt="C4 Contenedores">
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 13 · BACKEND 17 MÓDULOS
+════════════════════════════════════════ -->
+<section class="slide" data-section="ARQUITECTURA"
+  data-notes="El backend tiene 17 módulos NestJS organizados en 4 dominios. Usuarios: Auth, Patients, Doctors, Admins. Clínico: Triage, Consultations, Chat, Billing, Followups, Notifications. IA/RAG: Ai, Knowledge, Rag. Infraestructura: Outbox, Dashboard, Admin, OTel. Tres capas transversales: JWT+RBAC, throttling 20req/60s, filtro global de excepciones con correlationId.">
+  <div class="slide-header"><span class="tag">BACKEND · 17 MÓDULOS NESTJS</span><span class="num">13 / 25</span></div>
+  <div class="slide-body">
+    <h2>4 dominios · 17 módulos · 3 capas transversales.</h2>
+    <p class="claim">Cada módulo tiene límites claros. Acoplamiento por DI, nunca por imports directos.</p>
+    <div class="arch-grid mt3">
+      <div class="arch-col">
+        <div class="arch-title">🟢 Usuarios</div>
+        <div class="arch-item">Auth (JWT+Auth0)</div>
+        <div class="arch-item">Patients</div>
+        <div class="arch-item">Doctors (REThUS)</div>
+        <div class="arch-item">Admins</div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-title">🟡 Clínico</div>
+        <div class="arch-item">Triage + AI</div>
+        <div class="arch-item">Consultations</div>
+        <div class="arch-item">Chat (Socket.IO)</div>
+        <div class="arch-item">Billing · Followups</div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-title">🟣 IA / RAG</div>
+        <div class="arch-item">AiModule (Gemini)</div>
+        <div class="arch-item">Knowledge (Chunks)</div>
+        <div class="arch-item">Rag (Pipeline 8 pasos)</div>
+        <div class="arch-item">Vector Search 768d</div>
+      </div>
+      <div class="arch-col">
+        <div class="arch-title">🔴 Infraestructura</div>
+        <div class="arch-item">Outbox (exactly-once)</div>
+        <div class="arch-item">Dashboard (KPIs)</div>
+        <div class="arch-item">Common (Guards)</div>
+        <div class="arch-item">OTel Bootstrap</div>
+      </div>
+    </div>
+    <div class="mantra">JWT + RBAC · Throttling 20 req/60s · GlobalExceptionFilter + CorrelationId</div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 14 · PIPELINE TRIAGE IA
+════════════════════════════════════════ -->
+<section class="slide" data-section="ARQUITECTURA"
+  data-notes="El triage funciona en pasos: paciente responde el cuestionario → respuestas van a Gemini con prompt estructurado → Gemini genera análisis → guardrail revisa la respuesta → si hay diagnóstico/prescripción se bloquea y guarda null → si pasa el guardrail se persiste el resumen neutral. Fallback: si Gemini falla, motor de reglas asume el análisis sin error visible.">
+  <div class="slide-header"><span class="tag">IA · PIPELINE DE TRIAGE</span><span class="num">14 / 25</span></div>
+  <div class="slide-body">
+    <h2>Pipeline: cuestionario → Gemini → guardrail → resultado auditable.</h2>
+    <p class="claim">El fallback a ReglaEngine actúa sin interrupción si Gemini falla.</p>
+    <div class="ai-pipeline mt3">
+      <div class="pipe-step" style="border-color:rgba(59,130,246,.4)">
+        <div class="pipe-icon">📋</div>
+        <div class="pipe-name">Cuestionario</div>
+        <div class="pipe-desc">5–8 preguntas por especialidad</div>
+      </div>
+      <div class="pipe-step" style="border-color:rgba(16,185,129,.4)">
+        <div class="pipe-icon">🔍</div>
+        <div class="pipe-name">RAG Context</div>
+        <div class="pipe-desc">Vector Search 768d · Redis cache 300s</div>
+      </div>
+      <div class="pipe-step" style="border-color:rgba(139,92,246,.4)">
+        <div class="pipe-icon">🤖</div>
+        <div class="pipe-name">Gemini 2.5-flash</div>
+        <div class="pipe-desc">Prompt por especialidad · Audit log</div>
+      </div>
+      <div class="pipe-step" style="border-color:rgba(251,113,133,.4)">
+        <div class="pipe-icon">🛡️</div>
+        <div class="pipe-name">Guardrail</div>
+        <div class="pipe-desc">Bloquea diagnóstico/prescripción</div>
+      </div>
+      <div class="pipe-step" style="border-color:rgba(16,185,129,.4)">
+        <div class="pipe-icon">✅</div>
+        <div class="pipe-name">Resultado</div>
+        <div class="pipe-desc">LOW / MODERATE / HIGH + red flags</div>
+      </div>
+    </div>
+    <div class="cards cols-2" style="margin-top:2vh">
+      <div class="card" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.3);min-height:70px;padding:14px">
+        <p class="small"><strong class="color-coral">Si el guardrail detecta diagnóstico/prescripción:</strong> aiSummary = null · guardrailApplied = true · log WARN con correlationId</p>
+      </div>
+      <div class="card" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);min-height:70px;padding:14px">
+        <p class="small"><strong class="color-amber">Si Gemini falla (fallback):</strong> RedFlagsEngine procesa reglas locales · sin error visible para el usuario · analysisType = RULE_BASED</p>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 15 · CRITERIOS DE CALIDAD
+════════════════════════════════════════ -->
+<section class="slide" data-section="CALIDAD"
+  data-notes="Implementamos 6 criterios de calidad. Los 3 más importantes: seguridad, confiabilidad y observabilidad — cada uno con mecanismos concretos y medibles.">
+  <div class="slide-header"><span class="tag">CRITERIOS DE CALIDAD</span><span class="num">15 / 25</span></div>
+  <div class="slide-body">
+    <h2>Seis criterios de calidad con evidencia técnica medible.</h2>
+    <p class="claim">No son aspiraciones — son mecanismos implementados con tests que los validan.</p>
+    <div class="quality-grid mt3">
+      <div class="quality-item">
+        <div class="quality-num">01</div>
+        <div class="quality-name">🔐 Seguridad</div>
+        <div class="quality-desc">JWT HS256+RS256, RBAC, rate limiting Redis, bcrypt cost 12, máx 3 sesiones activas</div>
+      </div>
+      <div class="quality-item">
+        <div class="quality-num">02</div>
+        <div class="quality-name">✅ Confiabilidad</div>
+        <div class="quality-desc">406+ tests · 93% cobertura statements · E2E con MongoDB real · CI falla si &lt;80%</div>
+      </div>
+      <div class="quality-item">
+        <div class="quality-num">03</div>
+        <div class="quality-name">📊 Observabilidad</div>
+        <div class="quality-desc">OpenTelemetry · logs JSON estructurados · correlationId · p95 latencia · KPIs negocio</div>
+      </div>
+      <div class="quality-item">
+        <div class="quality-num">04</div>
+        <div class="quality-name">⚡ Rendimiento</div>
+        <div class="quality-desc">Redis cache 300s · Rate limiting 20 req/60s · SLO p95 &lt;1500ms · BullMQ async</div>
+      </div>
+      <div class="quality-item">
+        <div class="quality-num">05</div>
+        <div class="quality-name">🏗️ Mantenibilidad</div>
+        <div class="quality-desc">17 módulos NestJS · Clean Architecture · DI explícita · Swagger autogenerado</div>
+      </div>
+      <div class="quality-item">
+        <div class="quality-num">06</div>
+        <div class="quality-name">📈 Escalabilidad</div>
+        <div class="quality-desc">Redis adapter Socket.IO · BullMQ multi-worker · ECS Fargate autoscaling preparado</div>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 16 · SEGURIDAD
+════════════════════════════════════════ -->
+<section class="slide" data-section="CALIDAD"
+  data-notes="Seguridad. 5 controles en la capa de autenticación. Dual auth: JWT HS256 para legacy y Auth0 RS256 para OAuth. RBAC con 3 roles y guards globales. Rate limiting 20 req/60s por IP usando Redis como storage distribuido. bcrypt cost 12. Máximo 3 sesiones activas — si se supera, las más antiguas se revocan. Cada respuesta incluye correlationId para trazabilidad.">
+  <div class="slide-header"><span class="tag">CALIDAD · SEGURIDAD</span><span class="num">16 / 25</span></div>
+  <div class="slide-body">
+    <h2>Defensa en profundidad antes del controlador de negocio.</h2>
+    <p class="claim">Cada request pasa por 5 capas de validación antes de ejecutar lógica de dominio.</p>
+    <div class="security-items mt3">
+      <div class="sec-item">
+        <h3>🔑 Dual Auth: JWT + Auth0</h3>
+        <p>HS256 para flujo legacy · RS256 vía JWKS para OAuth2/Auth0 · JwtAuthGuard global con bypass @Public()</p>
+      </div>
+      <div class="sec-item">
+        <h3>👥 RBAC Explícito</h3>
+        <p>3 roles: PATIENT · DOCTOR · ADMIN · Guards globales via APP_GUARD · DoctorVerifiedGuard en rutas clínicas</p>
+      </div>
+      <div class="sec-item">
+        <h3>🚦 Rate Limiting Distribuido</h3>
+        <p>20 requests / 60 segundos / IP · Redis Store distribuido · Funciona en multi-instancia sin acoplar estado</p>
+      </div>
+      <div class="sec-item">
+        <h3>🔒 Gestión de Sesiones</h3>
+        <p>bcrypt cost 12 · Máximo 3 sesiones activas · LIFO revocation si se supera límite · Refresh token rotation</p>
+      </div>
+    </div>
+    <div class="mantra" style="margin-top:2vh">Cada error de API incluye statusCode, message y correlationId — auditable y trazable.</div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 17 · TESTING
+════════════════════════════════════════ -->
+<section class="slide" data-section="CALIDAD"
+  data-notes="Confiabilidad. 406 tests pasando, ninguno fallando. 93% cobertura statements. Umbral mínimo 80% configurado en Jest — si baja del 80% el CI falla. Dos capas: unit tests con mocks de NestJS (IA siempre mockeada en unit tests), y E2E tests con mongodb-memory-server que levanta MongoDB real en memoria. No se mockea la BD en E2E. ¿Por qué? Los mocks de BD no detectan bugs de migración ni queries complejas. El E2E real sí.">
+  <div class="slide-header"><span class="tag">CALIDAD · CONFIABILIDAD</span><span class="num">17 / 25</span></div>
+  <div class="slide-body">
+    <h2>406 tests, 93% cobertura, E2E con MongoDB real en memoria.</h2>
+    <p class="claim">Si la cobertura baja del 80%, el CI falla automáticamente. No hay degradación silenciosa.</p>
+    <div class="metrics cols-4 mt3">
+      <div class="metric"><span class="metric-val">406+</span><span class="metric-label">Tests backend</span></div>
+      <div class="metric"><span class="metric-val color-mint">93%</span><span class="metric-label">Stmt coverage</span></div>
+      <div class="metric"><span class="metric-val" style="color:var(--violet)">80%</span><span class="metric-label">Umbral mínimo CI</span></div>
+      <div class="metric"><span class="metric-val" style="color:var(--amber)">82</span><span class="metric-label">Tests web portal</span></div>
+    </div>
+    <div class="cards cols-2 mt3">
+      <div class="card accent-blue">
+        <h3>Unit Tests (Jest + NestJS Testing)</h3>
+        <p>Mocks de módulos NestJS · AiService siempre mockeado · Validan lógica de dominio aislada · Rápidos, ejecutan en CI en &lt;30s</p>
+      </div>
+      <div class="card accent-mint">
+        <h3>E2E Tests (mongodb-memory-server)</h3>
+        <p>MongoDB real en memoria para cada suite · No se mockea la capa de BD · Detectan bugs de queries complejas y relaciones entre esquemas · 12 suites E2E</p>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 18 · OBSERVABILIDAD
+════════════════════════════════════════ -->
+<section class="slide" data-section="CALIDAD"
+  data-notes="Observabilidad en 3 niveles. Logs estructurados JSON con correlationId, userId, método, path, statusCode, duración en ms. Métricas técnicas: p95 latencia y error rate en /v1/dashboard/technical. Alerta crítica si p95 supera 1500ms durante 10 min. Trazas distribuidas con OpenTelemetry — configurado, listo para exportar a Jaeger o Tempo.">
+  <div class="slide-header"><span class="tag">CALIDAD · OBSERVABILIDAD</span><span class="num">18 / 25</span></div>
+  <div class="slide-body">
+    <h2>Tres niveles de observabilidad: logs, métricas y trazas distribuidas.</h2>
+    <p class="claim">Cada request queda trazado. Cada error tiene correlationId. Cada KPI está disponible via API.</p>
+    <div class="cards cols-3 mt3">
+      <div class="card accent-blue">
+        <h3>📋 Logs Estructurados</h3>
+        <p>JSON con: correlationId · userId · method · path · statusCode · durationMs</p>
+        <p class="small mt2" style="font-family:monospace;background:rgba(0,0,0,.3);padding:8px;border-radius:8px;color:#10B981">{"level":"INFO","correlationId":"abc-123","durationMs":142}</p>
+      </div>
+      <div class="card accent-mint">
+        <h3>📊 Métricas Técnicas</h3>
+        <p>p95 latencia en tiempo real · Error rate · Endpoint: /v1/dashboard/technical · Alerta si p95 > 1500ms por 10 min</p>
+      </div>
+      <div class="card accent-violet">
+        <h3>🔭 OpenTelemetry</h3>
+        <p>NodeSDK con auto-instrumentación · OTLP HTTP :4318 · Listo para Jaeger/Tempo en producción</p>
+      </div>
+    </div>
+    <div class="cards cols-4" style="margin-top:2vh">
+      <div class="card" style="min-height:70px;padding:14px"><p class="small mono color-blue">Tiempo a 1ª respuesta médica</p></div>
+      <div class="card" style="min-height:70px;padding:14px"><p class="small mono color-mint">Tasa de uso resumen clínico IA</p></div>
+      <div class="card" style="min-height:70px;padding:14px"><p class="small mono color-violet">Tasa confirmación red flags</p></div>
+      <div class="card" style="min-height:70px;padding:14px"><p class="small mono color-amber">Retención followup 7 días</p></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 19 · IA EN EL PRODUCTO
+════════════════════════════════════════ -->
+<section class="slide" data-section="IA"
+  data-notes="La IA tiene 3 funciones en el producto. Triage: Gemini 2.5-flash recibe respuestas del cuestionario y genera clasificación de prioridad con red flags. El guardrail valida la salida. Resumen clínico: después del chat el doctor puede pedir a Gemini nota médica estructurada. RAG: Knowledge base con documentos clínicos, chunking, embeddings vectoriales 768d. Cache en Redis de 300s para no repetir búsquedas vectoriales idénticas.">
+  <div class="slide-header"><span class="tag">IA · EN EL PRODUCTO</span><span class="num">19 / 25</span></div>
+  <div class="slide-body">
+    <h2>La IA tiene tres funciones concretas, todas con guardrails.</h2>
+    <p class="claim">Gemini 2.5-flash + embedding-001 · RAG con Vector Search HNSW 768 dimensiones</p>
+    <div class="cards cols-3 mt3">
+      <div class="card accent-violet">
+        <h3>🤖 Triage Inteligente</h3>
+        <p>Clasifica prioridad LOW/MODERATE/HIGH</p>
+        <p class="small mt2">Detecta red flags por especialidad · Prompt versionado · Audit log de cada análisis · Fallback a ReglaEngine</p>
+      </div>
+      <div class="card accent-violet">
+        <h3>📝 Resumen Clínico</h3>
+        <p>Nota médica estructurada post-chat</p>
+        <p class="small mt2">Doctor solicita al cerrar consulta · Guardrail valida antes de mostrar · Campo aiSummary en Consultation</p>
+      </div>
+      <div class="card accent-violet">
+        <h3>🔍 RAG Pipeline</h3>
+        <p>Retrieval-Augmented Generation</p>
+        <p class="small mt2">8 pasos · Knowledge base clínica · Vector Search Atlas HNSW · Cache Redis 300s · RagTrace auditable</p>
+      </div>
+    </div>
+    <div class="diagram-frame" style="height:22vh;margin-top:2vh">
+      <img src="assets/sad_rag_pipeline_diagram.png" alt="RAG Pipeline">
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 20 · GUARDRAIL CLÍNICO
+════════════════════════════════════════ -->
+<section class="slide" data-section="IA"
+  data-notes="El guardrail merece slide propia porque es la respuesta técnica a la pregunta más frecuente: ¿cómo garantizan que la IA no diagnostica? La respuesta no es una promesa — es código. GuardrailService evalúa cada respuesta de Gemini contra 3 categorías bloqueadas. Si aparece cualquiera, la respuesta no se persiste. aiSummary queda en null, se registra con log WARN y correlationId, y guardrailApplied = true. Esto es auditable.">
+  <div class="slide-header"><span class="tag">IA · GUARDRAIL CLÍNICO</span><span class="num">20 / 25</span></div>
+  <div class="slide-body">
+    <h2>El guardrail no es una promesa — es código ejecutable y auditable.</h2>
+    <p class="claim">GuardrailService evalúa cada salida de Gemini antes de persistir. Sin excepciones.</p>
+    <div class="guardrail-box mt3">
+      <div class="guardrail-title">Categorías bloqueadas por GuardrailService</div>
+      <div class="guardrail-rule"><span class="icon">🚫</span><span><strong>Lenguaje de diagnóstico:</strong> "Usted tiene", "padece de", "el diagnóstico es", "parece ser X enfermedad"</span></div>
+      <div class="guardrail-rule"><span class="icon">🚫</span><span><strong>Lenguaje de prescripción:</strong> "Tome", "debe tomar", "le recomiendo X medicamento", "dosis de X"</span></div>
+      <div class="guardrail-rule"><span class="icon">🚫</span><span><strong>Afirmaciones clínicas definitivas:</strong> "Este síntoma confirma", "con certeza indica", "definitivamente es"</span></div>
+    </div>
+    <div class="cards cols-3 mt3">
+      <div class="card" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.35);text-align:center;padding:14px">
+        <div class="mono color-coral" style="font-size:20px;font-weight:900">aiSummary = null</div>
+        <p class="small mt2">La respuesta de IA no se persiste</p>
+      </div>
+      <div class="card" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.35);text-align:center;padding:14px">
+        <div class="mono color-amber" style="font-size:20px;font-weight:900">guardrailApplied = true</div>
+        <p class="small mt2">Flag auditable en el documento</p>
+      </div>
+      <div class="card" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.35);text-align:center;padding:14px">
+        <div class="mono color-blue" style="font-size:20px;font-weight:900">log WARN + correlationId</div>
+        <p class="small mt2">Evento registrado y trazable</p>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 21 · IA EN EL DESARROLLO
+════════════════════════════════════════ -->
+<section class="slide" data-section="IA"
+  data-notes="Más allá del producto, usamos IA durante todo el proceso de desarrollo. Claude Code de Anthropic como asistente principal. Generamos módulos NestJS, tests E2E, hooks React, esquemas Zod, documentación. Revisiones arquitectónicas antes de cada sprint. Los 406 tests del backend fueron revisados y en muchos casos generados con asistencia de IA. La documentación — wiki, READMEs, diagramas — fue auditada y actualizada con IA. Esto es evidencia concreta del ítem 6 de los lineamientos.">
+  <div class="slide-header"><span class="tag">IA · EN EL DESARROLLO (SWNT §6)</span><span class="num">21 / 25</span></div>
+  <div class="slide-body">
+    <h2>Claude Code fue el copiloto técnico del equipo durante todo el proyecto.</h2>
+    <p class="claim">Evidencia concreta del ítem 6 de los lineamientos: IA en generación de código, tests, arquitectura y documentación.</p>
+    <div class="ai-dev-grid mt3">
+      <div class="ai-dev-item">
+        <h3>⚙️ Generación de Código</h3>
+        <p>Módulos NestJS completos · Controllers, Services, DTOs · Schemas Mongoose · Hooks React y componentes Next.js</p>
+      </div>
+      <div class="ai-dev-item">
+        <h3>🧪 Testing</h3>
+        <p>406 tests generados/revisados con IA · E2E suites con mongodb-memory-server · Mocks de módulos NestJS</p>
+      </div>
+      <div class="ai-dev-item">
+        <h3>🏛️ Arquitectura</h3>
+        <p>Revisiones arquitectónicas por sprint · Auditoría C4 · Diagrams as code · Decisiones de patrones documentadas</p>
+      </div>
+      <div class="ai-dev-item">
+        <h3>📚 Documentación</h3>
+        <p>16 documentos wiki · READMEs de 3 servicios · SAD (Software Architecture Document) · Diagramas Mermaid</p>
+      </div>
+      <div class="ai-dev-item">
+        <h3>🎨 UX / UI</h3>
+        <p>Diseño de flujos de usuario · Mockups mobile · Componentes shadcn/ui · Paleta de colores y sistema de diseño</p>
+      </div>
+      <div class="ai-dev-item">
+        <h3>🔄 Refactorización</h3>
+        <p>Separación de módulos · Extracción de servicios · Aplicación de patrones clean architecture · Code review asistido</p>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 22 · RUTA DEL DEMO
+════════════════════════════════════════ -->
+<section class="slide" data-section="DEMO"
+  data-notes="La demo va a seguir esta ruta. 8 pasos, aproximadamente 7 minutos. Empezamos con QR del APK proyectado. Login del paciente, triage completo, resultado con prioridad ALTA y red flag visible, checkout, cambio al panel del doctor. Cola con prioridad alta al tope. Chat en tiempo real. Doctor genera resumen con Gemini. Cierra consulta. Admin ve KPIs reales. Si algo falla, tenemos screenshots de respaldo.">
+  <div class="slide-header"><span class="tag">DEMO · RUTA DE DEMOSTRACIÓN</span><span class="num">22 / 25</span></div>
+  <div class="slide-body">
+    <h2>Demo en vivo: flujo completo en 8 pasos · ~7 minutos.</h2>
+    <p class="claim">Si Gemini no responde, el sistema usa el motor de reglas — sin error visible para el usuario.</p>
+    <div class="demo-steps mt3">
+      <div class="demo-step"><span class="step-num">01</span><span class="step-text">📱 QR + APK<br>Instalar y abrir</span></div>
+      <div class="demo-step"><span class="step-num">02</span><span class="step-text">🔐 Login Paciente<br>JWT + Auth0</span></div>
+      <div class="demo-step"><span class="step-num">03</span><span class="step-text">🤖 Triage IA<br>Red flags visibles</span></div>
+      <div class="demo-step"><span class="step-num">04</span><span class="step-text">💳 Checkout<br>Pago simulado COP</span></div>
+      <div class="demo-step"><span class="step-num">05</span><span class="step-text">👨‍⚕️ Panel Doctor<br>Cola prioridad ALTA</span></div>
+      <div class="demo-step"><span class="step-num">06</span><span class="step-text">💬 Chat Real-time<br>Socket.IO bidireccional</span></div>
+      <div class="demo-step"><span class="step-num">07</span><span class="step-text">📝 Resumen IA<br>Gemini + Guardrail</span></div>
+      <div class="demo-step"><span class="step-num">08</span><span class="step-text">📊 Dashboard<br>KPIs reales BD</span></div>
+    </div>
+    <div class="cards cols-3" style="margin-top:2vh">
+      <div class="card" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.3);min-height:60px;padding:12px">
+        <p class="small"><strong class="color-coral">Si Gemini falla:</strong> sistema usa RedFlagsEngine automáticamente</p>
+      </div>
+      <div class="card" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);min-height:60px;padding:12px">
+        <p class="small"><strong class="color-amber">Si hay problema de red:</strong> screenshots de respaldo disponibles</p>
+      </div>
+      <div class="card" style="background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);min-height:60px;padding:12px">
+        <p class="small"><strong class="color-mint">Dashboard:</strong> datos reales de MongoDB, no hardcodeados</p>
+      </div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 23 · DEMO EN VIVO
+════════════════════════════════════════ -->
+<section class="slide" data-section="DEMO"
+  data-notes="Esta slide permanece durante toda la demo. Narrar cada paso con voz clara y sin apresurarse. Al triage: 'El sistema detectó señales de alarma — aquí los ven como red flags. La IA los clasificó como prioridad ALTA.' Al chat: 'Los mensajes van por Socket.IO en tiempo real. Persistidos en MongoDB.' Al resumen: 'El doctor pide el resumen. Gemini genera la nota. El guardrail valida que no tenga diagnóstico.' Al dashboard: 'Estas son métricas reales de la BD. No datos hardcodeados.'">
+  <div class="slide-header"><span class="tag">DEMO EN VIVO</span><span class="num">23 / 25</span></div>
+  <div class="slide-body" style="align-items:center;justify-content:center">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;width:100%">
+      <div>
+        <h2 style="font-size:clamp(32px,5vw,56px)">Demo activo — sistema funcionando en tiempo real.</h2>
+        <p class="lead" style="margin-top:2vh">Backend desplegado · MongoDB Atlas con datos reales · Socket.IO activo</p>
+        <div class="bullets mt3">
+          <div class="bullet"><span class="dot">→</span><span>Triage generado por Gemini 2.5-flash</span></div>
+          <div class="bullet"><span class="dot">→</span><span>Chat en tiempo real via Socket.IO</span></div>
+          <div class="bullet"><span class="dot">→</span><span>Resumen clínico con guardrail activo</span></div>
+          <div class="bullet"><span class="dot">→</span><span>KPIs leídos directamente de MongoDB</span></div>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:24px;padding:24px;text-align:center;min-width:200px">
+        <img src="assets/qr-apk.png" alt="QR APK" style="width:160px;height:160px;display:block;margin:0 auto 12px">
+        <strong style="color:#0F172A;display:block;font-size:16px">APK Disponible</strong>
+        <small style="display:block;color:#475569;font-size:11px;margin-top:4px">Expo Go / Descarga directa</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 24 · RESULTADOS
+════════════════════════════════════════ -->
+<section class="slide" data-section="CIERRE"
+  data-notes="En números: 17 módulos backend, 406 tests pasando, 3 roles de usuario, 2 frontends separados. 93% cobertura statements, mínimo 80% branches. 12 suites E2E. Todo esto en 5 meses de desarrollo en equipo de 4 personas.">
+  <div class="slide-header"><span class="tag">RESULTADOS LOGRADOS</span><span class="num">24 / 25</span></div>
+  <div class="slide-body">
+    <h2>Lo que construimos en números.</h2>
+    <p class="claim">5 meses · 4 personas · 3 servicios productivos · 1 plataforma clínica funcionando.</p>
+    <div class="results-grid mt3">
+      <div class="result-row"><span class="result-key">Módulos NestJS backend</span><span class="result-val color-blue">17</span></div>
+      <div class="result-row"><span class="result-key">Tests pasando (0 fallando)</span><span class="result-val color-mint">406+</span></div>
+      <div class="result-row"><span class="result-key">Cobertura statements</span><span class="result-val color-violet">93%</span></div>
+      <div class="result-row"><span class="result-key">Umbral mínimo CI (branches)</span><span class="result-val color-amber">80%</span></div>
+      <div class="result-row"><span class="result-key">Suites E2E con MongoDB real</span><span class="result-val color-blue">12</span></div>
+      <div class="result-row"><span class="result-key">Roles de usuario diferenciados</span><span class="result-val color-mint">3</span></div>
+      <div class="result-row"><span class="result-key">Frontends independientes</span><span class="result-val color-violet">2</span></div>
+      <div class="result-row"><span class="result-key">Especialidades médicas</span><span class="result-val color-amber">3</span></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 25 · CONCLUSIONES Y CIERRE
+════════════════════════════════════════ -->
+<section class="slide" data-section="CIERRE"
+  data-notes="SaludDeUna es un sistema que funciona, que tiene tests que lo respaldan, que tiene arquitectura que se puede explicar y defender, y que resuelve un problema real de comunicación en salud. Lo que aprendimos: la IA en salud necesita guardrails explícitos. Los tests E2E con BD real son críticos. La observabilidad desde el primer día ahorra horas de debugging. La modularidad del backend permitió trabajar en paralelo sin conflictos. El código es abierto, los tests están pasando, y la demo acaba de funcionar en vivo. ¿Preguntas?">
+  <div class="slide-header"><span class="tag">CONCLUSIONES</span><span class="num">25 / 25</span></div>
+  <div class="slide-body">
+    <h2>Un sistema que funciona, con tests que lo respaldan y arquitectura que se puede defender.</h2>
+    <div class="cards cols-2 mt3">
+      <div>
+        <p class="claim" style="font-size:clamp(15px,1.6vw,21px)">Lo que aprendimos:</p>
+        <div class="bullets mt2">
+          <div class="bullet"><span class="dot">→</span><span>La IA en salud no puede ser un black box — necesita guardrails explícitos en código</span></div>
+          <div class="bullet"><span class="dot">→</span><span>Tests E2E con base de datos real son críticos — los mocks no detectan bugs de migración</span></div>
+          <div class="bullet"><span class="dot">→</span><span>La observabilidad desde el día 1 ahorra horas de debugging en producción</span></div>
+          <div class="bullet"><span class="dot">→</span><span>La modularidad del backend permitió desarrollar en paralelo sin conflictos</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px">
+        <div style="background:#f8fafc;border-radius:20px;padding:20px;text-align:center">
+          <img src="assets/qr-apk.png" alt="QR APK" style="width:120px;height:120px;display:block;margin:0 auto 10px">
+          <strong style="color:#0F172A;font-size:14px">APK disponible</strong>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:clamp(28px,4vw,48px);font-weight:900;color:var(--blue)">¿Preguntas?</div>
+          <p style="color:var(--muted);font-size:14px;margin-top:8px">El código es abierto. Los tests están pasando. La demo acaba de funcionar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BACKUP SLIDES
+════════════════════════════════════════ -->
+<section class="slide backup" data-section="BACKUP · C4 CONTEXTO"
+  data-notes="Diagrama C4 Nivel 1: 3 actores humanos, 1 sistema central, 6 sistemas externos. Gemini para IA, MongoDB Atlas para datos, Redis para cache y colas, Auth0 para identidad, REThUS para verificar médicos, Expo Notifications para push.">
+  <div class="slide-header"><span class="tag">BACKUP · C4 NIVEL 1</span><span class="num">B1</span></div>
+  <div class="slide-body">
+    <h2>Contexto C4: actores humanos y sistemas externos.</h2>
+    <div class="diagram-frame h55"><img src="assets/sad_c4_context_diagram.png" alt="C4 Contexto"></div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · C4 CONTENEDORES"
+  data-notes="C4 Nivel 2: 2 frontends (mobile y web), 2 procesos backend (API y Worker), MongoDB Atlas, Redis Cloud.">
+  <div class="slide-header"><span class="tag">BACKUP · C4 NIVEL 2</span><span class="num">B2</span></div>
+  <div class="slide-body">
+    <h2>Contenedores C4: frontends, API, worker y datos.</h2>
+    <div class="diagram-frame h55"><img src="assets/sad_c4_container_view.png" alt="C4 Contenedores"></div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · AWS"
+  data-notes="Arquitectura objetivo AWS: ECS Fargate SPOT, ALB con sticky sessions para WebSocket, Route53+CloudFront+WAF, MongoDB Atlas M10+ multi-AZ, Redis Cloud HA 6GB. Costo estimado: $25-31/mes en SPOT.">
+  <div class="slide-header"><span class="tag">BACKUP · AWS DEPLOYMENT</span><span class="num">B3</span></div>
+  <div class="slide-body">
+    <h2>Despliegue objetivo AWS: ECS Fargate + ALB.</h2>
+    <p class="claim">Deploy actual: Railway + Vercel · Deploy objetivo: ECS Fargate SPOT (~$25-31/mes)</p>
+    <div class="diagram-frame h48"><img src="assets/sad_aws_deployment_diagram.png" alt="AWS"></div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · DATOS"
+  data-notes="Modelo de datos en 2 dominios: usuarios (patients, doctors, admins, sessions, billing) y clínico (consultations, chat, followups, triage, knowledge). MongoDB permite esquemas polimórficos para evolucionar sin migraciones destructivas.">
+  <div class="slide-header"><span class="tag">BACKUP · MODELO DE DATOS</span><span class="num">B4</span></div>
+  <div class="slide-body">
+    <h2>Modelo de datos: dominio usuarios y dominio clínico.</h2>
+    <p class="claim">MongoDB + Mongoose · Atlas Vector Search HNSW 768d para RAG</p>
+    <div class="two-diags mt3">
+      <div class="diagram-frame h48"><img src="assets/sad_data_model_users.png" alt="Users"></div>
+      <div class="diagram-frame h48"><img src="assets/sad_data_model_clinical.png" alt="Clinical"></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · CI/CD"
+  data-notes="CI/CD con GitHub Actions: lint → build → test → E2E. Si cobertura baja del 80%, falla. Deploy a Railway (backend) y Vercel (web). Observabilidad con OpenTelemetry, logs JSON, correlationId.">
+  <div class="slide-header"><span class="tag">BACKUP · CI/CD Y OBSERVABILIDAD</span><span class="num">B5</span></div>
+  <div class="slide-body">
+    <h2>CI/CD y observabilidad reducen riesgo operacional.</h2>
+    <div class="two-diags mt3">
+      <div class="diagram-frame h48"><img src="assets/sad_cicd_pipeline.png" alt="CI/CD"></div>
+      <div class="diagram-frame h48"><img src="assets/sad_observability_stack.png" alt="Observabilidad"></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · PREGUNTAS"
+  data-notes="Respuestas preparadas para preguntas del jurado.">
+  <div class="slide-header"><span class="tag">BACKUP · PREGUNTAS DEL JURADO</span><span class="num">B6</span></div>
+  <div class="slide-body">
+    <h2>Preguntas técnicas probables y respuestas preparadas.</h2>
+    <div class="cards cols-2 mt3">
+      <div class="card"><h3>¿Cómo garantizan que la IA no diagnostica?</h3><p>El guardrail es código, no promesa. Si Gemini genera lenguaje de diagnóstico, aiSummary = null. Podemos mostrar GuardrailService.</p></div>
+      <div class="card"><h3>¿Por qué MongoDB y no PostgreSQL?</h3><p>Vector Search nativo para RAG, esquema flexible para datos clínicos que evolucionan, embeddings 768d nativos en Atlas.</p></div>
+      <div class="card"><h3>¿Por qué NestJS?</h3><p>Madurez en TypeScript, DI explícita, módulos aislados, ecosistema para RAG y WebSocket listo. No requería la complejidad de Spring Boot.</p></div>
+      <div class="card"><h3>¿Cómo escala el chat?</h3><p>Redis adapter para Socket.IO. En multi-instancia, el pub/sub de Redis distribuye mensajes entre todas las instancias sin estado compartido.</p></div>
+      <div class="card"><h3>¿Qué pasa si Gemini falla?</h3><p>RedFlagsEngine basado en reglas locales toma el control. analysisType = RULE_BASED. Sin error visible para el usuario.</p></div>
+      <div class="card"><h3>¿Cuál es el costo de infraestructura?</h3><p>Railway + Vercel + MongoDB Atlas M0 + Redis Cloud free: ~$0/mes en dev. ECS Fargate SPOT objetivo: ~$25-31/mes.</p></div>
+    </div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+<section class="slide backup" data-section="BACKUP · CANVAS"
+  data-notes="Business Model Canvas: propuesta de valor en comunicación clínica, segmentos pacientes y médicos, canales digitales, fuente de ingresos por consulta.">
+  <div class="slide-header"><span class="tag">BACKUP · BUSINESS MODEL CANVAS</span><span class="num">B7</span></div>
+  <div class="slide-body">
+    <h2>Business Model Canvas y viabilidad de mercado.</h2>
+    <div class="diagram-frame" style="height:60vh;margin-top:2vh"><img src="assets/Business-Model-Canvas.png" alt="BMC"></div>
+  </div>
+  <img class="qr-badge" src="assets/qr-apk.png" alt="QR">
+</section>
+
+</main><!-- #deck -->
+
+<!-- Notes panel -->
+<div id="notes">
+  <div id="notes-title">NOTAS DEL EXPOSITOR</div>
+  <div id="notes-content"></div>
+</div>
+
+<!-- Navigation HUD -->
+<nav id="hud">
+  <button class="hud-btn" id="prev" title="Anterior (←)">‹</button>
+  <span id="counter">1 / 25</span>
+  <button class="hud-btn" id="next" title="Siguiente (→ / Space)">›</button>
+  <button class="hud-btn" id="btn-notes" title="Notas (N)">Notas</button>
+  <button class="hud-btn" id="btn-backup" title="Backup slides">Backup</button>
+  <button class="hud-btn" id="btn-fs" title="Pantalla completa (F)">⛶</button>
+</nav>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const main = slides.filter(s => !s.classList.contains('backup'));
+  const backup = slides.filter(s => s.classList.contains('backup'));
+  let cur = 0;
+  let showBackup = false;
+
+  const progress = document.getElementById('progress');
+  const sectionLabel = document.getElementById('section-label');
+  const counter = document.getElementById('counter');
+  const notes = document.getElementById('notes');
+  const notesContent = document.getElementById('notes-content');
+
+  function visible(){
+    return showBackup ? slides : main;
+  }
+
+  function go(n){
+    const list = visible();
+    if(n < 0 || n >= list.length) return;
+    list[cur]?.classList.remove('active');
+    cur = n;
+    const s = list[cur];
+    s.classList.add('active');
+    // progress
+    const pct = list.length > 1 ? (cur/(list.length-1))*100 : 100;
+    progress.style.width = pct + '%';
+    // section
+    const sec = s.dataset.section || '';
+    sectionLabel.textContent = sec;
+    // counter
+    const total = main.length;
+    counter.textContent = showBackup
+      ? (cur < main.length ? `${cur+1} / ${total}` : `B${cur-main.length+1}`)
+      : `${cur+1} / ${total}`;
+    // notes
+    notesContent.textContent = s.dataset.notes || '—';
+  }
+
+  document.getElementById('prev').onclick = () => go(cur - 1);
+  document.getElementById('next').onclick = () => go(cur + 1);
+
+  document.getElementById('btn-notes').onclick = () => notes.classList.toggle('open');
+
+  document.getElementById('btn-backup').onclick = function(){
+    showBackup = !showBackup;
+    this.style.color = showBackup ? 'var(--violet)' : '';
+    // reset to current main slide position or first backup
+    if(showBackup && cur >= main.length){
+      // already in backup range, ok
+    } else if(!showBackup && cur >= main.length){
+      cur = main.length - 1;
+    }
+    go(cur);
+  };
+
+  document.getElementById('btn-fs').onclick = () => {
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  };
+
+  document.addEventListener('keydown', e => {
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case ' ': e.preventDefault(); go(cur+1); break;
+      case 'ArrowLeft': case 'ArrowUp': e.preventDefault(); go(cur-1); break;
+      case 'n': case 'N': notes.classList.toggle('open'); break;
+      case 'f': case 'F': document.getElementById('btn-fs').click(); break;
+      case 'Home': go(0); break;
+      case 'End': go(visible().length-1); break;
+    }
+  });
+
+  // touch
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if(Math.abs(dx) > 50) dx > 0 ? go(cur+1) : go(cur-1);
+  });
+
+  go(0);
+})();
+</script>
+</body>
+</html>

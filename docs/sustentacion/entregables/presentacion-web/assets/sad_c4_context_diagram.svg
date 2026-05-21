@@ -1,0 +1,147 @@
+<svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Helvetica,Arial,sans-serif">
+  <title>C4 Nivel 1 — Contexto del Sistema SaludDeUna</title>
+  <defs>
+    <marker id="arr"     markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/></marker>
+    <marker id="arr-g"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#10B981"/></marker>
+    <marker id="arr-b"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0077B6"/></marker>
+    <marker id="arr-c"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0096C7"/></marker>
+    <marker id="arr-ext" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/></marker>
+    <filter id="shadow"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="640" fill="#F0F4F8" rx="8"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="960" height="40" fill="#0A1628" rx="8"/>
+  <rect x="0" y="22" width="960" height="18" fill="#0A1628"/>
+  <text x="8"   y="15" fill="#00B4D8"   font-size="8"  font-weight="bold">C4 MODEL — LEVEL 1 · CONTEXT</text>
+  <text x="480" y="26" fill="white"     font-size="14" font-weight="bold" text-anchor="middle">Diagrama C4 Nivel 1 — Contexto del Sistema SaludDeUna</text>
+
+  <!-- ══════════════ SISTEMA CENTRAL ══════════════ -->
+  <rect x="335" y="210" width="260" height="130" rx="12" fill="#0A1628" stroke="#00B4D8" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="465" y="232" text-anchor="middle" fill="#90E0EF" font-size="9">[ Sistema Software ]</text>
+  <text x="465" y="256" text-anchor="middle" fill="white"   font-size="20" font-weight="bold">SaludDeUna</text>
+  <text x="465" y="278" text-anchor="middle" fill="#00B4D8"  font-size="11" font-weight="600">Plataforma Clínica Inteligente</text>
+  <text x="465" y="296" text-anchor="middle" fill="#90E0EF"  font-size="9">Triage IA · Chat tiempo real</text>
+  <text x="465" y="313" text-anchor="middle" fill="#90E0EF"  font-size="9">Seguimiento · Facturación</text>
+
+  <!-- ══════════════ ACTORES — estilo [Person] círculo con label (consistente con C4 L2) ══════════════ -->
+
+  <!-- Paciente -->
+  <ellipse cx="100" cy="150" rx="28" ry="28" fill="#10B981" filter="url(#shadow)"/>
+  <text x="100" y="155" text-anchor="middle" fill="white" font-size="13" font-weight="bold">P</text>
+  <rect x="40" y="190" width="120" height="40" rx="6" fill="#10B98130"/>
+  <text x="100" y="208" text-anchor="middle" fill="#064E3B" font-size="11" font-weight="bold">Paciente</text>
+  <text x="100" y="221" text-anchor="middle" fill="#047857" font-size="8">[Person] · App Móvil</text>
+
+  <!-- Médico -->
+  <ellipse cx="100" cy="310" rx="28" ry="28" fill="#0077B6" filter="url(#shadow)"/>
+  <text x="100" y="315" text-anchor="middle" fill="white" font-size="13" font-weight="bold">M</text>
+  <rect x="40" y="350" width="120" height="40" rx="6" fill="#0077B630"/>
+  <text x="100" y="368" text-anchor="middle" fill="#0A1628" font-size="11" font-weight="bold">Médico</text>
+  <text x="100" y="381" text-anchor="middle" fill="#0369A1" font-size="8">[Person] · Staff Portal</text>
+
+  <!-- Admin -->
+  <ellipse cx="100" cy="470" rx="28" ry="28" fill="#0096C7" filter="url(#shadow)"/>
+  <text x="100" y="467" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ADM</text>
+  <rect x="40" y="510" width="120" height="40" rx="6" fill="#0096C730"/>
+  <text x="100" y="528" text-anchor="middle" fill="#0A1628" font-size="11" font-weight="bold">Administrador</text>
+  <text x="100" y="541" text-anchor="middle" fill="#0369A1" font-size="8">[Person] · Staff Portal</text>
+
+  <!-- ══════════════ FLECHAS ACTORES → SISTEMA ══════════════ -->
+  <!-- Paciente → sistema: sale del lado derecho del círculo -->
+  <line x1="128" y1="157" x2="330" y2="245" stroke="#10B981" stroke-width="1.8" marker-end="url(#arr-g)"/>
+  <rect x="178" y="176" width="110" height="18" rx="4" fill="#10B98125"/>
+  <text x="233" y="189" text-anchor="middle" fill="#065F46" font-size="9" font-weight="600">Triage · Consulta [HTTPS/WSS]</text>
+
+  <!-- Médico → sistema: sale del lado derecho del círculo -->
+  <line x1="128" y1="310" x2="330" y2="280" stroke="#0077B6" stroke-width="1.8" marker-end="url(#arr-b)"/>
+  <rect x="178" y="277" width="110" height="18" rx="4" fill="#0077B625"/>
+  <text x="233" y="290" text-anchor="middle" fill="#0c4a6e" font-size="9" font-weight="600">Atención médica [HTTPS/WSS]</text>
+
+  <!-- Admin → sistema: sale del lado derecho del círculo -->
+  <line x1="128" y1="462" x2="330" y2="320" stroke="#0096C7" stroke-width="1.8" marker-end="url(#arr-c)"/>
+  <rect x="178" y="370" width="110" height="18" rx="4" fill="#0096C725"/>
+  <text x="233" y="383" text-anchor="middle" fill="#0e4f6a" font-size="9" font-weight="600">Gestión operacional [HTTPS]</text>
+
+  <!-- ══════════════ SISTEMAS EXTERNOS (derecha) ══════════════ -->
+  <!-- Espaciado vertical: y = 58, 138, 218, 298, 378, 458  (gap=10, height=70 cada uno) -->
+
+  <!-- Google Gemini -->
+  <rect x="720" y="58"  width="210" height="70" rx="8" fill="#1A73E8" filter="url(#shadow)"/>
+  <text x="825" y="88"  text-anchor="middle" fill="white"   font-size="13" font-weight="bold">Google Gemini 2.5</text>
+  <text x="825" y="105" text-anchor="middle" fill="#BFDBFE" font-size="9">IA Generativa · embeddings-001</text>
+  <text x="825" y="118" text-anchor="middle" fill="#BFDBFE" font-size="8">[Sistema Externo]</text>
+
+  <!-- MongoDB Atlas -->
+  <rect x="720" y="138" width="210" height="70" rx="8" fill="#00684A" filter="url(#shadow)"/>
+  <text x="825" y="168" text-anchor="middle" fill="white"   font-size="13" font-weight="bold">MongoDB Atlas</text>
+  <text x="825" y="185" text-anchor="middle" fill="#A7F3D0" font-size="9">Documentos + Vector Search HNSW</text>
+  <text x="825" y="198" text-anchor="middle" fill="#A7F3D0" font-size="8">[Sistema Externo]</text>
+
+  <!-- Redis Cloud -->
+  <rect x="720" y="218" width="210" height="70" rx="8" fill="#CC2929" filter="url(#shadow)"/>
+  <text x="825" y="248" text-anchor="middle" fill="white"   font-size="13" font-weight="bold">Redis Cloud</text>
+  <text x="825" y="265" text-anchor="middle" fill="#FCA5A5" font-size="9">Cache · BullMQ · PubSub Socket.IO</text>
+  <text x="825" y="278" text-anchor="middle" fill="#FCA5A5" font-size="8">[Sistema Externo]</text>
+
+  <!-- Auth0 -->
+  <rect x="720" y="298" width="210" height="70" rx="8" fill="#EB5424" filter="url(#shadow)"/>
+  <text x="825" y="328" text-anchor="middle" fill="white"   font-size="13" font-weight="bold">Auth0</text>
+  <text x="825" y="345" text-anchor="middle" fill="#FED7AA" font-size="9">JWT RS256 · JWKS endpoint</text>
+  <text x="825" y="358" text-anchor="middle" fill="#FED7AA" font-size="8">[Sistema Externo]</text>
+
+  <!-- RETHUS -->
+  <rect x="720" y="378" width="210" height="70" rx="8" fill="#6B7280" filter="url(#shadow)"/>
+  <text x="825" y="408" text-anchor="middle" fill="white"   font-size="13" font-weight="bold">RETHUS Colombia</text>
+  <text x="825" y="425" text-anchor="middle" fill="#E5E7EB" font-size="9">Verificación credenciales médicas</text>
+  <text x="825" y="438" text-anchor="middle" fill="#E5E7EB" font-size="8">[Sistema Externo]</text>
+
+  <!-- Expo Notifications -->
+  <rect x="720" y="458" width="210" height="70" rx="8" fill="#4F46E5" filter="url(#shadow)"/>
+  <text x="825" y="488" text-anchor="middle" fill="white"   font-size="13" font-weight="bold">Expo Notifications</text>
+  <text x="825" y="505" text-anchor="middle" fill="#C7D2FE" font-size="9">Push · FCM / APNs</text>
+  <text x="825" y="518" text-anchor="middle" fill="#C7D2FE" font-size="8">[Sistema Externo]</text>
+
+  <!-- ══════════════ FLECHAS SISTEMA → EXTERNOS (punteadas) ══════════════ -->
+  <!-- Orígenes: borde derecho del sistema box (x=595), en distintas y para no solapar -->
+  <line x1="595" y1="248" x2="718" y2="93"  stroke="#1A73E8" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+  <line x1="595" y1="258" x2="718" y2="173" stroke="#00684A" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+  <line x1="595" y1="268" x2="718" y2="253" stroke="#CC2929" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+  <line x1="595" y1="278" x2="718" y2="333" stroke="#EB5424" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+  <line x1="595" y1="288" x2="718" y2="413" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+  <line x1="595" y1="298" x2="718" y2="493" stroke="#4F46E5" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-ext)"/>
+
+  <!-- Labels de relaciones externas -->
+  <text x="660" y="153" fill="#1A73E8" font-size="8" text-anchor="middle">Triage IA · RAG</text>
+  <text x="660" y="207" fill="#00684A" font-size="8" text-anchor="middle">Datos clínicos · vectores</text>
+  <text x="660" y="260" fill="#CC2929" font-size="8" text-anchor="middle">Cache · throttle · pub/sub</text>
+  <text x="660" y="316" fill="#EB5424" font-size="8" text-anchor="middle">Valida JWT RS256</text>
+  <text x="660" y="398" fill="#6B7280" font-size="8" text-anchor="middle">Verifica médicos</text>
+  <text x="660" y="452" fill="#4F46E5" font-size="8" text-anchor="middle">Push notifications</text>
+
+  <!-- ══════════════ LEYENDA (parte inferior, bien separada) ══════════════ -->
+  <rect x="16" y="572" width="920" height="52" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
+  <text x="28" y="588" fill="#0A1628" font-size="8" font-weight="bold">LEYENDA:</text>
+
+  <!-- Person -->
+  <ellipse cx="100" cy="600" rx="9" ry="9" fill="#0077B6"/>
+  <text x="115" y="604" fill="#334155" font-size="9">Persona [Person]</text>
+
+  <!-- System central -->
+  <rect x="230" y="592" width="16" height="12" rx="2" fill="#0A1628" stroke="#00B4D8" stroke-width="1.2"/>
+  <text x="252" y="604" fill="#334155" font-size="9">Sistema Central</text>
+
+  <!-- External system -->
+  <rect x="360" y="592" width="16" height="12" rx="2" fill="#1A73E8"/>
+  <text x="382" y="604" fill="#334155" font-size="9">Sistema Externo</text>
+
+  <!-- Arrow solid -->
+  <line x1="490" y1="598" x2="518" y2="598" stroke="#10B981" stroke-width="1.8" marker-end="url(#arr-g)"/>
+  <text x="524" y="604" fill="#334155" font-size="9">Relación actor → sistema</text>
+
+  <!-- Arrow dashed -->
+  <line x1="690" y1="598" x2="718" y2="598" stroke="#64748B" stroke-width="1.5" stroke-dasharray="5,2" marker-end="url(#arr-ext)"/>
+  <text x="724" y="604" fill="#334155" font-size="9">Relación sistema → externo (dashed)</text>
+</svg>
